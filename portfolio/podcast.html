@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Podcast — Your Name</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Show header */
+    .podcast-show-header {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      background: var(--accent-light);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+    }
+    .podcast-cover {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      background: var(--accent-light);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      border: 1px solid var(--border);
+    }
+    .podcast-show-meta { flex: 1; }
+    .podcast-show-label { font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+    .podcast-show-name { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.3; }
+    .podcast-show-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
+    .podcast-platforms { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* Guest context */
+    .podcast-context {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      padding: 20px;
+      background: var(--accent-light);
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+    }
+
+    /* Episode list */
+    .episode-list { display: flex; flex-direction: column; }
+    .episode-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .episode-item:last-child { border-bottom: none; }
+    .episode-item:hover { padding-left: 6px; }
+    .episode-thumb {
+      width: 88px;
+      height: 88px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .episode-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .episode-info { flex: 1; min-width: 0; }
+    .episode-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .episode-meta { font-size: 14px; color: var(--text-muted); display: flex; gap: 10px; }
+    .episode-duration { font-size: 14px; color: var(--text-muted); white-space: nowrap; }
+    .episode-arrow { font-size: 14px; color: var(--text-muted); opacity: 0; transition: var(--transition); flex-shrink: 0; }
+    .episode-item:hover .episode-arrow { opacity: 1; color: var(--accent); }
+    .episode-item:hover .episode-title { color: var(--accent); }
+
+    /* Featured single episode */
+    .episode-featured {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+    .episode-featured:hover { border-color: var(--accent); }
+    .episode-featured:hover .episode-featured-title { color: var(--accent); }
+    .episode-featured-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      background: var(--accent-light);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      border: 1px solid var(--border);
+    }
+    .episode-featured-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .episode-featured-meta { font-size: 14px; color: var(--text-muted); display: flex; gap: 12px; flex-wrap: wrap; }
+    .episode-featured-link { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 600; color: var(--accent); margin-top: 12px; }
+
+    @media (max-width: 600px) {
+      .podcast-show-header { flex-direction: column; }
+      .episode-featured { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
+        <div>
+          <div class="sidebar-name">王瑀萱｜大胃</div>
+          <div class="sidebar-title">Sr. Product Designer</div>
+        </div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
+        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
+        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
+        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
+        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
+        <li><a href="podcast.html" class="nav-item active"><span class="nav-icon">🎙️</span> Podcast</a></li>
+        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <div class="sidebar-available">Available Now</div>
+        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel">
+        <p class="section-label">Podcast</p>
+        <h1 class="page-title">我參與的 Podcast</h1>
+      </div>
+
+      <!-- Podcast 2 — 單集 -->
+      <div class="panel">
+        <div class="podcast-show-header">
+          <div class="podcast-cover"><img src="assets/images/product.png" alt="Product Design 1 on 1" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+          <div class="podcast-show-meta">
+            <div class="podcast-show-label">Guest Appearance · 受邀來賓 · 1 集</div>
+            <div class="podcast-show-name">Product Design 1 on 1</div>
+            <div class="podcast-show-desc">我作為橫跨 2C 與 2B 的資深設計師身份，參與了 Product Design 1 on 1 的 Podcast 頻道，與大家聊聊 2B 設計師的職涯挑戰、心態調適、如何抓住客戶真實需求，分享給聽眾 2B 設計背後的系統思維與真實挑戰。</div>
+          </div>
+        </div>
+        <div class="episode-list">
+          <a href="https://open.spotify.com/episode/4CjQp0ElixVsjUbpzuuK5L" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/1on1.png" alt="1on1"></div>
+            <div class="episode-info">
+              <div class="episode-title">設計圍爐系列 - 2B 設計師的挑戰與職涯挫折</div>
+              <div class="episode-meta"><span>2026年3月28日・55 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Podcast 1 — 多集 -->
+      <div class="panel">
+        <div class="podcast-show-header">
+          <div class="podcast-cover"><img src="assets/images/noshortcuts.png" alt="No Shortcuts" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+          <div class="podcast-show-meta">
+            <div class="podcast-show-label">Season 4 常駐來賓 · 10 集</div>
+            <div class="podcast-show-name">No Shortcuts — 沒有快捷鍵</div>
+            <div class="podcast-show-desc">2024 年，我在《No Shortcuts - 沒有快捷鍵》S4 的 EP1–10 中與大家聊聊關於資深設計師的定義、職場日常、協作溝通、職涯階梯等話題，透過 10 集把所有資深設計師在職場上所遇到的挑戰、心法和職涯規劃都毫不保留地分享給聽眾。</div>
+          </div>
+        </div>
+        <div class="episode-list">
+          <a href="https://open.spotify.com/episode/65jFHuUs6kambb2bhMUhKi" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP1.png" alt="S4EP1"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP1 · 怎麼樣才算是「資深」設計師？釐清後讓你的職涯不卡關</div>
+              <div class="episode-meta"><span>2024年3月3日・37 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/43KSqMo9EpEoP1IwqnA8v5" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP2.png" alt="S4EP2"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP2 · AI 會取代你嗎？如何融入產品設計流程？陪伴你告別價值焦慮的配方</div>
+              <div class="episode-meta"><span>2024年3月10日・40 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/717q0d99rhu722y1uflc0S" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP3.png" alt="S4EP3"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP3 · 掌握成為資深設計師的硬實力 — 揭秘提升設計實力的訓練指南！</div>
+              <div class="episode-meta"><span>2024年3月17日・45 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/5lWYoSWs8lluDJBcfAgIuJ" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP4.png" alt="S4EP4"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP4 · 軟實力是什麼？很少人提過的設計師職場秘密武器</div>
+              <div class="episode-meta"><span>2024年3月24日・46 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/63WUnjXNFJ5QCo0QfeWkVm" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP5.png" alt="S4EP5"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP5 · 資深設計師無所不能？聊聊那些年我們失敗跌倒的慘痛經驗</div>
+              <div class="episode-meta"><span>2024年3月31日・44 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/5AGdUuAcdmGiZoS4zycBJP" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP6.png" alt="S4EP6"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP6 · 如何攻克職場溝通協作挑戰 — 帶領團隊看到清晰的願景</div>
+              <div class="episode-meta"><span>2024年4月7日・52 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/49owPsVeyXz1JU75XRM1He" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP7.png" alt="S4EP7"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP7 · 設計師真正的超能力 — 創造價值的關鍵</div>
+              <div class="episode-meta"><span>2024年4月14日・40 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/6qUvcSnIFpOuvzyq1RVbYe" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP8.png" alt="S4EP8"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP8 · 成為資深設計師後的心態轉變與調適</div>
+              <div class="episode-meta"><span>2024年5月5日・36 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/06dgOxYSXEdpiDptCxhiHx" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP9.png" alt="S4EP9"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP9 · 想要具體可見的變強？資深工作者沒告訴你的成長配方</div>
+              <div class="episode-meta"><span>2024年5月12日・37 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+          <a href="https://open.spotify.com/episode/0dhTzcxTwp5fjJt1o0WzWK" target="_blank" class="episode-item">
+            <div class="episode-thumb"><img src="assets/images/S4EP10.png" alt="S4EP10"></div>
+            <div class="episode-info">
+              <div class="episode-title">S4EP10 · 以終為始的職涯觀——關於資深設計師的下一步</div>
+              <div class="episode-meta"><span>2024年5月19日・44 分鐘</span></div>
+            </div>
+            <div class="episode-arrow">↗</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="panel cta-panel">
+        <p class="section-label">Let's Work Together</p>
+        <div class="cta-title">對我的背景有興趣？</div>
+        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
+        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('mobileToggle');
+      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    });
+  </script>
+</body>
+</html>

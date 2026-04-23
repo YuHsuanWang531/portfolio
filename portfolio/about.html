@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Your Name</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
+        <div>
+          <div class="sidebar-name">王瑀萱｜大胃</div>
+          <div class="sidebar-title">Sr. Product Designer</div>
+        </div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
+        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
+        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
+        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
+        <li><a href="about.html" class="nav-item active"><span class="nav-icon">👤</span> 關於我</a></li>
+        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
+        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <div class="sidebar-available">Available Now</div>
+        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel">
+        <p class="section-label">About Me</p>
+        <h1 class="page-title">關於我</h1>
+      </div>
+
+      <div class="panel">
+        <div class="about-grid">
+          <div class="about-photo">
+            <img src="assets/images/hsuan.jpg" alt="王瑀萱">
+          </div>
+          <div class="about-text">
+            <p>嗨，我是大胃，因為學生時期是熱舞社，運動量大也吃得多，得此綽號！</p>
+            <p>我曾在媒體業深耕產品設計 8 年，透過數據與使用者訪談深入了解使用者需求，可以與使用者面對面是我熱愛 2C 產業的原因。最有成就感的時刻，是在捷運上看到陌生人使用我設計的產品！</p>
+            <p>我喜歡運動、烹飪，近 3 年轉戰運動科技產業，專注於幫助場館業者運用科技提升營運效率。我擅長化繁為簡，梳理複雜的 2B 系統操作流程，讓場館能輕鬆上手。將興趣與專業結合，讓我更能站在場館經營者與使用者的角度，不斷優化產品體驗。</p>
+            <p>除了設計工作，我也熱衷於設計教育，相信設計可以改變世界，我在社群中擔任業師、助教、教練等角色，透過分享自身經驗，幫助新手設計師少走一點彎路，也在這個過程中精進自己的溝通與專業能力。希望大家都能找到心之所向，並且有勇氣走向那個方向。</p>
+            <p>同時，我也是一名母親，在工作與家庭之間尋找平衡是我一直努力的課題，這樣的生活讓我學會如何在混亂中找到節奏，在忙碌中保留一點屬於自己的空間。此外，我有嚴重的「紅點點強迫症」——只要不是在洗澡或睡覺，一定秒讀秒回訊息！</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 技能 -->
+      <div class="panel">
+        <p class="section-label">Skills</p>
+        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px;">技能</h2>
+        <div class="skills-wrap">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">UI Design</span>
+          <span class="skill-tag">UX Research</span>
+          <span class="skill-tag">Design Systems</span>
+          <span class="skill-tag">Prototyping</span>
+          <span class="skill-tag">HTML/CSS</span>
+          <span class="skill-tag">使用者訪談</span>
+          <span class="skill-tag">產品策略</span>
+          <span class="skill-tag">A/B Testing</span>
+          <span class="skill-tag">利害關係人溝通</span>
+        </div>
+      </div>
+
+      <!-- 價值觀 -->
+      <div class="panel">
+        <p class="section-label">Values</p>
+        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px;">設計價值觀</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+            <div style="font-size: 24px; margin-bottom: 12px;">🎯</div>
+            <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">[設計價值觀標題]</div>
+            <div style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">[說明文字]</div>
+          </div>
+          <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+            <div style="font-size: 24px; margin-bottom: 12px;">💡</div>
+            <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">[設計價值觀標題]</div>
+            <div style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">[說明文字]</div>
+          </div>
+          <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+            <div style="font-size: 24px; margin-bottom: 12px;">🤝</div>
+            <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">[設計價值觀標題]</div>
+            <div style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">[說明文字]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel cta-panel">
+        <p class="section-label">Let's Work Together</p>
+        <div class="cta-title">對我的背景有興趣？</div>
+        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
+        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('mobileToggle');
+      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    });
+  </script>
+</body>
+</html>

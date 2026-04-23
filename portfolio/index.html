@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Designer & Developer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Mobile toggle -->
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+
+  <div class="layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar">
+          <img src="assets/images/avatar.webp" alt="avatar">
+        </div>
+        <div>
+          <div class="sidebar-name">王瑀萱｜大胃</div>
+          <div class="sidebar-title">Sr. Product Designer</div>
+        </div>
+      </div>
+
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-item active"><span class="nav-icon">🏠</span> 首頁</a></li>
+        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
+        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
+        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
+        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
+        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
+        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
+      </ul>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-available">Available Now</div>
+        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main">
+
+      <!-- Hero -->
+      <div class="panel">
+        <h1 class="hero-name">嗨，我是大胃！👋🏻</h1>
+        <p class="hero-desc">
+          我是擁有 10 年以上設計經驗的產品設計師，橫跨 2C 與 2B，熟悉從 0 到 1 的產品規劃與設計流程。設計之外，我也熱衷於設計教育，擔任設計助教與職涯教練，陪伴新手設計師找到方向。
+        </p>
+        <div class="hero-actions">
+          <a href="about.html" class="btn btn-primary">關於我 ↗</a>
+          <a href="projects.html" class="btn btn-outline">設計專案 ↗</a>
+        </div>
+      </div>
+
+      <!-- Recent Works Carousel -->
+      <div class="panel works-panel">
+        <div class="works-header">
+          <div class="works-title">Recent works</div>
+          <span class="works-rate">From $[XX]-$[XX]/hr</span>
+        </div>
+        <div class="works-carousel">
+
+          <a href="project-detail.html" class="work-card">
+            <div class="work-card-img">
+              <!-- <img src="assets/images/work-1.jpg" alt=""> -->
+              🖥️
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-title">[Project Name 1]</div>
+              <div class="work-card-tags">
+                <span class="tag">Web App</span>
+                <span class="tag">2025</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="project-detail.html" class="work-card">
+            <div class="work-card-img">📱</div>
+            <div class="work-card-body">
+              <div class="work-card-title">[Project Name 2]</div>
+              <div class="work-card-tags">
+                <span class="tag">Mobile</span>
+                <span class="tag">2025</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="project-detail.html" class="work-card">
+            <div class="work-card-img">🎨</div>
+            <div class="work-card-body">
+              <div class="work-card-title">[Project Name 3]</div>
+              <div class="work-card-tags">
+                <span class="tag">Branding</span>
+                <span class="tag">2024</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="project-detail.html" class="work-card">
+            <div class="work-card-img">🌐</div>
+            <div class="work-card-body">
+              <div class="work-card-title">[Project Name 4]</div>
+              <div class="work-card-tags">
+                <span class="tag">Landing Page</span>
+                <span class="tag">2024</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="project-detail.html" class="work-card">
+            <div class="work-card-img">⚡</div>
+            <div class="work-card-body">
+              <div class="work-card-title">[Project Name 5]</div>
+              <div class="work-card-tags">
+                <span class="tag">Dashboard</span>
+                <span class="tag">2024</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">[X]+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">[X]+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">[X]yr</div>
+          <div class="stat-label">Experience</div>
+        </div>
+      </div>
+
+      <!-- Services Teaser -->
+      <div class="panel">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+          <div>
+            <p class="section-label">What I Do</p>
+            <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Services</h2>
+          </div>
+          <a href="services.html" class="view-all">View all</a>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🎨</div>
+            <div class="service-title">UI/UX Design</div>
+            <div class="service-desc">[服務描述，約 2 句]</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">✦</div>
+            <div class="service-title">Brand Design</div>
+            <div class="service-desc">[服務描述，約 2 句]</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <div class="service-title">Product Design</div>
+            <div class="service-desc">[服務描述，約 2 句]</div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">💡</div>
+            <div class="service-title">Design Consultancy</div>
+            <div class="service-desc">[服務描述，約 2 句]</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="panel">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+          <div>
+            <p class="section-label">Social Proof</p>
+            <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Client Reviews</h2>
+          </div>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">[客戶評價內容，約 2-3 句]</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">😊</div>
+              <div>
+                <div class="testimonial-name">[Client Name]</div>
+                <div class="testimonial-role">[Role], [Company]</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">[客戶評價內容，約 2-3 句]</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">🙂</div>
+              <div>
+                <div class="testimonial-name">[Client Name]</div>
+                <div class="testimonial-role">[Role], [Company]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Teaser -->
+      <div class="panel">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+          <div>
+            <p class="section-label">Latest Thoughts</p>
+            <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">From the Blog</h2>
+          </div>
+          <a href="blog.html" class="view-all">View all</a>
+        </div>
+        <div class="blog-grid">
+          <a href="blog-detail.html" class="blog-card">
+            <div class="blog-thumb">✍️</div>
+            <div class="blog-body">
+              <div class="blog-meta">[Category] · [Date]</div>
+              <div class="blog-title">[Blog Post Title 1]</div>
+              <div class="blog-excerpt">[摘要，約 1-2 句]</div>
+            </div>
+          </a>
+          <a href="blog-detail.html" class="blog-card">
+            <div class="blog-thumb">💭</div>
+            <div class="blog-body">
+              <div class="blog-meta">[Category] · [Date]</div>
+              <div class="blog-title">[Blog Post Title 2]</div>
+              <div class="blog-excerpt">[摘要，約 1-2 句]</div>
+            </div>
+          </a>
+          <a href="blog-detail.html" class="blog-card">
+            <div class="blog-thumb">🚀</div>
+            <div class="blog-body">
+              <div class="blog-meta">[Category] · [Date]</div>
+              <div class="blog-title">[Blog Post Title 3]</div>
+              <div class="blog-excerpt">[摘要，約 1-2 句]</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="panel cta-panel">
+        <p class="section-label">Let's Work Together</p>
+        <div class="cta-title">Have a project in mind?</div>
+        <div class="cta-subtitle">Let's discuss your project and create something great together.</div>
+        <a href="contact.html" class="btn btn-primary">Start a Project ↗</a>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    }
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('mobileToggle');
+      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) && !toggle.contains(e.target)) {
+        sidebar.classList.remove('open');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>工作經歷 — Your Name</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-year { font-size: 14px; color: var(--text-muted); font-weight: 600; padding-top: 4px; white-space: nowrap; }
+    .timeline-body {}
+    .timeline-role { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .timeline-company { font-size: 16px; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+    .timeline-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+    .timeline-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .timeline-bullets { margin: 10px 0 14px 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .timeline-bullets li { font-size: 16px; color: var(--text-secondary); line-height: 1.5; padding-left: 16px; position: relative; }
+    .timeline-bullets li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 18px; line-height: 1.3; }
+    @media (max-width: 600px) {
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
+        <div>
+          <div class="sidebar-name">王瑀萱｜大胃</div>
+          <div class="sidebar-title">Sr. Product Designer</div>
+        </div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
+        <li><a href="work-experience.html" class="nav-item active"><span class="nav-icon">💼</span> 工作經歷</a></li>
+        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
+        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
+        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
+        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
+        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <div class="sidebar-available">Available Now</div>
+        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel">
+        <p class="section-label">Career</p>
+        <h1 class="page-title">工作經歷</h1>
+      </div>
+
+      <div class="panel">
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-year">2023.05 – 目前</div>
+            <div class="timeline-body">
+              <div class="timeline-role">資深產品設計師</div>
+              <div class="timeline-company">雲端力鍊股份有限公司｜全職</div>
+              <div class="timeline-desc">以科技驅動運動健身產業升級，協助場館業者提升營運效率，透過軟硬體整合，創造更智能的管理解決方案。</div>
+              <ul class="timeline-bullets">
+                <li>主導公司核心產品《Fitbutler》B2B 營運管理系統的設計策略，從 0 到 1 建立模組化設計架構，支援運動產業與空間租賃業等多產業跨國應用</li>
+                <li>導入 AI 設計流程 (Claude Code + MCP)，加速設計到開發的交付流程，提升團隊產出效率</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2019.02 – 2023.04</div>
+            <div class="timeline-body">
+              <div class="timeline-role">資深 UI/UX 設計師</div>
+              <div class="timeline-company">天下雜誌股份有限公司｜全職</div>
+              <div class="timeline-desc">以提升用戶的訂閱數、活躍度、留存率及轉換率等關鍵指標為目標，改善天下數位產品的閱讀、廣告、訂閱等核心功能體驗，並建立天下設計系統。</div>
+              <ul class="timeline-bullets">
+                <li>重新設計產品訂閱流程，優化使用者決策路徑，使轉換率提高 8%</li>
+                <li>改善產品閱讀及廣告體驗，提高使用者滿意度，同時為廣告提高 900% 點擊率，協助公司創下「數位營收大於紙本營收」的里程碑</li>
+                <li>透過使用者訪談找到關鍵痛點，提高訂戶分享率與改善聽新聞體驗，首次讓 App 內的 TTS 用戶超過 Podcast 用戶</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2014.08 – 2018.10</div>
+            <div class="timeline-body">
+              <div class="timeline-role">UI/UX 設計師</div>
+              <div class="timeline-company">聯合報系股份有限公司｜全職</div>
+              <div class="timeline-desc">跨部門協作開發多元數位產品，包含媒體、知識音頻、內容創作、電商、活動票卷等，改善使用者體驗與介面設計，並向內部相關單位進行設計提案。</div>
+              <ul class="timeline-bullets">
+                <li>從 0 到 1 設計《一刻鯨選》知識音頻 App，為部門首次帶來營收</li>
+                <li>從 0 到 1 設計《讀創故事》內容閱讀 App，成為部門核心營運產品</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 工作夥伴評價 -->
+      <div class="panel">
+        <p class="section-label">Peer Reviews</p>
+        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px;">工作夥伴怎麼說</h2>
+        <div id="peer-reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">[工作夥伴評價內容]</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">[姓名]</div>
+                <div class="testimonial-role">[職稱], [公司]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">[工作夥伴評價內容]</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">[姓名]</div>
+                <div class="testimonial-role">[職稱], [公司]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">[工作夥伴評價內容]</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">[姓名]</div>
+                <div class="testimonial-role">[職稱], [公司]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">[工作夥伴評價內容]</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">[姓名]</div>
+                <div class="testimonial-role">[職稱], [公司]</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="panel cta-panel">
+        <p class="section-label">Let's Work Together</p>
+        <div class="cta-title">對我的背景有興趣？</div>
+        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
+        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('mobileToggle');
+      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
