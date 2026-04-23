@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Blog Title] — Your Name</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .blog-prose { max-width: 680px; }
+    .blog-prose h2 { font-size: 22px; font-weight: 700; margin: 36px 0 12px; letter-spacing: -0.01em; }
+    .blog-prose p { font-size: 16px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 18px; }
+    .blog-prose blockquote { border-left: 3px solid var(--accent); padding: 4px 20px; margin: 28px 0; color: var(--text-secondary); font-style: italic; }
+  </style>
+</head>
+<body>
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
+        <div>
+          <div class="sidebar-name">王瑀萱｜大胃</div>
+          <div class="sidebar-title">Sr. Product Designer</div>
+        </div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
+        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
+        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
+        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
+        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
+        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
+        <li><a href="blog.html" class="nav-item active"><span class="nav-icon">📝</span> Blog</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <div class="sidebar-available">Available Now</div>
+        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel">
+        <a href="blog.html" style="font-size: 14px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">← Back to Blog</a>
+        <div style="margin-bottom: 14px;"><span class="tag">[Category]</span></div>
+        <h1 class="page-title">[Blog Post Title]</h1>
+        <p style="font-size: 14px; color: var(--text-muted); margin-top: 12px;">[Date] · [X] min read</p>
+      </div>
+
+      <div class="panel">
+        <div style="width: 100%; aspect-ratio: 16/7; background: var(--accent-light); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 48px; margin-bottom: 36px;">✍️</div>
+
+        <div class="blog-prose">
+          <p>[文章開頭 — 引起讀者興趣的導言，提出核心問題或觀點]</p>
+          <h2>[Section Heading 1]</h2>
+          <p>[段落內容]</p>
+          <p>[段落內容]</p>
+          <blockquote>[引言或重點句子，對讀者有啟發性的觀點]</blockquote>
+          <h2>[Section Heading 2]</h2>
+          <p>[段落內容]</p>
+          <p>[段落內容]</p>
+          <h2>[Section Heading 3]</h2>
+          <p>[段落內容]</p>
+          <h2>Conclusion</h2>
+          <p>[結論 — 總結核心觀點、給讀者的行動建議]</p>
+        </div>
+
+        <!-- Author -->
+        <div style="display: flex; gap: 16px; align-items: center; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);">
+          <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 24px;">🧑‍💻</div>
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">王瑀萱｜大胃</div>
+            <div style="font-size: 14px; color: var(--text-muted);">[Short bio — 1 sentence]</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More Posts -->
+      <div class="panel">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+          <h2 style="font-size: 20px; font-weight: 700;">More Articles</h2>
+          <a href="blog.html" class="view-all">All posts</a>
+        </div>
+        <div class="blog-grid">
+          <a href="blog-detail.html" class="blog-card">
+            <div class="blog-thumb">💭</div>
+            <div class="blog-body">
+              <div class="blog-meta">[Category] · [Date]</div>
+              <div class="blog-title">[Related Post 1]</div>
+              <div class="blog-excerpt">[摘要]</div>
+            </div>
+          </a>
+          <a href="blog-detail.html" class="blog-card">
+            <div class="blog-thumb">🚀</div>
+            <div class="blog-body">
+              <div class="blog-meta">[Category] · [Date]</div>
+              <div class="blog-title">[Related Post 2]</div>
+              <div class="blog-excerpt">[摘要]</div>
+            </div>
+          </a>
+          <a href="blog-detail.html" class="blog-card">
+            <div class="blog-thumb">🎨</div>
+            <div class="blog-body">
+              <div class="blog-meta">[Category] · [Date]</div>
+              <div class="blog-title">[Related Post 3]</div>
+              <div class="blog-excerpt">[摘要]</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="panel cta-panel">
+        <p class="section-label">Let's Work Together</p>
+        <div class="cta-title">對我的背景有興趣？</div>
+        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
+        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('mobileToggle');
+      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>設計教育經歷 — Your Name</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--border); }
+    .timeline-item:first-child { border-top: 1px solid var(--border); }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-year { font-size: 14px; color: var(--text-muted); font-weight: 600; padding-top: 4px; white-space: nowrap; }
+    .timeline-role { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2px; }
+    .timeline-company { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+    .timeline-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
+    .timeline-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    @media (max-width: 600px) { .timeline-item { grid-template-columns: 1fr; gap: 8px; } }
+    .edu-grid { display: flex; flex-direction: column; }
+    .edu-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-item:first-child { border-top: 1px solid var(--border); }
+    .edu-year { font-size: 14px; color: var(--text-muted); font-weight: 600; padding-top: 4px; }
+    .edu-degree { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .edu-school { font-size: 16px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+    .edu-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.75; }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .cert-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      transition: var(--transition);
+    }
+    .cert-card:hover { border-color: var(--accent); background: var(--accent-light); }
+    .cert-icon { font-size: 28px; margin-bottom: 12px; }
+    .cert-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .cert-issuer { font-size: 12px; color: var(--text-muted); }
+    .cert-year { font-size: 12px; color: var(--text-muted); margin-top: 8px; font-weight: 600; }
+    @media (max-width: 600px) {
+      .edu-item { grid-template-columns: 1fr; gap: 8px; }
+    }
+    .marquee-wrapper {
+      overflow: hidden;
+      margin: 0 -28px;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: marquee 45s linear infinite;
+    }
+    .marquee-item {
+      height: 240px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .marquee-item img { height: 100%; width: auto; object-fit: cover; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
+        <div>
+          <div class="sidebar-name">王瑀萱｜大胃</div>
+          <div class="sidebar-title">Sr. Product Designer</div>
+        </div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
+        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
+        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
+        <li><a href="education.html" class="nav-item active"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
+        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
+        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
+        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <div class="sidebar-available">Available Now</div>
+        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="panel">
+        <p class="section-label">Education</p>
+        <h1 class="page-title">設計教育經歷</h1>
+      </div>
+
+      <div class="panel">
+        <div class="timeline">
+
+          <!-- AAPD 職涯陪跑教練 -->
+          <div class="timeline-item" style="border-top: none;">
+            <div class="timeline-year">2025.06 – 目前</div>
+            <div class="timeline-body">
+              <div class="timeline-role">職涯陪跑教練</div>
+              <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+              <div class="timeline-desc">提供一對一個人化指導，幫助學員不只解決短期的困惑與挑戰，同時探索長期成長目標。已累積 10+ 以上學員諮詢經驗。</div>
+            </div>
+          </div>
+
+          <!-- AAPD 產品設計助教 -->
+          <div class="timeline-item">
+            <div class="timeline-year">2023.10 – 目前</div>
+            <div class="timeline-body">
+              <div class="timeline-role">產品設計助教</div>
+              <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+              <div class="timeline-desc">擔任《產品設計挑戰賽》及《UI 設計線上實戰營》的產品設計助教，協助學員作業批改、幫助學員排除遇到的困難、分享對應設計資源以及分享自身經驗。已累積協助 200+ 以上學員。</div>
+            </div>
+          </div>
+
+          <!-- XChange -->
+          <div class="timeline-item">
+            <div class="timeline-year">2025.01 – 2025.06</div>
+            <div class="timeline-body">
+              <div class="timeline-role">UI/UX 組業師</div>
+              <div class="timeline-company">XChange 互聯網大學｜兼職</div>
+              <div class="timeline-desc">我在第八屆 XChange 互聯網大學擔任 UI/UX 組業師，提供大學生和研究生一對一、一對二的諮詢，解惑他們在實習和專案中遇到的問題。</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 學員評價 -->
+      <div class="panel">
+        <p class="section-label">Student Reviews</p>
+        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px;">學員怎麼說</h2>
+        <div id="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">大胃不只能一針見血地指出核心問題，還會用細膩的眼光幫助我們看見畫面裡被忽略的細節。面對任何提問也十分願意耐心傾聽、細心解答，從整體產品思路到細微的視覺元素都照顧到，能感受到他滿滿的真心以及想讓學員成長的熱忱。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">Jyun</div>
+                <div class="testimonial-role">UI 實戰營學員</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">大胃總能在短時間內幫我們突破盲點，還會耐心帶著我們聚焦目標。快狠準又帶點幽默，讓緊張的專案過程多了不少歡笑聲。在他的帶領下，我們不只拿下優秀專案的頭銜，也在過程中培養了更全面的設計思考能力。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">Glori</div>
+                <div class="testimonial-role">UI 實戰營學員</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">大胃教練的回饋讓我更清楚作品集架構與敘事重點，也釐清設計師定位與未來方向。過程中激發了我對 UX 的熱情，並開始思考職涯下一步，受益良多。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">👤</div>
+              <div>
+                <div class="testimonial-name">Hedy Du</div>
+                <div class="testimonial-role">Coachee</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-quote">大胃助教滿滿的愛的教育，給我們情緒價值和明確方向，在資訊炸裂的 Figma 裡，是你的回饋讓我們找到前進的路。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">🙂</div>
+              <div>
+                <div class="testimonial-name">Dora Ting</div>
+                <div class="testimonial-role">產品設計挑戰賽學員</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card review-extra">
+            <p class="testimonial-quote">大胃教練很清楚的跟我說可以改進的部分以及新手容易犯的錯誤，對轉職者以及新手都是很好的提點！針對事前表單內容也很清楚的了解，在對談時更多了深入的提問，有助於釐清我自身的問題。</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">🐰</div>
+              <div>
+                <div class="testimonial-name">小橘</div>
+                <div class="testimonial-role">Coachee</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card review-extra">
+            <p class="testimonial-quote">很感謝大胃超用心的 Design Review，針對我提出的問題都一一超詳解，除了點出產品目前的問題，也提供很多發想讓我腦洞有被打開，諮詢結束後經過反覆消化，也發現自己在專案執行和思考上的盲點，真的收穫很多～</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">🐨</div>
+              <div>
+                <div class="testimonial-name">電鍋</div>
+                <div class="testimonial-role">Coachee</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="reviews-toggle-wrap" style="text-align: center; margin-top: 24px; display: none;">
+          <button id="reviews-toggle" onclick="toggleReviews()" style="background: none; border: 1px solid var(--border); border-radius: 999px; padding: 10px 24px; font-size: 14px; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+            查看更多評價 ↓
+          </button>
+        </div>
+      </div>
+
+      <!-- 照片牆 -->
+      <div class="panel" style="overflow: hidden;">
+        <p class="section-label">Moments</p>
+        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px;">教學現場</h2>
+        <div class="marquee-wrapper">
+          <div class="marquee-track">
+            <div class="marquee-item"><img src="assets/images/education1_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education3_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education6_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education5_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education4_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education7_web.jpg" alt=""></div>
+            <!-- 複製一組讓跑馬燈無縫循環 -->
+            <div class="marquee-item"><img src="assets/images/education1_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education3_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education6_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education5_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education4_web.jpg" alt=""></div>
+            <div class="marquee-item"><img src="assets/images/education7_web.jpg" alt=""></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel cta-panel">
+        <p class="section-label">Let's Work Together</p>
+        <div class="cta-title">對我的背景有興趣？</div>
+        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
+        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    var reviewsExpanded = false;
+
+    function getGridColumns() {
+      const grid = document.getElementById('reviews-grid');
+      const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+      return cols;
+    }
+
+    function updateReviewsLayout() {
+      const extras = document.querySelectorAll('.review-extra');
+      const toggleWrap = document.getElementById('reviews-toggle-wrap');
+      const btn = document.getElementById('reviews-toggle');
+      const cols = getGridColumns();
+
+      if (cols >= 3) {
+        // Wide: show all, hide toggle
+        extras.forEach(el => el.style.display = '');
+        toggleWrap.style.display = 'none';
+      } else {
+        // Narrow: respect expanded state
+        toggleWrap.style.display = 'block';
+        if (reviewsExpanded) {
+          extras.forEach(el => el.style.display = '');
+          btn.textContent = '收起評價 ↑';
+        } else {
+          extras.forEach(el => el.style.display = 'none');
+          btn.textContent = '查看更多評價 ↓';
+        }
+      }
+    }
+
+    function toggleReviews() {
+      reviewsExpanded = !reviewsExpanded;
+      updateReviewsLayout();
+    }
+
+    window.addEventListener('resize', updateReviewsLayout);
+    document.addEventListener('DOMContentLoaded', updateReviewsLayout);
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('mobileToggle');
+      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
