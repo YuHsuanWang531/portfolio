@@ -4,116 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Your Name</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .about-square-photo { width: 280px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden; }
+    .about-square-photo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: top center; display: block; }
+    .about-intro-grid { display: flex; gap: var(--sp-10); align-items: flex-start; }
+    @media (max-width: 900px) {
+      .about-intro-grid { flex-direction: column; }
+      .about-square-photo { width: 100%; order: -1; }
+    }
+    .life-marquee-wrapper { overflow: hidden; margin: 0; }
+    .life-marquee-track { display: flex; gap: 12px; width: max-content; animation: marquee-life 45s linear infinite; animation-play-state: paused; }
+    .life-marquee-item { height: 240px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0; }
+    .life-marquee-item img { height: 100%; width: auto; object-fit: contain; display: block; }
+    @keyframes marquee-life { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  </style>
 </head>
 <body>
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item active"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <main class="main">
       <div class="panel">
-        <p class="section-label">About Me</p>
         <h1 class="page-title">關於我</h1>
       </div>
 
       <div class="panel">
-        <div class="about-grid">
-          <div class="about-photo">
-            <img src="assets/images/hsuan.jpg" alt="王瑀萱">
-          </div>
+        <div class="about-intro-grid">
           <div class="about-text">
-            <p>嗨，我是大胃，因為學生時期是熱舞社，運動量大也吃得多，得此綽號！</p>
-            <p>我曾在媒體業深耕產品設計 8 年，透過數據與使用者訪談深入了解使用者需求，可以與使用者面對面是我熱愛 2C 產業的原因。最有成就感的時刻，是在捷運上看到陌生人使用我設計的產品！</p>
-            <p>我喜歡運動、烹飪，近 3 年轉戰運動科技產業，專注於幫助場館業者運用科技提升營運效率。我擅長化繁為簡，梳理複雜的 2B 系統操作流程，讓場館能輕鬆上手。將興趣與專業結合，讓我更能站在場館經營者與使用者的角度，不斷優化產品體驗。</p>
-            <p>除了設計工作，我也熱衷於設計教育，相信設計可以改變世界，我在社群中擔任業師、助教、教練等角色，透過分享自身經驗，幫助新手設計師少走一點彎路，也在這個過程中精進自己的溝通與專業能力。希望大家都能找到心之所向，並且有勇氣走向那個方向。</p>
-            <p>同時，我也是一名母親，在工作與家庭之間尋找平衡是我一直努力的課題，這樣的生活讓我學會如何在混亂中找到節奏，在忙碌中保留一點屬於自己的空間。此外，我有嚴重的「紅點點強迫症」——只要不是在洗澡或睡覺，一定秒讀秒回訊息！</p>
+            <h2>嗨，我是大胃，<br>一名跨領域產品設計師，專注於用設計創造商業價值</h2>
+            <p>目前在運動科技業擔任資深產品設計師，專注於幫助運動場館業者運用科技提升營運效率，以推動運動科技產業數位化為目標，主導 B2B SaaS 與 B2B2C 多產品線的設計策略。我擅長化繁為簡，梳理複雜的系統操作流程，讓場館能輕鬆上手。將興趣與專業結合，讓我更能站在場館經營者與使用者的角度，不斷優化產品體驗。</p>
+            <p>過去曾在內容媒體業深耕 2C 產品設計 8 年，橫跨新聞媒體、知識音頻、電商、活動票券等多元產品線，透過數據與使用者訪談深入了解使用者需求，主導多項核心功能體驗優化，驅動業務成長，累計交付 10+ 個產品專案。最有成就感的時刻，是在捷運上看到陌生人使用我設計的產品！</p>
+            <p>我也熱衷於設計教育，在社群中擔任設計助教與職涯教練，陪伴新手設計師找到方向，透過分享自身經驗，幫助新手設計師少走一點彎路，我相信好的設計師不只能解決問題，更能幫助身邊的人看見更好的可能性。</p>
           </div>
         </div>
       </div>
 
       <!-- 技能 -->
       <div class="panel">
-        <p class="section-label">Skills</p>
-        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px;">技能</h2>
-        <div class="skills-wrap">
-          <span class="skill-tag">Figma</span>
-          <span class="skill-tag">UI Design</span>
-          <span class="skill-tag">UX Research</span>
-          <span class="skill-tag">Design Systems</span>
-          <span class="skill-tag">Prototyping</span>
-          <span class="skill-tag">HTML/CSS</span>
-          <span class="skill-tag">使用者訪談</span>
-          <span class="skill-tag">產品策略</span>
-          <span class="skill-tag">A/B Testing</span>
-          <span class="skill-tag">利害關係人溝通</span>
+        <h2>專業技能</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-card-icon"><img src="assets/images/productdesign.svg" alt="產品設計"></div>
+            <h3 class="value-card-title">產品設計</h3>
+            <div class="value-card-desc">從概念發想到高保真設計，擅長用 Figma 快速驗證想法、建立設計系統，具備 HTML/CSS 基礎，能與工程師無縫協作並精準傳達設計意圖。</div>
+          </div>
+          <div class="value-card">
+            <div class="value-card-icon"><img src="assets/images/research.svg" alt="使用者研究"></div>
+            <h3 class="value-card-title">使用者研究</h3>
+            <div class="value-card-desc">透過質化訪談與量化數據理解使用者真實需求，將洞察轉化為可落地的設計決策，讓每個設計選擇都有扎實依據，而非僅憑直覺。</div>
+          </div>
+          <div class="value-card">
+            <div class="value-card-icon"><img src="assets/images/chat.svg" alt="策略與溝通"></div>
+            <h3 class="value-card-title">策略與溝通</h3>
+            <div class="value-card-desc">擅長在 PM、工程師、業務等多方利害關係人之間建立共識，將商業目標轉化為設計語言，讓設計不只美觀，更能驅動業務成長。</div>
+          </div>
         </div>
       </div>
 
       <!-- 價值觀 -->
       <div class="panel">
-        <p class="section-label">Values</p>
-        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 24px;">設計價值觀</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
-          <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
-            <div style="font-size: 24px; margin-bottom: 12px;">🎯</div>
-            <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">[設計價值觀標題]</div>
-            <div style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">[說明文字]</div>
+        <h2>設計價值觀</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-card-icon"><img src="assets/images/happy.svg" alt="樂在其中"></div>
+            <h3 class="value-card-title">樂在其中</h3>
+            <div class="value-card-desc">設計不只是交付成果，而是一個充滿樂趣和挑戰的過程。當你真心投入每一個決策、每一次溝通、每一個解決問題的瞬間，好的設計自然會發生。</div>
           </div>
-          <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
-            <div style="font-size: 24px; margin-bottom: 12px;">💡</div>
-            <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">[設計價值觀標題]</div>
-            <div style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">[說明文字]</div>
+          <div class="value-card">
+            <div class="value-card-icon"><img src="assets/images/rose.svg" alt="生涯適應力"></div>
+            <h3 class="value-card-title">生涯適應力</h3>
+            <div class="value-card-desc">產業瞬息萬變，保持彈性是應對變化最好的方式。持續探索新領域、對新事物保持好奇心，不斷嘗試與學習，才能在變化中找到自己的方向。</div>
           </div>
-          <div style="padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
-            <div style="font-size: 24px; margin-bottom: 12px;">🤝</div>
-            <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">[設計價值觀標題]</div>
-            <div style="font-size: 16px; color: var(--text-secondary); line-height: 1.7;">[說明文字]</div>
+          <div class="value-card">
+            <div class="value-card-icon"><img src="assets/images/diamond.svg" alt="設計創造價值"></div>
+            <h3 class="value-card-title">設計創造價值</h3>
+            <div class="value-card-desc">設計師的工作不只是讓產品變好看，而是透過理解使用者需求與商業目標，將每一個設計決策轉化為對使用者和企業都有意義的成果。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 照片跑馬燈 -->
+      <div class="panel panel-overflow-hidden">
+        <h2>生活現場</h2>
+        <div class="life-marquee-wrapper">
+          <div class="life-marquee-track">
+            <div class="life-marquee-item"><img src="assets/images/life7.png" alt="生活照 7"></div>
+            <div class="life-marquee-item"><img src="assets/images/life2.png" alt="生活照 2"></div>
+            <div class="life-marquee-item"><img src="assets/images/life3.png" alt="生活照 3"></div>
+            <div class="life-marquee-item"><img src="assets/images/life5.png" alt="生活照 5"></div>
+            <div class="life-marquee-item"><img src="assets/images/life4.png" alt="生活照 4"></div>
+            <div class="life-marquee-item"><img src="assets/images/life6.png" alt="生活照 6"></div>
+            <div class="life-marquee-item"><img src="assets/images/life1.png" alt="生活照 1"></div>
+            <div class="life-marquee-item"><img src="assets/images/life8.png" alt="生活照 8"></div>
+            <!-- 複製一組讓跑馬燈無縫循環 -->
+            <div class="life-marquee-item"><img src="assets/images/life7.png" alt="生活照 7"></div>
+            <div class="life-marquee-item"><img src="assets/images/life2.png" alt="生活照 2"></div>
+            <div class="life-marquee-item"><img src="assets/images/life3.png" alt="生活照 3"></div>
+            <div class="life-marquee-item"><img src="assets/images/life5.png" alt="生活照 5"></div>
+            <div class="life-marquee-item"><img src="assets/images/life4.png" alt="生活照 4"></div>
+            <div class="life-marquee-item"><img src="assets/images/life6.png" alt="生活照 6"></div>
+            <div class="life-marquee-item"><img src="assets/images/life1.png" alt="生活照 1"></div>
+            <div class="life-marquee-item"><img src="assets/images/life8.png" alt="生活照 8"></div>
           </div>
         </div>
       </div>
 
       <div class="panel cta-panel">
-        <p class="section-label">Let's Work Together</p>
-        <div class="cta-title">對我的背景有興趣？</div>
-        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
-        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
       </div>
-
     </main>
   </div>
 
   <script>
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    window.addEventListener('load', function() {
+      var track = document.querySelector('.life-marquee-track');
+      if (track) track.style.animationPlayState = 'running';
     });
   </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>

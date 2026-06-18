@@ -4,35 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Your Name</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <main class="main">
       <div class="panel">
@@ -76,38 +53,38 @@
               <label>Tell Me About Your Project</label>
               <textarea placeholder="Describe your project, goals, timeline..." required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message ↗</button>
-            <p id="form-status" style="font-size: 14px; color: var(--accent); text-align: center; display: none; margin-top: 8px;"></p>
+            <button type="submit" class="btn btn-primary btn-full">Send Message ↗</button>
+            <p id="form-status" class="contact-form-status"></p>
           </form>
 
           <div class="contact-info">
             <div>
               <p class="section-label">Direct Contact</p>
-              <div style="margin-top: 12px;">
+              <div class="contact-info-group">
                 <div class="contact-detail-label">Email</div>
-                <a href="mailto:hello@youremail.com" class="contact-detail-value" style="color: var(--accent);">hello@youremail.com</a>
+                <a href="mailto:hello@youremail.com" class="contact-detail-value contact-email-link">hello@youremail.com</a>
               </div>
-              <div style="margin-top: 20px;">
+              <div class="contact-info-group">
                 <div class="contact-detail-label">Based In</div>
                 <div class="contact-detail-value">[Your City, Country]</div>
               </div>
-              <div style="margin-top: 20px;">
+              <div class="contact-info-group">
                 <div class="contact-detail-label">Response Time</div>
                 <div class="contact-detail-value">Within 24 hours</div>
               </div>
             </div>
             <div>
               <p class="section-label">Book a Call</p>
-              <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin: 12px 0 16px;">Schedule a free 30-minute discovery call to discuss your project.</p>
+              <p class="contact-booking-desc">Schedule a free 30-minute discovery call to discuss your project.</p>
               <a href="#" class="btn btn-outline">Book a Call ↗</a>
             </div>
             <div>
               <p class="section-label">Follow Me</p>
-              <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;">
-                <a href="#" class="btn btn-outline" style="padding: 9px 16px; font-size: 14px;">LinkedIn</a>
-                <a href="#" class="btn btn-outline" style="padding: 9px 16px; font-size: 14px;">Behance</a>
-                <a href="#" class="btn btn-outline" style="padding: 9px 16px; font-size: 14px;">Dribbble</a>
-                <a href="#" class="btn btn-outline" style="padding: 9px 16px; font-size: 14px;">Instagram</a>
+              <div class="contact-social-row">
+                <a href="#" class="btn btn-outline btn-xs">LinkedIn</a>
+                <a href="#" class="btn btn-outline btn-xs">Behance</a>
+                <a href="#" class="btn btn-outline btn-xs">Dribbble</a>
+                <a href="#" class="btn btn-outline btn-xs">Instagram</a>
               </div>
             </div>
           </div>
@@ -115,22 +92,6 @@
       </div>
     </main>
   </div>
-
-  <script>
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
-    });
-    function handleSubmit(e) {
-      e.preventDefault();
-      const s = document.getElementById('form-status');
-      s.style.display = 'block';
-      s.textContent = "Message sent! I'll get back to you within 24 hours.";
-      e.target.reset();
-    }
-  </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>

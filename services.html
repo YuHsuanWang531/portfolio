@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services — Your Name</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
@@ -18,8 +18,8 @@
       align-items: start;
       transition: var(--transition);
     }
-    .service-full:hover { border-color: var(--accent); }
-    .service-full-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .service-full:hover { transform: scale(1.02); }
+    .service-full-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
     .service-full-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; }
     .deliverable { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
     .deliverable::before { content: '→'; color: var(--accent); font-weight: 700; }
@@ -28,30 +28,7 @@
   </style>
 </head>
 <body>
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <main class="main">
       <div class="panel">
@@ -59,14 +36,14 @@
         <h1 class="page-title">Services built<br>around your needs.</h1>
       </div>
 
-      <div class="panel" style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="panel services-panel-list">
 
         <div class="service-full">
           <div>
             <div class="service-icon">🎨</div>
             <div class="service-full-title">UI/UX Design</div>
             <p class="service-full-desc">[服務詳細描述 — 說明你的設計流程、方法論、如何以使用者為中心產出高品質設計]</p>
-            <a href="contact.html" class="btn btn-primary" style="font-size: 14px; padding: 11px 20px;">Get Started ↗</a>
+            <a href="contact.html" class="btn btn-primary btn-sm">Get Started ↗</a>
           </div>
           <div>
             <p class="section-label">Deliverables</p>
@@ -85,7 +62,7 @@
             <div class="service-icon">✦</div>
             <div class="service-full-title">Brand Design</div>
             <p class="service-full-desc">[服務詳細描述 — 說明你如何建立品牌識別、視覺語言、讓品牌在市場中脫穎而出]</p>
-            <a href="contact.html" class="btn btn-primary" style="font-size: 14px; padding: 11px 20px;">Get Started ↗</a>
+            <a href="contact.html" class="btn btn-primary btn-sm">Get Started ↗</a>
           </div>
           <div>
             <p class="section-label">Deliverables</p>
@@ -104,7 +81,7 @@
             <div class="service-icon">📱</div>
             <div class="service-full-title">Product Design</div>
             <p class="service-full-desc">[服務詳細描述 — 說明你如何從概念到落地，設計完整的數位產品體驗]</p>
-            <a href="contact.html" class="btn btn-primary" style="font-size: 14px; padding: 11px 20px;">Get Started ↗</a>
+            <a href="contact.html" class="btn btn-primary btn-sm">Get Started ↗</a>
           </div>
           <div>
             <p class="section-label">Deliverables</p>
@@ -123,7 +100,7 @@
             <div class="service-icon">💡</div>
             <div class="service-full-title">Design Consultancy</div>
             <p class="service-full-desc">[服務詳細描述 — 說明你如何以顧問身份幫助團隊提升設計能力]</p>
-            <a href="contact.html" class="btn btn-primary" style="font-size: 14px; padding: 11px 20px;">Book a Call ↗</a>
+            <a href="contact.html" class="btn btn-primary btn-sm">Book a Call ↗</a>
           </div>
           <div>
             <p class="section-label">What's Included</p>
@@ -139,29 +116,11 @@
       </div>
 
       <div class="panel cta-panel">
-        <p class="section-label">Ready to Start?</p>
-        <div class="cta-title">Let's build something great together.</div>
-        <div class="cta-subtitle">Tell me about your project and I'll get back to you within 24 hours.</div>
-        <a href="contact.html" class="btn btn-primary">Start a Project ↗</a>
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
       </div>
-      <div class="panel cta-panel">
-        <p class="section-label">Let's Work Together</p>
-        <div class="cta-title">對我的背景有興趣？</div>
-        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
-        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
-      </div>
-
     </main>
   </div>
-
-  <script>
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
-    });
-  </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>

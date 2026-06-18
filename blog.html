@@ -4,35 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog — Your Name</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item active"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <main class="main">
       <div class="panel">
@@ -93,23 +70,11 @@
         </div>
       </div>
       <div class="panel cta-panel">
-        <p class="section-label">Let's Work Together</p>
-        <div class="cta-title">對我的背景有興趣？</div>
-        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
-        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
       </div>
-
     </main>
   </div>
-
-  <script>
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
-    });
-  </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>

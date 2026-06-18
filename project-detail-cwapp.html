@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>天下雜誌 App 訂戶增長 — 王瑀萱</title>
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    .section-label { margin-bottom: 8px; }
+    .prose .section-label + h2 { margin-top: 8px; }
+    .prose .section-label { margin-top: 48px; }
+    .prose .section-label:first-child { margin-top: 0; }
+    .panel .back-nav { margin-bottom: 32px; }
+    .panel .project-intro { color: var(--text-primary); margin-top: 32px; margin-bottom: 32px; }
+
+    .cw-persona-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .cw-persona-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 24px; }
+    .cw-persona-type { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .persona-name { font-size: var(--fs-h4); font-weight: 700; margin-bottom: 4px; }
+    .persona-subtitle { font-size: var(--fs-small); color: var(--text-muted); margin-bottom: 12px; }
+    .persona-desc { font-size: var(--fs-body); color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+    .persona-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .insight-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+    .insight-col { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .insight-group-title { font-size: var(--fs-h4); font-weight: 700; color: var(--accent); text-align: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .insight-item-title { font-size: var(--fs-body); font-weight: 700; margin-bottom: 6px; }
+    .insight-item p { font-size: var(--fs-body); color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+    .interview-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .interview-info-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 20px; }
+    .interview-info-label { font-size: var(--fs-small); color: var(--text-muted); margin-bottom: 8px; }
+    .interview-info-value { font-size: var(--fs-body); color: var(--text-primary); line-height: 1.6; }
+
+    .adj-comparison { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
+    .adj-panel { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+    .adj-title { font-size: var(--fs-h4); font-weight: 700; text-align: center; margin-bottom: 16px; }
+    .adj-arrow { font-size: 24px; color: var(--text-muted); flex-shrink: 0; }
+    .adj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .persona-chip { border: 1px solid var(--border); border-radius: 12px; padding: 16px 12px; text-align: center; background: #fff; }
+    .persona-chip.greyed { opacity: 0.3; }
+    .persona-chip.new { border-color: var(--accent); background: var(--accent-light); }
+    .chip-name { font-size: var(--fs-body); font-weight: 700; margin-bottom: 4px; }
+    .chip-desc { font-size: var(--fs-xs); color: var(--text-muted); }
+    .persona-chip.new .chip-desc { color: var(--accent); }
+
+    .panel .interview-section-h3 { font-size: var(--fs-h3); font-weight: 700; margin: 24px 0 12px; }
+    .panel .prose h3 { margin-bottom: 12px; }
+    .purpose-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 24px; }
+    .purpose-card-title { font-size: var(--fs-h3); font-weight: 700; margin-bottom: 8px; }
+    .purpose-card p { margin: 0; }
+    #results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
+    .result-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .result-card-label { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; }
+    .result-card-sublabel { font-size: var(--fs-small); font-weight: 400; color: var(--text-muted); }
+    .hooked-insight { display: flex; align-items: center; gap: 16px; background: var(--accent-light); border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 12px; }
+    .hooked-insight-icon { font-size: 20px; flex-shrink: 0; }
+    .hooked-insight p { margin: 0; font-size: var(--fs-body); color: var(--text-secondary); line-height: 1.6; }
+    .interview-img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; display: block; }
+    .persona-avatar { width: 60px; height: 60px; object-fit: contain; border-radius: 8px; margin-bottom: 12px; }
+    .purpose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .interview-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .adj-grid-full-row { grid-column: 1/-1; display: flex; justify-content: center; gap: 12px; }
+    .adj-grid-full-row .persona-chip { flex: 0 0 calc(33.333% - 8px); }
+    .interview-info-grid .span-full { grid-column: span 2; }
+
+    @media(max-width:900px){
+      .persona-grid { grid-template-columns: 1fr !important; }
+      .interview-info-grid { grid-template-columns: 1fr 1fr !important; }
+      #results-grid { grid-template-columns: 1fr !important; }
+      .adj-comparison { flex-direction: column; }
+      .adj-arrow { transform: rotate(90deg); }
+      .adj-panel { width: 100%; }
+      .insight-columns { grid-template-columns: 1fr !important; }
+      .interview-img-grid { grid-template-columns: 1fr !important; }
+    }
+    .adjustment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .adjustment-grid .challenge-card { border-left: none; margin-bottom: 0; }
+    .adjustment-grid .challenge-card h3 { font-size: var(--fs-body); font-weight: 700; margin-bottom: 8px; }
+    @media(max-width:900px){ .adjustment-grid { grid-template-columns: 1fr; } }
+
+    @media(max-width:600px){
+      .meta-card-grid { grid-template-columns: 1fr !important; }
+      .interview-info-grid { grid-template-columns: 1fr !important; }
+      .interview-info-grid .span-full { grid-column: span 1 !important; }
+      .purpose-grid { grid-template-columns: 1fr !important; }
+    }
+
+    .paywall-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); table-layout: fixed; }
+    .paywall-table th, .paywall-table td { border: 1px solid var(--border); padding: 8px 12px; text-align: center; white-space: nowrap; }
+    .paywall-table th:first-child, .paywall-table td:first-child { text-align: left; font-weight: 500; background: var(--bg); }
+    .paywall-table thead th { background: var(--bg); font-weight: 600; color: var(--text-secondary); }
+    .paywall-table .super-row th { border-bottom: none; font-size: var(--fs-xs); font-weight: 700; color: var(--text-muted); background: #fff; padding-bottom: 2px; }
+    .paywall-table .super-row th.sl { color: var(--accent); }
+    .paywall-table .super-row th:first-child { background: #fff; }
+    .paywall-table tbody td { background: #fff; }
+    .paywall-table .changed { color: var(--color-danger); font-weight: 600; }
+    .paywall-notes { font-size: var(--fs-small); color: var(--text-secondary); line-height: 1.8; }
+    .paywall-notes p { margin: 0 0 4px; }
+
+    .table-ba-wrap { position: relative; overflow: hidden; border-radius: var(--radius-sm); cursor: ew-resize; }
+    .table-ba-layer { width: 100%; }
+    .table-ba-before-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; clip-path: inset(0 50% 0 0); background: #fff; overflow: hidden; }
+    .table-ba-inner { width: 100%; }
+    .table-ba-line { position: absolute; top: 0; left: 50%; width: 2px; height: 100%; background: rgba(0,0,0,0.45); transform: translateX(-50%); pointer-events: none; }
+    .table-ba-wrap .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,0.55); box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; }
+    .table-ba-wrap .ba-label { position: absolute; top: 12px; background: rgba(0,0,0,0.55); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; pointer-events: none; }
+    .table-ba-wrap .ba-label--before { left: 12px; }
+    .table-ba-wrap .ba-label--after { right: 12px; }
+    @media(max-width:700px){ .paywall-table { font-size: 11px; } .paywall-table th, .paywall-table td { padding: 6px 8px; } }
+  </style>
+</head>
+<body>
+  <div id="reading-progress" class="reading-progress"></div>
+  <script>
+  window.addEventListener('scroll', function(){
+    var el = document.getElementById('reading-progress');
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    el.style.width = (docHeight > 0 ? (scrollTop / docHeight * 100) : 0) + '%';
+  });
+  </script>
+  <div class="layout">
+
+    <main class="main">
+
+      <!-- Header + Cover -->
+      <div class="panel">
+        <a href="projects.html" class="back-nav">← 回到設計專案</a>
+        <h1 class="page-title">從使用者訪談到產品優化：UX 研究如何助攻《天下雜誌 App》訂戶增長</h1>
+        <p class="project-intro">作為產品團隊中的 UI/UX 設計師，我於 2023 年負責《天下雜誌 App》的使用者訪談，將訪談中的關鍵洞察轉化為可衡量的產品機會，付費牆優化訂閱轉換率 +4%、禮物文章擴大觸及非訂戶、TTS 用戶首度超越 Podcast 用戶，協助團隊制定產品年度 Roadmap，目標達成訂戶增長 8,000 人。</p>
+        <img src="assets/images/cwapp.png" alt="天下雜誌 App" class="full-img full-img-mt" />
+        <div class="meta-card-grid">
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">專案時程</div>
+              <div class="meta-card-value">2023.01 - 2023.03</div>
+            </div>
+          </div>
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">角色</div>
+              <div class="meta-card-value">資深 UI/UX 設計師</div>
+            </div>
+          </div>
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">負責項目</div>
+              <div class="meta-card-value">UX 研究、UI 設計</div>
+            </div>
+          </div>
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">團隊組成</div>
+              <div class="meta-card-value">PM、UI/UX、UX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 產業背景 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">產業背景</p>
+          <h2>全球媒體產業正經歷前所未有的數位轉型浪潮</h2>
+          <p>全球媒體數位轉型主要受到使用者行動閱讀習慣改變，以及全球媒體訂閱制營收模式 (Paywall) 興起影響。面對這樣的趨勢，《天下雜誌》在 2015 年正式宣布開啟數位轉型，推動「平網整合」的內容政策。2017 年，推出「全閱讀」服務，正式啟動線上新聞付費模式，開創台灣媒體數位轉型的新里程碑。</p>
+          <p>2019 年，尼曼新聞實驗室提出了<strong>「紙本媒體數位轉型四大里程碑」，包括：數位營收大於紙本營收、讀者營收大於廣告營收、數位營收成長大於紙本營收衰退，以及數位訂戶數超過紙本訂戶數</strong>。這些指標不僅為媒體轉型提供了清晰的方向，也突顯了數位產品體驗的重要性。</p>
+        </div>
+      </div>
+
+      <!-- 現況與問題 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">現況與問題</p>
+          <h2>《天下雜誌 App》訂戶數停滯不前</h2>
+          <p>《天下雜誌 App》是天下數位產品中最成熟的指標性產品，憑藉穩定的高品質內容與報導，累積一群高黏著度的忠實讀者。2022 年底，訂戶數出現明顯的停滯期，新客數獲取趨緩、既有訂戶的留存壓力也逐漸浮現，隨著市場需求的變化與競爭媒體的多樣性，<strong style="color: var(--text-primary)">團隊面臨如何突破成長的挑戰</strong>，究竟是什麼原因讓使用者願意付費？什麼原因讓使用者願意停留？</p>
+          <img src="assets/images/orderdata.png" alt="訂戶數停滯趨勢" class="full-img full-img-mt" />
+        </div>
+      </div>
+
+      <!-- 訪談計劃 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">訪談計劃</p>
+          <h2>了解使用者在訂閱前的最後一哩路 — 付費行為背後的真實動機</h2>
+          <p>核心商業目標是在 2023 年訂戶數增長 8 千人，為了達成目標，產品團隊計劃透過深入的使用者研究與訪談，了解「付費」與「不付費」之間的關鍵決策差異，並探索現有產品功能是否滿足用戶需求，這些研究結果將作為制定產品年度 Roadmap 的重要依據之一。我們在為期 3 週的時間內，完成了 10 名使用者的訪談，<strong style="color: var(--text-primary)">我負責撰寫主要訪綱，並擔任 3 場訪談的主訪者與 4 場訪談的紀錄者</strong>。</p>
+
+          <h3>訪談目的</h3>
+          <div class="purpose-grid">
+            <div class="purpose-card">
+              <div class="purpose-card-title">了解訂閱行為</div>
+              <p>了解使用者在決定訂閱前的動機與行為、付費與不付費的關鍵因素</p>
+            </div>
+            <div class="purpose-card">
+              <div class="purpose-card-title">現有功能滿意度</div>
+              <p>現有產品功能是否符合使用者的需求，找出可以改善的地方，並提高用戶滿意度</p>
+            </div>
+          </div>
+
+          <h3>訪談方法</h3>
+        </div>
+        <div class="interview-info-grid">
+          <div class="interview-info-card">
+            <div class="interview-info-label">執行方式</div>
+            <div class="interview-info-value">電話訪談、實體質化訪談</div>
+          </div>
+          <div class="interview-info-card">
+            <div class="interview-info-label">執行時間</div>
+            <div class="interview-info-value">實體訪談每場 1.5～2 小時</div>
+          </div>
+          <div class="interview-info-card">
+            <div class="interview-info-label">執行人員</div>
+            <div class="interview-info-value">主訪者 1 名、紀錄者 1 名、設備 1 名</div>
+          </div>
+          <div class="interview-info-card">
+            <div class="interview-info-label">篩選條件</div>
+            <div class="interview-info-value">是《天下雜誌》的會員，且有使用《天下雜誌 App》經驗</div>
+          </div>
+          <div class="interview-info-card span-full">
+            <div class="interview-info-label">訪談對象</div>
+            <div class="interview-info-value">根據訂閱行為分成 5 群：首購族、忠誠客、斷訂戶、恢訂戶、免費仔</div>
+          </div>
+        </div>
+        <h3 class="interview-section-h3">訪談現場</h3>
+        <div class="interview-img-grid">
+          <img src="assets/images/interview1.png" alt="訪談現場 1" class="interview-img" />
+          <img src="assets/images/interview2.png" alt="訪談現場 2" class="interview-img" />
+        </div>
+      </div>
+
+      <!-- 困難與挑戰 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">困難與挑戰</p>
+          <h2>難以找到最理想的訪談對象</h2>
+          <p>我們最初將目標受訪者分為 5 個群體，期望涵蓋完整的使用者生命週期，包含首購族、忠誠客、斷訂戶、恢訂戶跟免費仔。但在實際招募過程中，我們發現<strong>斷訂戶與恢訂戶的招募難度遠超預期</strong>，這些使用者對產品已失去關注，參與意願極低，即便多次接觸也難以成功邀約。</p>
+          <p>經過團隊討論，我們做出了策略性調整，將受訪對象重新定義，排除斷訂戶與恢訂戶，同時新增新忠誠客作為新的訪談對象，可以更完整地捕捉訂閱留存的關鍵點。</p>
+        </div>
+
+        <!-- 調整前後對比 -->
+        <div class="adj-comparison">
+          <!-- 調整前 -->
+          <div class="adj-panel">
+            <div class="adj-title">調整前</div>
+            <div class="adj-grid">
+              <div class="persona-chip"><div class="chip-name">免費仔</div><div class="chip-desc">持續使用但未付費</div></div>
+              <div class="persona-chip"><div class="chip-name">首購族</div><div class="chip-desc">3 個月內訂閱</div></div>
+              <div class="persona-chip"><div class="chip-name">忠誠客</div><div class="chip-desc">2 年以上現訂戶</div></div>
+              <div class="adj-grid-full-row">
+                <div class="persona-chip"><div class="chip-name">斷訂戶</div><div class="chip-desc">1 年內斷訂</div></div>
+                <div class="persona-chip"><div class="chip-name">恢訂戶</div><div class="chip-desc">1 年內斷訂又續訂</div></div>
+              </div>
+            </div>
+          </div>
+          <!-- 箭頭 -->
+          <div class="adj-arrow">→</div>
+          <!-- 調整後 -->
+          <div class="adj-panel">
+            <div class="adj-title">調整後</div>
+            <div class="adj-grid">
+              <div class="persona-chip"><div class="chip-name">免費仔</div><div class="chip-desc">持續使用但未付費</div></div>
+              <div class="persona-chip"><div class="chip-name">首購族</div><div class="chip-desc">6 個月內訂閱</div></div>
+              <div class="persona-chip new"><div class="chip-name">新忠誠客</div><div class="chip-desc">1 年內有續訂行為</div></div>
+              <div class="persona-chip"><div class="chip-name">忠誠客</div><div class="chip-desc">2 年以上現訂戶</div></div>
+              <div class="persona-chip greyed"><div class="chip-name">斷訂戶</div><div class="chip-desc">1 年內斷訂</div></div>
+              <div class="persona-chip greyed"><div class="chip-name">恢訂戶</div><div class="chip-desc">1 年內斷訂又續訂</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 使用者輪廓 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">使用者輪廓</p>
+          <h2>從免費用戶到忠實訂戶的使用者輪廓</h2>
+          <p>透過深度使用者訪談，我們將讀者群體歸納為四個主要類型，描繪出從免費用戶到長期訂戶的完整輪廓。這些類型反映出不同階段讀者的核心需求與行為特徵，也成為後續設計決策的重要依據。</p>
+        </div>
+        <div class="cw-persona-grid">
+          <div class="cw-persona-card">
+            <img src="assets/images/profile-1.png" alt="免費仔" class="persona-avatar" />
+            <div class="cw-persona-type">免費仔 · 持續使用未訂閱</div>
+            <div class="persona-name">心有餘而力不足的迷惘海歸中年</div>
+            <div class="persona-desc">資訊爆炸時代，覺得自己不能落下，害怕自己跟不上，卻因為工作時間長，沒辦法撥出時間持續學習新知。</div>
+            <div class="persona-tags">
+              <span class="tag">資訊焦慮</span>
+              <span class="tag">時間零碎</span>
+            </div>
+          </div>
+          <div class="cw-persona-card">
+            <img src="assets/images/profile-3.png" alt="首購族" class="persona-avatar" />
+            <div class="cw-persona-type">首購族 · 6 個月內訂閱</div>
+            <div class="persona-name">認真生活思考成長的文青小資女</div>
+            <div class="persona-desc">就算工作很忙也要撥空給自己好好生活。30 歲開始讀天下，今年願望是要長知識，訂定每天看新聞、學習理財的目標。</div>
+            <div class="persona-tags">
+              <span class="tag">強迫學習</span>
+              <span class="tag">書展訂閱</span>
+            </div>
+          </div>
+          <div class="cw-persona-card">
+            <img src="assets/images/profile-4.png" alt="新忠誠客" class="persona-avatar" />
+            <div class="cw-persona-type">新忠誠客 · 1 年內有過續訂</div>
+            <div class="persona-name">超級知識管理狂的管顧大叔</div>
+            <div class="persona-desc">對於知識管理有強烈需求，使用各種管理工具幫助自己內化知識，喜歡跟同事分享新知，比起手機閱讀更喜歡用聽的。</div>
+            <div class="persona-tags">
+              <span class="tag">主動分享</span>
+              <span class="tag">聽新聞</span>
+            </div>
+          </div>
+          <div class="cw-persona-card">
+            <img src="assets/images/profile-2.png" alt="忠誠客" class="persona-avatar" />
+            <div class="cw-persona-type">忠誠客 · 2 年以上現訂戶</div>
+            <div class="persona-name">愛之深責之切的重度黏著高端使用者</div>
+            <div class="persona-desc">持續關注管理、投資理財等議題，在意新聞可信度與品質，認為天下是高品質媒體，不能犯低級錯誤。</div>
+            <div class="persona-tags">
+              <span class="tag">信任天下</span>
+              <span class="tag">熱愛學習</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 關鍵洞察 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">關鍵洞察</p>
+          <h2>品牌認同與產品體驗的斷層</h2>
+          <p>透過訪談我們發現《天下雜誌》在讀者心中扮演著集專業性與社交價值於一身的媒體角色。使用者普遍認同天下的品牌形象及高品質內容，也願意透過訂閱付費支持，但同時也發現使用者有強烈的個人化需求。</p>
+
+        </div>
+        <div class="insight-columns">
+          <div class="insight-col">
+            <div class="insight-group-title">品牌認同</div>
+            <div class="insight-item">
+              <div class="insight-item-title">認同品牌形象</div>
+              <p>使用者對《天下雜誌》保持高度信任，認為其帶給人正向積極的感覺且資訊更新速度快、可信度高。</p>
+            </div>
+            <div class="insight-item">
+              <div class="insight-item-title">高品質內容創造社交價值</div>
+              <p>使用者認為《天下雜誌》提供的內容能讓他們在社交場合中更具話題性，講話時能言之有物。</p>
+            </div>
+          </div>
+          <div class="insight-col">
+            <div class="insight-group-title">訂戶權益</div>
+            <div class="insight-item">
+              <div class="insight-item-title">訂戶權益認知不足</div>
+              <p>認同內容訂閱制，願意為高品質內容付費，但不清楚自己成為訂戶後的具體權益，形成了一個關鍵的轉換障礙。</p>
+            </div>
+            <div class="insight-item">
+              <div class="insight-item-title">訂戶尊榮感的力量</div>
+              <p>使用者看到「訂戶限定」會很有尊榮感，認為自己享有特殊權益，且樂於分享給他人。</p>
+            </div>
+          </div>
+          <div class="insight-col">
+            <div class="insight-group-title">需求差異化</div>
+            <div class="insight-item">
+              <div class="insight-item-title">內容差異化</div>
+              <p>《天下雜誌》的文章資訊量大，使用者偏好只看自己感興趣的內容，對於不感興趣的內容則會選擇忽略。</p>
+            </div>
+            <div class="insight-item">
+              <div class="insight-item-title">功能差異化</div>
+              <p>對於 App 內功能使用的差異化大，會用的人很依賴，不用的人則完全忽略，例如：TTS、推播、分享。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 行為分析框架 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">行為分析框架</p>
+          <h2>以「鉤癮模型」分析付費與留存循環</h2>
+          <p>我們將訪談中獲得的洞察逐一填入鉤癮模型的四個環節，藉此找出影響訂閱轉換與留存的機會點。從最初的外在工作需求到培養自主學習的內在動力，再到尊榮會員體驗與多元化的獎勵機制，形成了一個完整的使用者循環。這個正向循環不僅強化了使用者對品牌的黏著度，更轉化為持續性的閱讀習慣和自我提升動力。透過這個分析框架，我們可以更清楚地知道如何為產品優化提供明確方向。</p>
+          <div class="hooked-insight">
+            <span class="hooked-insight-icon">💡</span>
+            <p><strong>習慣循環的核心：</strong>透過持續的 <strong>觸發</strong> → <strong>行動</strong> → <strong>獎賞</strong> → <strong>投入</strong>，建立正向的長期循環，讓訂閱成為自然且有價值的選擇。</p>
+          </div>
+          <img src="assets/images/hooked.png" alt="鉤癮模型" class="full-img full-img-mt" />
+        </div>
+      </div>
+
+      <!-- 假設 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">假設</p>
+          <p>基於以上洞察與行為分析，我們對影響訂閱轉換的關鍵因素提出了以下假設：</p>
+          <h2 class="highlight-box">透過優化訂閱旅程與核心功能體驗，降低付費門檻、強化訂戶尊榮感，進而帶動訂戶增長與留存</h2>
+        </div>
+      </div>
+
+      <!-- 設計解方 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">設計解方</p>
+          <h2>將洞察轉化為可落地的三大產品設計策略</h2>
+          <p>基於使用者研究的洞察，團隊並未急著提出大量新功能，而是回到<strong style="color: var(--text-primary)">「哪些體驗最直接影響使用者對訂閱價值的認知」</strong>這個核心問題，聚焦在三個最具影響力、也最能支撐訂戶成長的優化方向。產品團隊根據我們提出的三大優化方向，排定了具體的開發優先序，並在後續的季度迭代中逐步實現。</p>
+
+          <h3>1. 說清楚價值：貫穿旅程的權益溝通</h3>
+          <p>我們發現「權益認知模糊」是導致潛在用戶猶豫與現有訂戶流失的主因，設計上不應只在付費牆（Paywall）出現權益說明，而應貫穿整個用戶旅程，從內容瀏覽、功能使用，到訂閱完成後的 Onboarding，每個接觸點都是可以強調訂閱價值的機會。</p>
+          <div style="margin-top: 32px; margin-bottom: 16px;"><span class="tag">優化項目一</span></div>
+          <h3>付費牆與訂閱流程優化</h3>
+          <p><strong>(1) 釐清權益邏輯</strong>：原有的權益設計對不同身份的使用者來說規則複雜、邊界模糊，我先完整盤點七種使用者身份的現有權益，找出不一致的地方，再針對「免費使用空間、訂戶限定功能、試用邏輯」三個方向重新整理，讓每個身份的權益區分更清楚且可對外溝通。</p>
+          <p><strong>(2) 優化訂閱流程</strong>：我梳理了從訪客到訂戶的完整路徑，找出各個身份在哪個節點遇到付費牆、哪些步驟造成猶豫，再重新規劃各身份的訂閱動線，讓轉換路徑更順暢。</p>
+          <p><strong>(3) 調整付費牆介面設計</strong>：舊版的設計要求使用者先選方案、再按訂閱按鈕，多了一個決策步驟。新版將推薦方案與訂閱按鈕直接結合，預設選中推薦方案，使用者只需確認一次即可完成訂閱，降低了付費門檻。</p>
+          <!-- 權益比較表 BA Slider -->
+          <div style="background: var(--bg); border-radius: var(--radius-sm); padding: 24px; box-sizing: border-box;" class="full-img-mt">
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="background:rgba(0,0,0,0.55); color:#fff; font-size:12px; font-weight:700; padding:4px 12px; border-radius:20px;">Before</span>
+            <span style="background:rgba(0,0,0,0.55); color:#fff; font-size:12px; font-weight:700; padding:4px 12px; border-radius:20px;">After</span>
+          </div>
+          <div class="table-ba-wrap" id="table-ba">
+            <!-- After layer (base) -->
+            <div class="table-ba-layer table-ba-after-layer">
+              <div class="table-ba-inner">
+                <table class="paywall-table">
+                  <colgroup><col style="width:22%"><col style="width:17%"><col style="width:17%"><col style="width:14%"><col style="width:15%"><col style="width:15%"></colgroup>
+                  <thead>
+                    <tr class="super-row">
+                      <th></th><th class="sl">限會員</th><th class="sl">限訂戶</th><th class="sl">限訂戶</th><th></th><th class="sl">限會員</th>
+                    </tr>
+                    <tr>
+                      <th></th><th>文章閱讀</th><th>podcast</th><th>TTS</th><th>深色模式</th><th>收藏文章</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>訪客</td><td class="changed">每月免費 1 篇</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>新會員</td><td class="changed">X</td><td>V</td><td class="changed">X</td><td>X</td><td>V</td></tr>
+                    <tr><td>是會員新訂戶</td><td class="changed">免費 7 天</td><td class="changed">免費 7 天</td><td class="changed">免費 7 天</td><td>V</td><td>V</td></tr>
+                    <tr><td>非會員新訂戶</td><td class="changed">免費 7 天</td><td class="changed">免費 7 天</td><td class="changed">免費 7 天</td><td>V</td><td>X</td></tr>
+                    <tr><td>是會員非訂戶</td><td>每月免費 2 篇</td><td>V</td><td>X</td><td>X</td><td>V</td></tr>
+                    <tr><td>是會員是訂戶</td><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+                    <tr><td>非會員是訂戶</td><td>V</td><td>X</td><td>X</td><td>V</td><td>X</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Before layer (overlay) -->
+            <div class="table-ba-layer table-ba-before-layer" id="tba-before">
+              <div class="table-ba-inner">
+                <table class="paywall-table">
+                  <colgroup><col style="width:22%"><col style="width:17%"><col style="width:17%"><col style="width:14%"><col style="width:15%"><col style="width:15%"></colgroup>
+                  <thead>
+                    <tr class="super-row">
+                      <th></th><th></th><th class="sl">限會員</th><th></th><th class="sl">限訂戶</th><th class="sl">限會員</th>
+                    </tr>
+                    <tr>
+                      <th></th><th>文章閱讀</th><th>podcast</th><th>TTS</th><th>深色模式</th><th>收藏文章</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>訪客</td><td>免費 2 篇</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                    <tr><td>新會員</td><td>暢讀 72 小時</td><td>暢聽 72 小時</td><td>暢聽 72 小時</td><td>X</td><td>V</td></tr>
+                    <tr><td>是會員新訂戶</td><td>免費 14 天</td><td>免費 14 天</td><td>免費 14 天</td><td>V</td><td>V</td></tr>
+                    <tr><td>非會員新訂戶</td><td>免費 7 天</td><td>X</td><td>X</td><td>V</td><td>X</td></tr>
+                    <tr><td>是會員非訂戶</td><td>每月 +2 篇</td><td>V</td><td>今日頁的</td><td>X</td><td>V</td></tr>
+                    <tr><td>是會員是訂戶</td><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+                    <tr><td>非會員是訂戶</td><td>V</td><td>X</td><td>X</td><td>V</td><td>X</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Divider -->
+            <div class="table-ba-line" id="tba-line">
+              <div class="ba-handle">⟨⟩</div>
+            </div>
+          </div>
+          <script>
+          (function(){
+            var wrap = document.getElementById('table-ba');
+            var before = document.getElementById('tba-before');
+            var line = document.getElementById('tba-line');
+            var down = false;
+            function move(x){
+              var r = wrap.getBoundingClientRect();
+              var p = Math.max(0, Math.min(1, (x - r.left) / r.width));
+              var pct = (p * 100).toFixed(2);
+              before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+              line.style.left = pct + '%';
+            }
+            wrap.addEventListener('mousedown', function(e){ down = true; move(e.clientX); e.preventDefault(); });
+            wrap.addEventListener('touchstart', function(e){ down = true; move(e.touches[0].clientX); }, {passive: true});
+            window.addEventListener('mousemove', function(e){ if(down) move(e.clientX); });
+            window.addEventListener('touchmove', function(e){ if(down) move(e.touches[0].clientX); }, {passive: true});
+            window.addEventListener('mouseup', function(){ down = false; });
+            window.addEventListener('touchend', function(){ down = false; });
+          })();
+          </script>
+          </div><!-- end gray bg wrapper -->
+          <img src="assets/images/subscribe.png" alt="付費牆優化" class="full-img full-img-mt" />
+
+          <div style="margin-bottom: 16px; margin-top: 32px;"><span class="tag">優化項目二</span></div>
+          <h3>禮物文章分享</h3>
+          <p>我們發現訂戶有強烈的主動分享行為，他們願意把好文章推薦給身邊的人，但現有的分享機制無法突破付費牆，非訂戶收到連結後仍然看不到完整內容，分享的價值因此大打折扣。我們改變了分享文章的規則，讓訂戶的分享行為變得有意義。每位訂戶每月有 10 篇無牆分享額度，收到連結的人在 14 天內可直接閱讀完整文章，不受付費牆限制，也不計入自己的免費閱讀篇數。</p>
+          <p>不但強化訂戶的尊榮感與專屬感，訂戶手上握有「送出好內容」的能力，這本身就是一種有形的訂閱價值，也讓訂戶自然成為品牌的口碑擴散者，好內容透過熟人推薦觸及潛在新客，比任何廣告都更有說服力。</p>
+          <img src="assets/images/share.png" alt="禮物文章分享功能" class="full-img full-img-my" />
+          <div style="margin-top: 32px; margin-bottom: 16px;"><span class="tag">優化項目三</span></div>
+          <h3>訂戶限定標籤</h3>
+          <p>使用者看到「訂戶限定」四個字時，會產生一種「只有我有」的尊榮感心態，是一種身份認同層面的滿足感。</p>
+          <p>Podcast 頻道本身就有明確的分層結構：部分集數限會員收聽，部分則是訂戶才能解鎖的獨家內容，但沒有被清楚地視覺化，加上「訂戶限定」標籤之後，訂戶每次瀏覽 Podcast 頻道時都能看見自己享有的專屬權益，免費用戶則會在每次瀏覽中感受到訂閱的具體價值差異。</p>
+          <div style="background: var(--bg); border-radius: var(--radius-sm); padding: 24px; box-sizing: border-box; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px;">
+            <img src="assets/images/label1.png" alt="訂戶限定標籤 1" style="width: 100%; display: block; border-radius: 4px;" />
+            <img src="assets/images/label2.png" alt="訂戶限定標籤 2" style="width: 100%; display: block; border-radius: 4px;" />
+            <img src="assets/images/label3.png" alt="訂戶限定標籤 3" style="width: 100%; display: block; border-radius: 4px;" />
+            <img src="assets/images/label4.png" alt="訂戶限定標籤 4" style="width: 100%; display: block; border-radius: 4px;" />
+          </div>
+
+          <h3>2. 數據驅動體驗：個人化內容推薦系統</h3>
+          <p>《天下雜誌》的內容量與深度本身即是優勢，但資訊過量反而成為使用門檻。使用者並不追求看完所有內容，而是希望快速找到與自己高度相關的觀點與主題。</p>
+          <p>我們規劃以行為數據為基礎的個人化推薦系統，透過記錄使用者的閱讀、收藏、分享等行為，並以此為依據提供更精準的內容推薦。目標是將每一次打開 App 的體驗，從「資訊海中的被動瀏覽」轉變為「與自己高度相關的主動發現」，降低挑選文章的成本同時，也提升每次閱讀的滿意度與回訪動機。</p>
+
+          <h3>3. 放大已被依賴的價值：優化核心功能體驗</h3>
+          <p>部分核心功能對特定使用者而言是關鍵付費原因，但體驗門檻及學習成本容易讓人卻步，優化核心功能體驗讓會用的人更依賴、不會用的人願意開始用，進一步提升滿意度與留存率。</p>
+          <div style="margin-top: 32px; margin-bottom: 16px;"><span class="tag">優化項目四</span></div>
+          <h3>優化「聽」的體驗</h3>
+          <p>TTS 語音播報功能對特定使用者而言是不可或缺的核心體驗，甚至是他們選擇持續訂閱的關鍵原因之一，尤其是時間碎片化、偏好「用聽的」吸收新知的使用者群體。這次優化聚焦在補齊使用者最期待的核心體驗，新增倍速播放、播放清單與斷點續播功能。</p>
+          <img src="assets/images/TTS.png" alt="TTS 體驗優化" class="full-img full-img-mt" />
+        </div>
+      </div>
+
+      <!-- 專案成果 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">專案成果</p>
+          <h2>研究洞察直接落地，多項指標達成可量化成效</h2>
+          <p>訪談結束後的洞察不只停留在報告裡，而是實際轉化為付費牆優化、禮物文章、TTS 體驗升級等具體功能，並在上線後獲得了可量化的成效回饋。</p>
+        </div>
+        <div id="results-grid">
+          <div class="result-card">
+            <span class="result-card-label">訂閱轉換率<br><span class="result-card-sublabel">付費牆優化上線一個月後</span></span>
+            <span class="result-num">+ <span class="count-num" data-target="4">0</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">禮物文章分享<br><span class="result-card-sublabel">上線三天內</span></span>
+            <span class="result-num"><span class="count-num" data-target="120">0</span> 次</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">觸及非訂戶讀者<br><span class="result-card-sublabel">禮物文章上線三天內</span></span>
+            <span class="result-num"><span class="count-num" data-target="107">0</span> 位</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">TTS 用戶首度超越<br><span class="result-card-sublabel">Podcast 使用人數</span></span>
+            <span class="result-num">達成</span>
+          </div>
+        </div>
+        <script>
+        (function(){
+          var nums = document.querySelectorAll('#results-grid .count-num');
+          var started = false;
+          function animate(){
+            if(started) return;
+            started = true;
+            nums.forEach(function(el){
+              var target = parseInt(el.getAttribute('data-target'));
+              var duration = 2000;
+              var start = null;
+              function step(ts){
+                if(!start) start = ts;
+                var progress = Math.min((ts - start) / duration, 1);
+                var ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(ease * target);
+                if(progress < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            });
+          }
+          var observer = new IntersectionObserver(function(entries){
+            if(entries[0].isIntersecting) animate();
+          }, {threshold: 0.3});
+          observer.observe(document.getElementById('results-grid'));
+        })();
+        </script>
+      </div>
+
+      <!-- 學習與反思 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">學習與反思</p>
+          <h2>傾聽真實的聲音，找到設計的方向</h2>
+          <p>在訪談中聽他們說起每天通勤時用 App 聽新聞的習慣、說起看到某篇文章突然決定訂閱的瞬間，也聽到他們對我設計的介面提出直接的批評，面對面交流的真實感，是任何數據報告都無法取代的，這也是我喜歡做 2C 產品的原因，不只是因為設計的東西會被很多人用，也因為使用者的回饋是如此直接，才能讓設計師清楚知道自己的決策是否真的有意義。</p>
+          <p>另一個深刻的收穫，是看見研究成果被真正採納，訪談結束後的洞察不只是停留在報告裡，而是實際轉化為付費牆優化、禮物文章、TTS 體驗升級等具體功能，並在上線後獲得了可量化的成效回饋，讓我理解了什麼叫做「設計決策有所依據」，也讓我對 UX 研究在產品團隊中的角色有了更清晰的認識。</p>
+          <p>唯一遺憾的是，我在當年度年中離職，沒能親眼看到年底的訂戶數是否達成 8,000 人的目標，但能在有限的時間內完成一個有完整流程的研究專案，並親眼見證設計落地、數據回升，已經是很完整的一段經歷。</p>
+        </div>
+      </div>
+
+      <div class="panel cta-panel">
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
+      </div>
+    </main>
+  </div>
+  <script src="assets/js/sidebar.js"></script>
+</body>
+</html>

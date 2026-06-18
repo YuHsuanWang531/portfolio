@@ -4,16 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>天下雜誌閱讀體驗改版 — 王瑀萱</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    .prose h2 { font-size: 20px; font-weight: 700; margin: 36px 0 12px; letter-spacing: -0.01em; }
-    .prose h3 { font-size: 17px; font-weight: 700; margin: 24px 0 8px; }
-    .prose p { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
-    .prose ul { margin: 0 0 16px 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .prose ul li { font-size: 16px; color: var(--text-secondary); line-height: 1.7; padding-left: 16px; position: relative; }
-    .prose ul li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 18px; line-height: 1.3; }
 
     .meta-grid {
       display: grid;
@@ -25,7 +19,7 @@
       margin-top: 24px;
     }
     .meta-item dt { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-    .meta-item dd { font-size: 15px; font-weight: 600; }
+    .meta-item dd { font-size: 16px; font-weight: 600; }
 
     .stats-grid {
       display: grid;
@@ -35,11 +29,13 @@
     }
     .stat-block {
       padding: 20px;
-      background: var(--accent-light);
+      background: var(--bg);
       border-radius: var(--radius-sm);
     }
-    .stat-block .num { font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 4px; }
-    .stat-block .label { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+    .stat-block .num { font-size: 36px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 0; }
+    .stat-block .stat-num { color: var(--text-primary); }
+    #current-stats-grid .stat-num { color: var(--color-danger); }
+    .stat-block .label { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
 
     .insight-block {
       padding: 20px 24px;
@@ -53,249 +49,479 @@
       font-style: italic;
     }
 
-    .section-divider { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
-
-    .challenge-card {
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      margin-bottom: 12px;
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .section-label { margin-bottom: 8px; }
+    .prose .section-label + h2 { margin-top: 8px; }
+    .prose .section-label { margin-top: 48px; }
+    .prose .section-label:first-child { margin-top: 0; }
+    .prose p + .highlight-box { margin-top: -4px; }
+    .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .challenge-card { border-left: none; border: 1px solid var(--border); }
+    .challenge-card h3 { margin-bottom: 12px; }
+    .challenge-card p { font-size: var(--fs-body); color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    .comma-mobile { display: none; }
+    @media (max-width: 900px) {
+      .challenge-grid { grid-template-columns: 1fr; }
+      .br-desktop { display: none; }
+      .comma-mobile { display: inline; }
     }
-    .challenge-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-    .challenge-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+    @media (max-width: 900px) { .learn-grid { grid-template-columns: 1fr; } #results-grid { grid-template-columns: 1fr; } .current-stats-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .success-metrics-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 480px) { .success-metrics-grid { grid-template-columns: 1fr !important; } }
+    .current-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .prose-section { margin-top: 32px; }
+    .quote-card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .quote-card-row .quote-card { margin: 0; }
+    .quote-card-row .quote-card-grid { display: flex; flex-direction: column; gap: 8px; }
+    @media (max-width: 900px) { .quote-card-row { grid-template-columns: 1fr; } }
+    #results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
+    .result-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .result-card-label { font-size: 20px; font-weight: 600; }
+    .learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+
+    .panel .back-nav { margin-bottom: 32px; }
+    .panel .project-intro { color: var(--text-primary); margin-top: 32px; margin-bottom: 32px; }
+
+    /* Before/After Slider */
+    .ba-slider { position: relative; width: 100%; border-radius: 16px; overflow: hidden; cursor: ew-resize; max-height: 560px; }
+    .ba-after { display: block; width: 100%; height: auto; }
+    .ba-before { width: 100%; height: auto; }
+    .ba-before { position: absolute; top: 0; left: 0; width: 100%; clip-path: inset(0 50% 0 0); }
+    .ba-line { position: absolute; top: 0; left: 50%; width: 2px; height: 100%; background: #fff; transform: translateX(-50%); pointer-events: none; }
+    .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #444; }
+    .ba-label { position: absolute; top: 12px; background: rgba(0,0,0,0.55); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; pointer-events: none; }
+    .ba-label--before { left: 12px; }
+    .ba-label--after { right: 12px; }
   </style>
 </head>
 <body>
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
+  <div id="reading-progress" class="reading-progress"></div>
+  <script>
+  window.addEventListener('scroll', function(){
+    var el = document.getElementById('reading-progress');
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    el.style.width = (docHeight > 0 ? (scrollTop / docHeight * 100) : 0) + '%';
+  });
+  </script>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item active"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <main class="main">
-      <!-- Header -->
+      <!-- Header + Cover -->
       <div class="panel">
-        <a href="projects.html" style="font-size: 14px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; transition: var(--transition);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">← 回到設計專案</a>
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;">
-          <span class="tag">設計系統</span>
-          <span class="tag">利害關係人溝通</span>
-          <span class="tag">A/B Testing</span>
+        <a href="projects.html" class="back-nav">← 回到設計專案</a>
+        <h1 class="page-title">透過改善數位閱讀及廣告體驗，協助《天下雜誌》達成「數位營收大於紙本營收」里程碑</h1>
+        <p class="project-intro">作為產品團隊中的 UI/UX 設計師，我於 2020 年負責《天下雜誌》官網數位內容閱讀體驗的改版，透過改善閱讀及廣告體驗，使跳出率降低 3%、文字廣告點擊率提升 900%、廣編稿每週新增 4 萬篇流量，成功協助公司達成「數位營收大於紙本營收」的里程碑。</p>
+        <div class="full-img-mt">
+        <div id="ba-slider" class="ba-slider">
+          <img id="ba-after" src="assets/images/cwarticlepage_after.png" class="ba-after" />
+          <img id="ba-before" src="assets/images/cwarticlepage_before.png" class="ba-before" />
+          <div id="ba-line" class="ba-line">
+            <div class="ba-handle">⟨⟩</div>
+          </div>
+          <span class="ba-label ba-label--before">Before</span>
+          <span class="ba-label ba-label--after">After</span>
         </div>
-        <h1 class="page-title">透過改善數位閱讀及廣告體驗<br>協助《天下雜誌》達成「數位營收大於紙本營收」里程碑</h1>
-        <div class="meta-grid">
-          <dl class="meta-item"><dt>專案時程</dt><dd>2019.12 – 2020.06</dd></dl>
-          <dl class="meta-item"><dt>角色</dt><dd>資深 UI/UX 設計師</dd></dl>
-          <dl class="meta-item"><dt>負責項目</dt><dd>UX 研究、設計系統、UI 設計、設計交付</dd></dl>
-          <dl class="meta-item"><dt>團隊組成</dt><dd>PM、UI/UX、前端、後端</dd></dl>
+        <script>
+        (function(){
+          var el = document.getElementById('ba-slider');
+          var before = document.getElementById('ba-before');
+          var line = document.getElementById('ba-line');
+          var down = false;
+          function move(x){
+            var r = el.getBoundingClientRect();
+            var p = Math.max(0, Math.min(1, (x - r.left) / r.width));
+            var pct = (p*100).toFixed(2);
+            before.style.clipPath = 'inset(0 '+(100-pct)+'% 0 0)';
+            line.style.left = pct+'%';
+          }
+          el.addEventListener('mousedown', function(e){ down=true; move(e.clientX); e.preventDefault(); });
+          el.addEventListener('touchstart', function(e){ down=true; move(e.touches[0].clientX); },{passive:true});
+          window.addEventListener('mousemove', function(e){ if(down) move(e.clientX); });
+          window.addEventListener('touchmove', function(e){ if(down) move(e.touches[0].clientX); },{passive:true});
+          window.addEventListener('mouseup', function(){ down=false; });
+          window.addEventListener('touchend', function(){ down=false; });
+        })();
+        </script>
         </div>
-      </div>
-
-      <!-- Cover -->
-      <div class="panel">
-        <div class="project-cover">
-          <img src="assets/images/cwarticle.png" alt="天下雜誌閱讀體驗改版">
+        <div class="meta-card-grid">
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">專案時程</div>
+              <div class="meta-card-value">2019.12 - 2020.06</div>
+            </div>
+          </div>
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">角色</div>
+              <div class="meta-card-value">資深 UI/UX 設計師</div>
+            </div>
+          </div>
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">負責項目</div>
+              <div class="meta-card-value">UX 研究、設計系統、UI 設計、設計交付</div>
+            </div>
+          </div>
+          <div class="meta-card">
+            <div>
+              <div class="meta-card-label">團隊組成</div>
+              <div class="meta-card-value">PM、UI/UX、前端、後端</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- 產業背景 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Background</p>
-          <h2>產業背景</h2>
-          <h3>全球媒體產業正經歷前所未有的數位轉型浪潮</h3>
+          <p class="section-label">產業背景</p>
+          <h2>全球媒體產業正經歷前所未有的數位轉型浪潮</h2>
           <p>全球媒體數位轉型主要受到使用者行動閱讀習慣改變，以及全球媒體訂閱制營收模式 (Paywall) 興起影響。面對這樣的趨勢，《天下雜誌》在 2015 年正式宣布開啟數位轉型，推動「平網整合」的內容政策。2017 年，推出「全閱讀」服務，正式啟動線上新聞付費模式，開創台灣媒體數位轉型的新里程碑。</p>
-          <p>2019 年，尼曼新聞實驗室提出了「紙本媒體數位轉型四大里程碑」，包括：數位營收大於紙本營收、讀者營收大於廣告營收、數位營收成長大於紙本營收衰退，以及數位訂戶數超過紙本訂戶數。這些指標不僅為媒體轉型提供了清晰的方向，也突顯了數位產品體驗的重要性。</p>
+          <p>2019 年，尼曼新聞實驗室提出了<strong>「紙本媒體數位轉型四大里程碑」，包括：數位營收大於紙本營收、讀者營收大於廣告營收、數位營收成長大於紙本營收衰退，以及數位訂戶數超過紙本訂戶數</strong>。這些指標不僅為媒體轉型提供了清晰的方向，也突顯了數位產品體驗的重要性。</p>
+        </div>
+      </div>
 
-          <hr class="section-divider">
-          <p class="section-label">Problem</p>
-          <h2>現況與問題</h2>
-          <h3>文章頁作為網站中流量最高的一頁，關鍵數據成效卻不顯著</h3>
+      <!-- 現況與問題 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">現況與問題</p>
+          <h2>文章頁作為網站中流量最高的一頁，關鍵數據成效卻不顯著</h2>
           <p>在媒體數位轉型的關鍵時期，使用者的滿意度與留存率顯得更重要。《天下雜誌》文章頁面佔網站全站流量的 86.5%，是全站中佔比最大的一頁。然而，閱讀延續性和廣告收益的表現不佳，導致數位廣告收入和數位訂戶數的增長受到限制。</p>
         </div>
-        <div class="stats-grid">
-          <div class="stat-block"><div class="num">82.5%</div><div class="label">跳出率</div></div>
-          <div class="stat-block"><div class="num">0.01%</div><div class="label">文字廣告點擊率</div></div>
-          <div class="stat-block"><div class="num">0.03%</div><div class="label">R1 廣告點擊率</div></div>
+        <div id="current-stats-grid" class="current-stats-grid">
+          <div class="result-card">
+            <span class="result-card-label">跳出率</span>
+            <span class="result-num"><span class="stat-num" data-target="82.5" data-decimals="1">82.5</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">載入速度</span>
+            <span class="result-num"><span class="stat-num" data-target="13" data-decimals="0">13</span> 秒</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">文字廣告點擊率</span>
+            <span class="result-num"><span class="stat-num" data-target="0.01" data-decimals="2">0.01</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">R1 廣告點擊率</span>
+            <span class="result-num"><span class="stat-num" data-target="0.03" data-decimals="2">0.03</span> %</span>
+          </div>
         </div>
+        <script>
+        (function(){
+          var nums = document.querySelectorAll('#current-stats-grid .stat-num');
+          var started = false;
+          function animate(){
+            if(started) return;
+            started = true;
+            nums.forEach(function(el){
+              var target = parseFloat(el.getAttribute('data-target'));
+              var decimals = parseInt(el.getAttribute('data-decimals'));
+              var duration = 2000;
+              var start = null;
+              function step(ts){
+                if(!start) start = ts;
+                var progress = Math.min((ts - start) / duration, 1);
+                var ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = (ease * target).toFixed(decimals);
+                if(progress < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            });
+          }
+          var observer = new IntersectionObserver(function(entries){
+            if(entries[0].isIntersecting) animate();
+          }, {threshold: 0.3});
+          observer.observe(document.getElementById('current-stats-grid'));
+        })();
+        </script>
       </div>
 
       <!-- 研究與發現 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Research</p>
-          <h2>研究與發現</h2>
-          <h3>需調整商業策略與優化產品體驗，提升數位媒體競爭力</h3>
+          <p class="section-label">研究與發現</p>
+          <h2>需調整商業策略與優化產品體驗，提升數位媒體競爭力</h2>
           <p>我們透過競品分析、用戶訪談等方式，深入了解用戶需求和市場趨勢，也透過數據觀察和利害關係人訪談了解公司的商業考量以及文章頁的內容閱讀及廣告體驗等問題。</p>
 
-          <h3>洞察全球趨勢：借鏡國際媒體龍頭，以數位體驗驅動營收轉型</h3>
-          <p>國內外媒體龍頭（紐約時報、經濟學人、華盛頓郵報等）不斷地在更新各自的文章呈現方式與版面，不僅提供讀者更多元的閱讀方式同時也為自己帶來商業利益。數位訂閱制 (Paywall) 成為全球媒體主流營收模式，紐約時報在 2017 年數位訂閱收入首次超過廣告收入，華爾街日報、金融時報等也紛紛強化付費牆策略。</p>
+          <h3>1. 洞察全球趨勢：借鏡國際媒體龍頭，以數位體驗驅動營收轉型</h3>
+          <p>國內外媒體龍頭（紐約時報、經濟學人、華盛頓郵報等）不斷地在更新各自的文章呈現方式與版面，不僅提供讀者更多元的閱讀方式同時也為自己帶來商業利益。<strong>數位訂閱制 (Paywall) 成為全球媒體主流營收模式</strong>，紐約時報在 2017 年數位訂閱收入首次超過廣告收入，華爾街日報、金融時報等也紛紛強化付費牆策略。</p>
 
-          <h3>定義商業目標：優化數位廣告觸及，提升廣告點擊與商業曝光</h3>
-          <p>透過利害關係人訪談，我們釐清了《天下雜誌》現階段的核心商業任務，除了衝刺「全閱讀」的訂閱數，穩定的數位廣告與廣編稿收益仍是重要支柱。團隊希望能在不損害品牌質感與閱讀流暢度的前提下，透過介面優化提升廣告的可視度與點擊率，達成內容與商業利益的雙贏。</p>
+          <img src="assets/images/media.png" alt="國際媒體競品分析" class="full-img full-img-my" />
+          <h3>2. 定義商業目標：優化數位廣告觸及，提升廣告點擊與商業曝光</h3>
+          <p>透過利害關係人訪談，我們釐清了《天下雜誌》現階段的核心商業任務，除了衝刺「全閱讀」的訂閱數，<strong>穩定的數位廣告與廣編稿收益仍是重要支柱</strong>。團隊希望能在不損害品牌質感與閱讀流暢度的前提下，透過介面優化提升廣告的可視度與點擊率，達成內容與商業利益的雙贏。</p>
 
-          <h3>重塑品牌形象：擺脫傳統，重新定義數位閱讀的「天下感」</h3>
-          <p>天下官網已多年沒有更新，舊版介面乘載了紙媒時代的裝飾，飽和度低且不明顯，不僅設計風格老舊，也無數位設計系統可以運用，造成元件無一致性，操作體驗不佳。我們也透過讀者的質性訪談，瞭解到他們心中的天下是什麼模樣。希望可以賦予品牌符合現代美學，創造專屬於《天下雜誌》的「天下感」設計。</p>
+          <h3>3. 重塑品牌形象：擺脫傳統，重新定義數位閱讀的「天下感」</h3>
+          <p>天下官網已多年沒有更新，舊版介面乘載了紙媒時代的裝飾，飽和度低且不明顯，不僅設計風格老舊，也無數位設計系統可以運用，造成元件無一致性，操作體驗不佳。我們也透過讀者的質性訪談，瞭解到他們心中的天下是什麼模樣。希望可以<strong>賦予品牌符合現代美學，創造專屬於《天下雜誌》的「天下感」設計</strong>。</p>
 
-          <div class="insight-block">「整個頁面看起來舊舊髒髒的，讓人覺得還是很傳統的紙本媒體，沒有呈現出天下的大氣跟質感」</div>
-          <div class="insight-block">「天下深度文章篇幅長，有時會出現專有名詞，需重視文字的排版、層級、名詞解釋等呈現方式；文章讀完的提醒太明顯，會覺得讀完就可以走了，需重視閱讀的連續性」</div>
-          <div class="insight-block">「雙欄式設計讓讀者直接忽略廣告版位、文字廣告點擊率差、分不出來哪篇是廣告」</div>
+          <div class="quote-card-row">
+            <div class="quote-card">
+              <div class="quote-card-grid">
+                <span class="quote-card-icon">😕</span>
+                <div>
+                  <div class="quote-card-title">設計風格</div>
+                  <p class="quote-card-body">整個頁面看起來舊舊髒髒的，讓人覺得還是很傳統的紙本媒體，沒有呈現出天下的大氣跟質感</p>
+                </div>
+              </div>
+            </div>
+            <div class="quote-card">
+              <div class="quote-card-grid">
+                <span class="quote-card-icon">😕</span>
+                <div>
+                  <div class="quote-card-title">閱讀體驗</div>
+                  <p class="quote-card-body">天下文章篇幅長，文字排版層級不清；文章讀完的提醒太明顯，影響閱讀連續性，不易引導讀者繼續閱讀更多文章</p>
+                </div>
+              </div>
+            </div>
+            <div class="quote-card">
+              <div class="quote-card-grid">
+                <span class="quote-card-icon">😕</span>
+                <div>
+                  <div class="quote-card-title">廣告體驗</div>
+                  <p class="quote-card-body">雙欄式設計讓讀者習慣性忽略廣告版位，文字廣告點擊率低，廣編稿與一般文章難以辨別</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <h3>假設</h3>
-          <p>透過改善文章頁的閱讀及廣告體驗，提升使用者的留存率與黏著度，進而帶動數位營收增長。</p>
+        </div>
+      </div>
 
-          <h3>成功指標</h3>
-          <ul>
-            <li><strong>跳出率</strong>：瀏覽單一頁面就離開網站的訪問次數百分比</li>
-            <li><strong>頁面載入速度</strong>：從用戶點擊到頁面完全可用的時間</li>
-            <li><strong>閱讀篇數</strong>：單次造訪期間閱讀的文章數量</li>
-            <li><strong>廣告可視度</strong>：廣告在用戶視窗中可見的時間比例</li>
-            <li><strong>廣告點擊率</strong>：廣告被點擊的次數與廣告曝光次數的比率</li>
-            <li><strong>廣編稿流量</strong>：原生廣告或贊助內容的瀏覽量</li>
-          </ul>
+      <!-- 假設與成功指標 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">假設</p>
+          <p>基於競品研究、使用者訪談與商業目標的交叉分析，我們針對文章頁的核心問題提出以下設計假設，並以此定義成功指標：</p>
+          <h2 class="highlight-box">透過改善文章頁的閱讀及廣告體驗，提升使用者的留存率與黏著度，進而帶動數位營收增長</h2>
+        </div>
+        <div class="prose prose-section">
+          <p class="section-label">成功指標</p>
+          <div class="success-metrics-grid">
+            <div class="metric-item">
+              <div class="metric-item-title">跳出率 <span class="text-accent">↓</span></div>
+              <div class="metric-item-desc">瀏覽單一頁面就離開網站的訪問次數百分比</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-title">頁面載入速度 <span class="text-accent">↓</span></div>
+              <div class="metric-item-desc">從用戶點擊到頁面完全可用的時間</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-title">閱讀篇數 <span class="text-accent">↑</span></div>
+              <div class="metric-item-desc">單次造訪期間閱讀的文章數量</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-title">廣告可視度 <span class="text-accent">↑</span></div>
+              <div class="metric-item-desc">廣告在用戶視窗中可見的時間比例</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-title">廣告點擊率 <span class="text-accent">↑</span></div>
+              <div class="metric-item-desc">廣告被點擊的次數與廣告曝光次數的比率</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-item-title">廣編稿流量 <span class="text-accent">↑</span></div>
+              <div class="metric-item-desc">原生廣告或贊助內容的瀏覽量</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- 困難與挑戰 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Challenges</p>
-          <h2>困難與挑戰</h2>
-          <h3>如何在眾多利害關係人間解決利益衝突與溝通成本問題？</h3>
+          <p class="section-label">困難與挑戰</p>
+          <h2>如何在眾多利害關係人間解決利益衝突與溝通成本問題？</h2>
           <p>由於網站改版牽涉到編輯、業務、技術、營運等多方利害關係人，各方意見不一，往往會產生利益衝突，有效地解決這些問題是設計提案過程中的一大挑戰。</p>
         </div>
-        <div class="challenge-card">
-          <h4>事前 1:1 對齊，提前建立盟友</h4>
-          <p>在設計提案的公開會議以前，我先透過 1:1 的方式跟關鍵角色溝通，了解各部門在意的底線、風險和期待後，先將這些「雷點」排除，確保正式提案前已有初步共識，在公開會議時可以有效減少反對的聲音，降低溝通損耗。</p>
-        </div>
-        <div class="challenge-card">
-          <h4>利用數據跟實際案例作為支撐</h4>
-          <p>不用主觀的判斷，而是客觀的用使用者的訪談原話、競品範例或是數據，讓提案更有說服力，證明優化的方向是有理可循的，而不只是設計師憑感覺的設計。</p>
-        </div>
-        <div class="challenge-card">
-          <h4>針對不同角色，講他們想聽的</h4>
-          <p>面對老闆時，著重說明該設計如何呼應公司的願景與設計風格，以及具體的時程規劃；面對業務單位時，強調廣告版位與付費功能的優化，如何提升點擊率與可視度；面對營運單位時，著重介紹新功能如何協助他們提升工作效率。</p>
+        <div class="challenge-grid">
+          <div class="challenge-card">
+            <div class="tag" style="margin-bottom:12px">方法一</div>
+            <h3>事前 1:1 對齊期待<span class="comma-mobile">，</span><br class="br-desktop">提前建立盟友</h3>
+            <p>在設計提案的公開會議以前，我先透過 1:1 的方式跟關鍵角色溝通，了解各部門在意的底線、風險和期待後，先將這些「雷點」排除，確保正式提案前已有初步共識，在公開會議時可以有效減少反對的聲音，降低溝通損耗。</p>
+          </div>
+          <div class="challenge-card">
+            <div class="tag" style="margin-bottom:12px">方法二</div>
+            <h3>以數據與實際案例<span class="comma-mobile">，</span><br class="br-desktop">支撐設計決策</h3>
+            <p>不用主觀的判斷，而是客觀的用使用者的訪談原話、競品範例或是數據，讓提案更有說服力，證明優化的方向是有理可循的，而不只是設計師憑感覺的設計。</p>
+          </div>
+          <div class="challenge-card">
+            <div class="tag" style="margin-bottom:12px">方法三</div>
+            <h3>針對不同角色<span class="comma-mobile">，</span><br class="br-desktop">講他們在意的內容</h3>
+            <p>面對老闆時，著重說明該設計如何呼應公司的願景與設計風格，以及具體的時程規劃；面對業務單位時，強調廣告版位與付費功能的優化，如何提升點擊率與可視度；面對營運單位時，著重介紹新功能如何協助他們提升工作效率。</p>
+          </div>
         </div>
       </div>
 
       <!-- 設計決策 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Design Decisions</p>
-          <h2>設計決策</h2>
-          <h3>擺脫紙本設計思維，數位設計轉型</h3>
+          <p class="section-label">設計決策</p>
+          <h2>擺脫紙本設計思維，數位設計轉型</h2>
           <p>設計原則能夠幫助建立一致的理念與溝通框架、輔助進行大小設計決策、傳遞品牌和設計價值觀。天下的設計原則為「大方、有份量、現代、簡潔」，設計上需層次簡明、編排俐落、用字單純、用色明亮。</p>
 
-          <h3>建立設計系統：透過標準化元件規範，提升內容易讀性與版位靈活度</h3>
-          <ul>
-            <li><strong>字體</strong>：舊版網站的文字層級不明，影響閱讀體驗。重新規範字體後提供五個層級的樣式，明確區分主標、次標及內容，並引入思源宋體作為文章標題，做出區隔，增強層級感。</li>
-            <li><strong>顏色</strong>：舊版網站直接使用紙本顏色，導致在螢幕上顯得暗淡。調整了配色後以天下品牌色紅色為基礎，搭配不同層級的灰色與強調色，讓整體配色更明亮飽滿。</li>
-            <li><strong>設計系統</strong>：重新定義風格、字體、顏色、元件等使用方式，透過一致的設計語言提高開發效率以及設計品質。</li>
-          </ul>
+          <h3>1. 手機先行：以行動裝置體驗為設計起點</h3>
+          <p>數據顯示進入文章頁的使用者有高達 8 成來自手機，因此這次改版確立了<strong>「Mobile First」的設計原則</strong>，優先從手機版面開始設計，再往桌機延伸，而非過去以桌機版為主再往下縮減的慣例。這個決策直接影響了版面結構、字體大小、觸控區域與廣告位置的規劃，確保最多使用者能獲得最佳的閱讀體驗。</p>
 
-          <h3>調整資訊架構：提升閱讀體驗與廣告成效</h3>
+          <img src="assets/images/cw_mobile.png" alt="手機先行" class="full-img full-img-my" />
+          <h3>2. 建立設計系統：透過標準化元件規範，提升內容易讀性與版位靈活度</h3>
+          <p><strong>字體</strong>：舊版網站的文字層級不明，影響閱讀體驗。重新規範字體後提供五個層級的樣式，明確區分主標、次標及內容，並引入思源宋體作為文章標題，做出區隔，增強層級感。</p>
+          <p><strong>顏色</strong>：舊版網站直接使用紙本顏色，導致在螢幕上顯得暗淡。調整了配色後以天下品牌色紅色為基礎，搭配不同層級的灰色與強調色，讓整體配色更明亮飽滿。</p>
+          <p><strong>設計系統</strong>：我設計了專屬於<a href="https://design-system.cw.com.tw/cw/" target="_blank">天下數位產品的設計系統</a>，重新定義風格、字體、顏色、元件等使用方式，透過一致的設計語言提高開發效率以及設計品質。</p>
+
+          <img src="assets/images/cw_designsystem.png" alt="天下設計系統" class="full-img full-img-my" />
+          <h3>3. 調整資訊架構：提升閱讀體驗與廣告成效</h3>
           <p><strong>舊版</strong>：採用雙欄式版面，廣告置於頁面上方與右側欄位，因「廣告視盲（Banner Blindness）」效應，使使用者容易忽略右側廣告與文末推薦內容，影響閱讀流暢度與曝光成效。</p>
-          <p><strong>新版</strong>：改為單欄式頁面結構，將廣告整合進使用者自然滑動的視線動線，以「文中廣告」取代側欄，讓閱讀線性化並透過明確廣告標示維持信任感。上線後的數據驗證了這個判斷，廣告版位數量雖然有刪減，但每個版位的實際效益大幅改善。</p>
+          <p><strong>新版</strong>：改為單欄式頁面結構，將廣告整合進使用者自然滑動的視線動線，以「文中廣告」取代側欄，讓閱讀線性化並透過明確廣告標示維持信任感，<strong>預期讓廣告版位數量減少，換取每個版位的有效可視度與觸及率提升</strong>。上線後的數據驗證了這個判斷，廣告版位數量雖然有刪減，但每個版位的實際效益大幅改善。</p>
+          <img src="assets/images/cw_layout.png" alt="天下版面調整" class="full-img full-img-my" />
         </div>
       </div>
 
       <!-- 設計產出 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Design Output</p>
-          <h2>設計產出</h2>
-          <h3>以 UX 為核心的設計方案</h3>
+          <p class="section-label">設計產出</p>
+          <h2>以 UX 為核心的設計方案，讓每個決策有所依據</h2>
 
-          <h3>少即是多：減少不必要的元素，給使用者更簡約的第一屏</h3>
+          <h3>1. 少即是多：減少不必要的元素，給使用者更簡約的第一屏</h3>
           <p><strong>舊版</strong>：文章標題被 Header 和主圖夾在中間，讓使用者難以快速找到吸引他們的內容。頁面中的功能按鈕、行銷版位、Logo 等顏色過多，容易造成視覺疲勞，分散使用者的注意力。</p>
           <p><strong>新版</strong>：移除頁面上不必要的資訊及樣式，來幫助使用者專注於閱讀文章標題及前言，打造一個簡單乾淨的第一屏，讓使用者可以很快地看到重點，藉此降低跳出率。</p>
+          <img src="assets/images/cw1.png" alt="少即是多" class="full-img full-img-my" />
 
-          <h3>脈絡式設計：適當的時機出現相對應的功能，增加使用者互動性</h3>
+          <h3>2. 脈絡式設計：適當的時機出現相對應的功能，增加使用者互動性</h3>
           <p><strong>舊版</strong>：分享功能僅在文章開頭和結尾出現，讓使用者難以找到分享操作。文章推薦則只在文末出現，導致未閱讀完的使用者無法輕易找到下一篇文章。</p>
-          <p><strong>新版</strong>：分享功能在使用者滑動頁面時自動顯示，在閱讀過程中隨時能夠進行分享。而文章推薦則在使用者閱讀到 75% 時出現，鼓勵他們在接近文章結尾時立即接著閱讀下一篇。</p>
+          <p><strong>新版</strong>：分享功能在使用者滑動頁面時自動顯示，在閱讀過程中隨時能夠進行分享。而文章推薦則在使用者閱讀到 75% 時出現，鼓勵他們在接近文章結尾時立即接著閱讀下一篇。藉此提高文章分享率與推薦文章點擊率。</p>
+          <img src="assets/images/cw2.png" alt="脈絡式設計" class="full-img full-img-my" />
 
-          <h3>廣告與內容互利共生：需維持兩者之間的平衡</h3>
-          <ul>
-            <li><strong>編業分離</strong>：因《天下雜誌》採取編業分離原則，廣告不得影響內容產製，並且需遵循固定比例規範——每 6 則文章中必須有 1 則廣告，且需在介面中標示。</li>
-            <li><strong>原生廣告</strong>：舊版標題顯示不完全，造成使用者不確定內容是什麼而不想點擊；新版將標題完整顯示，且把標題文案改為廣告感不那麼重的文案。</li>
-            <li><strong>文中廣告</strong>：舊版文中廣告無特別標示，容易與文中圖片混淆；新版文中廣告加上字樣及背景做區隔，向用戶清晰標示廣告與內容的區別，增強信任感。</li>
-          </ul>
+          <h3>3. 廣告與內容互利共生：需維持兩者之間的平衡</h3>
+          <p><strong>編業分離</strong>：因《天下雜誌》採取編業分離原則，以維持公信力與閱讀體驗。意味著編輯部與廣告部門獨立運作，廣告不得影響內容產製，並且需遵循固定比例規範，例如每 6 則文章中必須有 1 則廣告，且需在介面中標示。</p>
+          <img src="assets/images/cw3-2.png" alt="編業分離" class="full-img full-img-my" />
+          <p><strong>原生廣告</strong>：將廣告設計成與內容相符的形式，使其更自然地融入閱讀體驗，增加接受度。舊版標題顯示不完全，造成使用者因為不確定內容是什麼而不想點擊；新版將標題完整顯示，且把標題文案改為廣告感不那麼重的文案。</p>
+          <img src="assets/images/cw3-1.png" alt="原生廣告" class="full-img full-img-my" />
+          <p><strong>文中廣告</strong>：舊版文中廣告無特別標示，容易與文中圖片混淆；新版文中廣告加上字樣及背景做區隔，向用戶清晰標示廣告與內容的區別，增強信任感，降低廣告帶來的負面影響。</p>
+          <img src="assets/images/cw3.png" alt="文中廣告" class="full-img full-img-my" />
 
-          <h3>運用希克定律優化付費牆</h3>
-          <p><strong>舊版</strong>：付費牆上的選擇過多，更核心的問題是同一個畫面要服務不同需求的使用者（訪客、免費會員、一般會員），使用者不容易意識到自己是什麼身份要點擊什麼按鈕，且按鈕與連結樣式規範不一致。</p>
+          <h3>4. 提升閱讀體驗的輔助工具設計</h3>
+          <p>天下的文章篇幅通常較長，且會出現一些專有名詞或是艱澀難懂的詞彙，造成使用者閱讀上的困難。我們設計了幾個輔助閱讀的小工具如：小檔案、小辭典、文中推薦版位等，不但幫助使用者理解文章內容也提供給營運單位更多操作文章的可能性。</p>
+          <img src="assets/images/cw4.png" alt="輔助閱讀工具" class="full-img full-img-my" />
+
+          <h3>5. 運用希克定律優化付費牆：透過減少選項，降低認知負荷，幫助使用者提升決策速度</h3>
+          <p><strong>舊版</strong>：付費牆上的選擇過多，更核心的問題是同一個畫面要服務不同需求的使用者 (訪客、免費會員、一般會員)，使用者不容易意識到自己是什麼身份要點擊什麼按鈕，且按鈕與連結樣式規範不一致、付費牆目的不明確，使用者不知道可以點擊或下一步應該做什麼。</p>
           <p><strong>新版</strong>：根據使用者身份不同，給予差異化設計的動態付費牆，並突出 CTA 樣式，直接引導使用者做下一步動作。</p>
+          <img src="assets/images/cw5.png" alt="付費牆優化" class="full-img full-img-my" />
         </div>
       </div>
 
       <!-- 專案成果 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Results</p>
-          <h2>專案成果</h2>
-          <h3>廣告成效顯著，但閱讀篇數增長不如預期</h3>
-          <p>此次改版在多方面取得成功，顯著提升了商業指標和使用者黏著度。頁面載入速度更快，改善了手機閱讀體驗，使用者停留時間延長。廣告的可視度與點擊率大幅提升，新增的廣編稿流量為數位廣告營收帶來可觀增長。然而，閱讀篇數的數據增長仍未達預期。</p>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-block"><div class="num">↓ 跳出率</div><div class="label">-3%</div></div>
-          <div class="stat-block"><div class="num">↑ 文字廣告</div><div class="label">點擊率 +900%</div></div>
-          <div class="stat-block"><div class="num">↑ 廣編稿</div><div class="label">+4萬篇/週 新流量</div></div>
-          <div class="stat-block"><div class="num">↑ R1 廣告</div><div class="label">可視度與點擊率大幅提升</div></div>
+          <p class="section-label">專案成果</p>
+          <h2>廣告成效顯著，但閱讀篇數增長不如預期</h2>
+          <p>以下為新版文章頁上線一個月後的成效數據。此次改版在多方面取得成功，<strong style="color: var(--text-primary)">顯著提升了商業指標和使用者黏著度</strong>。頁面載入速度更快，改善了手機閱讀體驗，使用者停留時間延長。廣告的可視度與點擊率大幅提升，<strong style="color: var(--text-primary)">新增的廣編稿流量為數位廣告營收帶來可觀增長</strong>。然而，閱讀篇數的數據增長仍未達預期。</p>
         </div>
 
-        <div class="prose" style="margin-top: 8px;">
-          <h3>設計方案迭代：針對閱讀篇數進行 A/B Testing</h3>
+        <div id="results-grid">
+          <div class="result-card">
+            <span class="result-card-label">跳出率</span>
+            <span class="result-num">- <span class="count-num" data-target="3">0</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">載入速度</span>
+            <span class="result-num">- <span class="count-num" data-target="5">0</span> 秒</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">平均工作階段時間</span>
+            <span class="result-num">+ <span class="stat-num" data-target="6.06" data-decimals="2" style="color:inherit;font-size:inherit;font-weight:inherit;letter-spacing:inherit">6.06</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">單次工作階段頁數</span>
+            <span class="result-num">+ <span class="stat-num" data-target="0.7" data-decimals="1" style="color:inherit;font-size:inherit;font-weight:inherit;letter-spacing:inherit">0.7</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">文字廣告點擊率</span>
+            <span class="result-num">+ <span class="count-num" data-target="900">0</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">滾動下一篇</span>
+            <span class="result-num">+ <span class="count-num" data-target="4">0</span> 萬篇</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">R1 廣告點擊率</span>
+            <span class="result-num">+ <span class="count-num" data-target="460">0</span> %</span>
+          </div>
+          <div class="result-card">
+            <span class="result-card-label">R1 廣告可視度</span>
+            <span class="result-num">+ <span class="count-num" data-target="114">0</span> %</span>
+          </div>
+        </div>
+        <script>
+        (function(){
+          var nums = document.querySelectorAll('.count-num');
+          var started = false;
+          function animate(){
+            if(started) return;
+            started = true;
+            nums.forEach(function(el){
+              var target = parseInt(el.getAttribute('data-target'));
+              var duration = 2000;
+              var start = null;
+              function step(ts){
+                if(!start) start = ts;
+                var progress = Math.min((ts - start) / duration, 1);
+                var ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(ease * target);
+                if(progress < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            });
+          }
+          var observer = new IntersectionObserver(function(entries){
+            if(entries[0].isIntersecting) animate();
+          }, {threshold: 0.3});
+          observer.observe(document.getElementById('results-grid'));
+        })();
+        </script>
+        <img src="assets/images/data.png" alt="專案成果數據" class="full-img full-img-mt" />
+        <img src="assets/images/cwdata.png" alt="數據圖表" class="full-img full-img-mt" style="background: var(--bg); border-radius: var(--radius-sm); padding: 24px; box-sizing: border-box;" />
+
+      </div>
+
+      <!-- 設計方案迭代 -->
+      <div class="panel">
+        <div class="prose">
+          <p class="section-label">設計方案迭代</p>
+          <h2>針對閱讀篇數進行 A/B Testing，持續觀察數據變化</h2>
           <p>頁面上線後，由於閱讀篇數的數據增長不如預期，我們持續針對各個閱讀版位進行 A/B Testing，根據數據不斷調整版位與樣式，以提升每項關鍵指標，並為使用者提供更好的閱讀體驗。</p>
+
+          <h3>1. 提高文末推薦文章點擊率的測試</h3>
           <p>為提高文末推薦文章的點擊率，我們設計了不同版型進行測試。結果顯示，對照組的使用者不太會使用左右滑動功能，多數僅點擊前兩篇文章。相比之下，實驗組雖然篇幅較長，但因為所有文章都可見，點擊率顯著高於對照組。最終，我們選擇了實驗組中以「上下直線型」閱讀的版型作為最終方案。</p>
-          <p>為提高文中推薦文章的點擊率，結果顯示搭配圖片的版面比純文字樣式更能吸引使用者點擊，因此選擇了含圖片的版型作為最終方案。</p>
+          <img src="assets/images/AB1.png" alt="文末推薦文章 A/B Testing" class="full-img full-img-my" />
+
+          <h3>2. 提高文中推薦文章點擊率的測試</h3>
+          <p>為提高文中推薦文章的點擊率，我們設計了不同版型進行測試。結果顯示，搭配圖片的版面比純文字樣式更能吸引使用者點擊。因此，我們選擇了下圖右側的實驗組作為最終方案。</p>
+          <img src="assets/images/AB2.png" alt="文中推薦文章 A/B Testing" class="full-img full-img-my" />
         </div>
       </div>
 
       <!-- 學習與反思 -->
       <div class="panel">
         <div class="prose">
-          <p class="section-label">Reflection</p>
-          <h2>學習與反思</h2>
-          <h3>設計師需作為商業需求與使用者需求間的橋樑</h3>
-          <p>在與各個部門主管和利害關係人的多次對話中，我開始明白一個成功的產品設計必須能夠平衡商業利益與使用者需求。設計師需要具備商業思維，理解產品如何為公司創造價值與帶來營收，同時也要有效地將這些商業目標轉化為有用的解決方案。我學會運用數據說話，將使用者研究的發現與商業指標結合，用具體的數據或 UX 概念來支持設計決策，而不是單純依靠直覺或個人喜好，才更能夠說服別人。</p>
+          <p class="section-label">學習與反思</p>
+          <h2>設計師需作為商業需求與使用者需求間的橋樑</h2>
+          <p>在與各個部門主管和利害關係人的多次對話中，我逐漸理解一個成功的產品設計，必須能夠同時回應商業利益與使用者需求。設計師需要具備商業思維，理解產品如何為公司創造價值，同時也要將這些商業目標轉化為真正有用的解決方案。這個專案讓我學會用數據說話，將使用者研究的發現與商業指標結合，用具體的數字或 UX 概念來支撐設計決策，而不是依靠直覺或個人喜好，提案才能真正說服人。</p>
+          <p>這也是我第一次在如此多利害關係人的環境中推進設計。編輯、業務、技術、營運各有立場，每一場提案都像在走鋼索，既要護住使用者體驗的底線，又不能讓商業訴求落空。我學到的不只是如何設計，而是如何在眾多聲音中找到共識的切入點，事前一對一溝通、用數據建立信任、把設計決策的理由說清楚，比任何一張精美的設計稿都更重要。</p>
+        </div>
+        <div class="learn-grid">
+          <img src="assets/images/learn1.png" alt="學習與反思 1" class="full-img" />
+          <img src="assets/images/learn2.png" alt="學習與反思 2" class="full-img" />
         </div>
       </div>
 
       <div class="panel cta-panel">
-        <p class="section-label">Let's Work Together</p>
-        <div class="cta-title">對我的背景有興趣？</div>
-        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
-        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
       </div>
-
     </main>
   </div>
-
-  <script>
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
-    });
-  </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>

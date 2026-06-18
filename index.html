@@ -4,272 +4,260 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name — Designer & Developer</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- Mobile toggle -->
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
 
   <div class="layout">
 
     <!-- ===== SIDEBAR ===== -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar">
-          <img src="assets/images/avatar.webp" alt="avatar">
-        </div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item active"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <!-- ===== MAIN CONTENT ===== -->
     <main class="main">
 
       <!-- Hero -->
       <div class="panel">
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          設計中
+        </div>
         <h1 class="hero-name">嗨，我是大胃！👋🏻</h1>
         <p class="hero-desc">
-          我是擁有 10 年以上設計經驗的產品設計師，橫跨 2C 與 2B，熟悉從 0 到 1 的產品規劃與設計流程。設計之外，我也熱衷於設計教育，擔任設計助教與職涯教練，陪伴新手設計師找到方向。
+          10 年以上產品設計經驗，橫跨 2C 與 2B，擅長從 0 到 1 的產品規劃與設計流程。善於在不同角色之間搭起溝通橋樑，讓用戶需求、商業目標與技術可行性達到平衡。
+        </p>
+        <p class="hero-desc">
+          我也熱衷於設計教育，擔任設計助教與職涯教練，陪伴新手設計師找到方向。我相信好的設計師不只解決問題，更能幫助身邊的人看見更好的可能性。
         </p>
         <div class="hero-actions">
           <a href="about.html" class="btn btn-primary">關於我 ↗</a>
-          <a href="projects.html" class="btn btn-outline">設計專案 ↗</a>
+          <a href="assets/resume.pdf" target="_blank" class="btn btn-outline">下載履歷 ↓</a>
         </div>
       </div>
 
-      <!-- Recent Works Carousel -->
+      <!-- Recent Works Bento -->
       <div class="panel works-panel">
-        <div class="works-header">
-          <div class="works-title">Recent works</div>
-          <span class="works-rate">From $[XX]-$[XX]/hr</span>
+        <div class="panel-header">
+          <div>
+            <h2>設計專案</h2>
+          </div>
+          <a href="projects.html" class="btn btn-outline">看全部 ↗</a>
         </div>
-        <div class="works-carousel">
+        <div class="projects-bento">
 
-          <a href="project-detail.html" class="work-card">
+          <a href="project-detail-fitbutler.html" class="work-card">
             <div class="work-card-img">
-              <!-- <img src="assets/images/work-1.jpg" alt=""> -->
-              🖥️
+              <img src="assets/images/fitbutler.png" alt="Fitbutler">
             </div>
             <div class="work-card-body">
-              <div class="work-card-title">[Project Name 1]</div>
               <div class="work-card-tags">
-                <span class="tag">Web App</span>
-                <span class="tag">2025</span>
+                <span class="tag">B2B</span>
+                <span class="tag">SaaS</span>
+                <span class="tag">模組化設計</span>
               </div>
+              <div class="work-card-title">用模組化思維重新定義 B2B 營運管理系統：《Fitbutler》從 0 到 1 的設計策略</div>
+              <div class="work-card-desc">從零建立模組化設計架構，支援運動產業與空間租賃業的差異化需求，並具備跨國營運能力</div>
             </div>
           </a>
 
-          <a href="project-detail.html" class="work-card">
-            <div class="work-card-img">📱</div>
-            <div class="work-card-body">
-              <div class="work-card-title">[Project Name 2]</div>
-              <div class="work-card-tags">
-                <span class="tag">Mobile</span>
-                <span class="tag">2025</span>
+          <div class="projects-bento-sub">
+            <a href="project-detail.html" class="work-card">
+              <div class="work-card-img">
+                <img src="assets/images/cwarticle.png" alt="天下雜誌廣告體驗">
               </div>
-            </div>
-          </a>
+              <div class="work-card-body">
+                <div class="work-card-tags">
+                  <span class="tag">設計系統</span>
+                  <span class="tag">利害關係人溝通</span>
+                  <span class="tag">A/B Testing</span>
+                </div>
+                <div class="work-card-title">改善數位閱讀及廣告體驗，協助《天下雜誌》創下「數位營收大於紙本營收」里程碑</div>
+                <div class="work-card-desc">降低使用者跳出率 (-3%)，提供廣編稿新流量來源 (+4萬篇/週)、提升文字廣告點擊率 (+900%)</div>
+              </div>
+            </a>
 
-          <a href="project-detail.html" class="work-card">
-            <div class="work-card-img">🎨</div>
-            <div class="work-card-body">
-              <div class="work-card-title">[Project Name 3]</div>
-              <div class="work-card-tags">
-                <span class="tag">Branding</span>
-                <span class="tag">2024</span>
+            <a href="project-detail-cwapp.html" class="work-card">
+              <div class="work-card-img">
+                <img src="assets/images/cwapp.png" alt="天下雜誌App">
               </div>
-            </div>
-          </a>
-
-          <a href="project-detail.html" class="work-card">
-            <div class="work-card-img">🌐</div>
-            <div class="work-card-body">
-              <div class="work-card-title">[Project Name 4]</div>
-              <div class="work-card-tags">
-                <span class="tag">Landing Page</span>
-                <span class="tag">2024</span>
+              <div class="work-card-body">
+                <div class="work-card-tags">
+                  <span class="tag">產品策略</span>
+                  <span class="tag">使用者訪談</span>
+                  <span class="tag">洞察轉化</span>
+                </div>
+                <div class="work-card-title">從使用者訪談到產品優化：UX 研究如何助攻《天下雜誌 App》訂戶增長</div>
+                <div class="work-card-desc">付費牆優化訂閱轉換率 (+4%)、禮物文章擴大觸及非訂戶、TTS 用戶首度超越 Podcast 用戶</div>
               </div>
-            </div>
-          </a>
-
-          <a href="project-detail.html" class="work-card">
-            <div class="work-card-img">⚡</div>
-            <div class="work-card-body">
-              <div class="work-card-title">[Project Name 5]</div>
-              <div class="work-card-tags">
-                <span class="tag">Dashboard</span>
-                <span class="tag">2024</span>
-              </div>
-            </div>
-          </a>
+            </a>
+          </div>
 
         </div>
       </div>
 
-      <!-- Stats -->
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-num">[X]+</div>
-          <div class="stat-label">Projects Completed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">[X]+</div>
-          <div class="stat-label">Happy Clients</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">[X]yr</div>
-          <div class="stat-label">Experience</div>
-        </div>
-      </div>
-
-      <!-- Services Teaser -->
-      <div class="panel">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+      <!-- AI 實驗室 -->
+      <div class="panel works-panel">
+        <div class="panel-header">
           <div>
-            <p class="section-label">What I Do</p>
-            <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Services</h2>
+            <h2>AI 實驗室</h2>
           </div>
-          <a href="services.html" class="view-all">View all</a>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">🎨</div>
-            <div class="service-title">UI/UX Design</div>
-            <div class="service-desc">[服務描述，約 2 句]</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">✦</div>
-            <div class="service-title">Brand Design</div>
-            <div class="service-desc">[服務描述，約 2 句]</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">📱</div>
-            <div class="service-title">Product Design</div>
-            <div class="service-desc">[服務描述，約 2 句]</div>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">💡</div>
-            <div class="service-title">Design Consultancy</div>
-            <div class="service-desc">[服務描述，約 2 句]</div>
-          </div>
+        <div class="podcast-teaser-grid ai-lab-grid">
+
+          <a href="#" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover"><img src="assets/images/AI_pro.png" alt="AI 作品集專案"></div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta">
+                <span class="tag">AI</span>
+                <span class="tag">2026</span>
+              </div>
+              <div class="podcast-teaser-title">不會寫 Code，但我用 AI 做了一個作品集網站</div>
+            </div>
+          </a>
+
+          <a href="#" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">✨</div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta">
+                <span class="tag">AI</span>
+                <span class="tag">2026</span>
+              </div>
+              <div class="podcast-teaser-title">用 AI 解決多語系翻譯表的維護地獄</div>
+            </div>
+          </a>
+
+          <a href="#" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">🌙</div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta">
+                <span class="tag">AI</span>
+                <span class="tag">2026</span>
+              </div>
+              <div class="podcast-teaser-title">用 AI 留住那些一睜眼就消失的夢</div>
+            </div>
+          </a>
+
         </div>
       </div>
 
-      <!-- Testimonials -->
+
+
+      <!-- Podcast Teaser -->
       <div class="panel">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div class="panel-header">
           <div>
-            <p class="section-label">Social Proof</p>
-            <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Client Reviews</h2>
+            <h2>Podcast</h2>
           </div>
+          <a href="podcast.html" class="btn btn-outline">聽全部 ↗</a>
         </div>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <p class="testimonial-quote">[客戶評價內容，約 2-3 句]</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">😊</div>
-              <div>
-                <div class="testimonial-name">[Client Name]</div>
-                <div class="testimonial-role">[Role], [Company]</div>
-              </div>
+        <div class="podcast-teaser-grid">
+          <a href="https://open.spotify.com/episode/4CjQp0ElixVsjUbpzuuK5L" target="_blank" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">
+              <img src="assets/images/1on1.png" alt="設計圍爐">
             </div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-quote">[客戶評價內容，約 2-3 句]</p>
-            <div class="testimonial-author">
-              <div class="testimonial-avatar">🙂</div>
-              <div>
-                <div class="testimonial-name">[Client Name]</div>
-                <div class="testimonial-role">[Role], [Company]</div>
-              </div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta">Product Design 1 on 1 · 55 分鐘</div>
+              <div class="podcast-teaser-title">設計圍爐系列 - 2B 設計師的挑戰與職涯挫折</div>
             </div>
-          </div>
+          </a>
+          <a href="https://open.spotify.com/episode/63WUnjXNFJ5QCo0QfeWkVm" target="_blank" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">
+              <img src="assets/images/S4EP5.png" alt="S4EP5">
+            </div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta">No Shortcuts S4EP5 · 44 分鐘</div>
+              <div class="podcast-teaser-title">資深設計師無所不能？聊聊那些年我們失敗跌倒的慘痛經驗</div>
+            </div>
+          </a>
+          <a href="https://open.spotify.com/episode/49owPsVeyXz1JU75XRM1He" target="_blank" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">
+              <img src="assets/images/S4EP7.png" alt="S4EP7">
+            </div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta">No Shortcuts S4EP7 · 40 分鐘</div>
+              <div class="podcast-teaser-title">設計師真正的超能力 — 創造價值的關鍵</div>
+            </div>
+          </a>
         </div>
       </div>
 
       <!-- Blog Teaser -->
       <div class="panel">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+        <div class="panel-header">
           <div>
-            <p class="section-label">Latest Thoughts</p>
-            <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">From the Blog</h2>
+            <h2>最新文章</h2>
           </div>
-          <a href="blog.html" class="view-all">View all</a>
+          <a href="https://medium.com/@yuhsuanwang531" target="_blank" class="btn btn-outline">看全部 ↗</a>
         </div>
-        <div class="blog-grid">
-          <a href="blog-detail.html" class="blog-card">
-            <div class="blog-thumb">✍️</div>
-            <div class="blog-body">
-              <div class="blog-meta">[Category] · [Date]</div>
-              <div class="blog-title">[Blog Post Title 1]</div>
-              <div class="blog-excerpt">[摘要，約 1-2 句]</div>
+        <div class="podcast-teaser-grid blog-teaser-grid">
+          <a href="https://medium.com/@yuhsuanwang531/%E5%BE%9E%E8%AE%80%E6%87%82%E7%94%A8%E6%88%B6%E5%88%B0%E8%AE%80%E6%87%82%E7%B3%BB%E7%B5%B1-2c-%E8%BD%89-2b-%E7%9A%84%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD%E8%BD%89%E6%8F%9B-2ab9857ac2ef" target="_blank" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">
+              <img src="assets/images/blog1.webp" alt="blog1">
+            </div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta"><span class="tag">2B設計</span></div>
+              <div class="podcast-teaser-title">從讀懂用戶到讀懂系統 — 2C 轉 2B 的設計思維轉換</div>
             </div>
           </a>
-          <a href="blog-detail.html" class="blog-card">
-            <div class="blog-thumb">💭</div>
-            <div class="blog-body">
-              <div class="blog-meta">[Category] · [Date]</div>
-              <div class="blog-title">[Blog Post Title 2]</div>
-              <div class="blog-excerpt">[摘要，約 1-2 句]</div>
+          <a href="https://medium.com/@yuhsuanwang531/%E8%BB%9F%E5%AF%A6%E5%8A%9B%E6%89%8D%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%AE%93%E4%BD%A0%E5%9C%A8%E8%81%B7%E5%A0%B4%E4%B8%AD%E8%88%87%E7%9C%BE%E4%B8%8D%E5%90%8C-%E4%B8%8A-dd560ea55585" target="_blank" class="podcast-teaser-card">
+            <div class="podcast-teaser-cover">
+              <img src="assets/images/blog2.webp" alt="blog2">
+            </div>
+            <div class="podcast-teaser-body">
+              <div class="podcast-teaser-meta"><span class="tag">職涯成長</span></div>
+              <div class="podcast-teaser-title">軟實力才能真正讓你在職場中與眾不同 — 軟實力培養</div>
             </div>
           </a>
-          <a href="blog-detail.html" class="blog-card">
-            <div class="blog-thumb">🚀</div>
-            <div class="blog-body">
-              <div class="blog-meta">[Category] · [Date]</div>
-              <div class="blog-title">[Blog Post Title 3]</div>
-              <div class="blog-excerpt">[摘要，約 1-2 句]</div>
+        </div>
+      </div>
+
+      <!-- 一對一諮詢 -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>想跟大胃聊聊？</h2>
+            <p class="page-subtitle">歡迎預約 60 分鐘的一對一設計職涯諮詢</p>
+          </div>
+          <a href="https://aapd.com.tw/coach-program/coach-all/%E5%A4%A7%E8%83%83" target="_blank" class="btn btn-outline">預約諮詢 ↗</a>
+        </div>
+        <div class="persona-grid">
+          <div class="persona-card">
+            <div class="persona-tags">
+              <span class="tag">職涯方向</span>
+              <span class="tag">作品集健診</span>
             </div>
-          </a>
+            <div class="persona-type">剛入行的設計師</div>
+            <div class="persona-desc">對職涯方向感到迷茫，不確定自己的定位，想找到適合自己的路</div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-tags">
+              <span class="tag">職涯升級</span>
+              <span class="tag">軟實力</span>
+            </div>
+            <div class="persona-type">想升職的中階設計師</div>
+            <div class="persona-desc">已有 3–5 年經驗，卡在瓶頸期，想突破升上資深或 Lead</div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-tags">
+              <span class="tag">2B 設計思維</span>
+              <span class="tag">職涯轉換</span>
+            </div>
+            <div class="persona-type">2C 想轉 2B 的設計師</div>
+            <div class="persona-desc">想從消費端跨入企業端產品設計，不知道思維差異在哪、如何切入</div>
+          </div>
         </div>
       </div>
 
       <!-- CTA -->
       <div class="panel cta-panel">
-        <p class="section-label">Let's Work Together</p>
-        <div class="cta-title">Have a project in mind?</div>
-        <div class="cta-subtitle">Let's discuss your project and create something great together.</div>
-        <a href="contact.html" class="btn btn-primary">Start a Project ↗</a>
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
       </div>
-
     </main>
   </div>
-
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('open');
-    }
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) {
-        sidebar.classList.remove('open');
-      }
-    });
-  </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>

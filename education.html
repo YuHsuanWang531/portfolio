@@ -4,20 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>設計教育經歷 — Your Name</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     .timeline { display: flex; flex-direction: column; }
     .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--border); }
-    .timeline-item:first-child { border-top: 1px solid var(--border); }
+    .timeline-item:first-child { border-top: none; }
     .timeline-item:last-child { border-bottom: none; }
     .timeline-year { font-size: 14px; color: var(--text-muted); font-weight: 600; padding-top: 4px; white-space: nowrap; }
-    .timeline-role { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2px; }
-    .timeline-company { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+    .timeline-role { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
+    .timeline-company { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
     .timeline-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
     .timeline-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     @media (max-width: 600px) { .timeline-item { grid-template-columns: 1fr; gap: 8px; } }
+    .timeline-logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .timeline-logo { width: 44px; height: 44px; border-radius: 10px; object-fit: contain; flex-shrink: 0; border: 1px solid var(--border); }
+    .timeline-logo-row .timeline-company { margin-bottom: 0; }
     .edu-grid { display: flex; flex-direction: column; }
     .edu-item {
       display: grid;
@@ -29,13 +32,13 @@
     .edu-item:first-child { border-top: 1px solid var(--border); }
     .edu-year { font-size: 14px; color: var(--text-muted); font-weight: 600; padding-top: 4px; }
     .edu-degree { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-    .edu-school { font-size: 16px; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+    .edu-school { font-size: 16px; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
     .edu-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.75; }
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 28px;
+      gap: 16px;
+      margin-top: 24px;
     }
     .cert-card {
       border: 1.5px solid var(--border);
@@ -43,7 +46,7 @@
       padding: 20px;
       transition: var(--transition);
     }
-    .cert-card:hover { border-color: var(--accent); background: var(--accent-light); }
+    .cert-card:hover { transform: scale(1.02); }
     .cert-icon { font-size: 28px; margin-bottom: 12px; }
     .cert-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
     .cert-issuer { font-size: 12px; color: var(--text-muted); }
@@ -53,13 +56,14 @@
     }
     .marquee-wrapper {
       overflow: hidden;
-      margin: 0 -28px;
+      margin: 0;
     }
     .marquee-track {
       display: flex;
       gap: 12px;
       width: max-content;
       animation: marquee 45s linear infinite;
+      animation-play-state: paused;
     }
     .marquee-item {
       height: 240px;
@@ -72,49 +76,61 @@
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    .toggle-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .toggle-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    #reviews-toggle-wrap { text-align: center; margin-top: 24px; display: none; }
   </style>
 </head>
 <body>
-  <button class="mobile-nav-toggle" onclick="toggleSidebar()" id="mobileToggle">☰</button>
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-profile">
-        <div class="sidebar-avatar"><img src="assets/images/avatar.webp" alt="avatar"></div>
-        <div>
-          <div class="sidebar-name">王瑀萱｜大胃</div>
-          <div class="sidebar-title">Sr. Product Designer</div>
-        </div>
-      </div>
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-item"><span class="nav-icon">🏠</span> 首頁</a></li>
-        <li><a href="work-experience.html" class="nav-item"><span class="nav-icon">💼</span> 工作經歷</a></li>
-        <li><a href="projects.html" class="nav-item"><span class="nav-icon">🎨</span> 設計專案</a></li>
-        <li><a href="education.html" class="nav-item active"><span class="nav-icon">🎓</span> 設計教育經歷</a></li>
-        <li><a href="about.html" class="nav-item"><span class="nav-icon">👤</span> 關於我</a></li>
-        <li><a href="podcast.html" class="nav-item"><span class="nav-icon">🎙️</span> Podcast</a></li>
-        <li><a href="blog.html" class="nav-item"><span class="nav-icon">📝</span> Blog</a></li>
-      </ul>
-      <div class="sidebar-bottom">
-        <div class="sidebar-available">Available Now</div>
-        <a href="contact.html" class="btn-hire">Hire Me ↗</a>
-      </div>
-    </aside>
 
     <main class="main">
       <div class="panel">
-        <p class="section-label">Education</p>
         <h1 class="page-title">設計教育經歷</h1>
       </div>
 
       <div class="panel">
         <div class="timeline">
 
+          <!-- AAPD 產品人成長圈教練 -->
+          <div class="timeline-item">
+            <div class="timeline-year">2026.07 – 目前</div>
+            <div class="timeline-body">
+              <div class="timeline-logo-row">
+                <img src="assets/images/growth.png" alt="產品人成長圈" class="timeline-logo">
+                <div>
+                  <div class="timeline-role">產品人成長圈教練</div>
+                  <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+                </div>
+              </div>
+              <div class="timeline-desc">透過日常思考引導、每週重點訓練拆解，以及每月個案診斷，從不同專長視角協助學員突破盲點、陪伴學員建立持續成長的節奏。</div>
+            </div>
+          </div>
+
           <!-- AAPD 職涯陪跑教練 -->
-          <div class="timeline-item" style="border-top: none;">
+          <div class="timeline-item">
             <div class="timeline-year">2025.06 – 目前</div>
             <div class="timeline-body">
-              <div class="timeline-role">職涯陪跑教練</div>
-              <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+              <div class="timeline-logo-row">
+                <img src="assets/images/aapdlogo.png" alt="AAPD" class="timeline-logo">
+                <div>
+                  <div class="timeline-role">職涯陪跑教練</div>
+                  <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+                </div>
+              </div>
               <div class="timeline-desc">提供一對一個人化指導，幫助學員不只解決短期的困惑與挑戰，同時探索長期成長目標。已累積 10+ 以上學員諮詢經驗。</div>
             </div>
           </div>
@@ -123,8 +139,13 @@
           <div class="timeline-item">
             <div class="timeline-year">2023.10 – 目前</div>
             <div class="timeline-body">
-              <div class="timeline-role">產品設計助教</div>
-              <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+              <div class="timeline-logo-row">
+                <img src="assets/images/aapdlogo.png" alt="AAPD" class="timeline-logo">
+                <div>
+                  <div class="timeline-role">產品設計助教</div>
+                  <div class="timeline-company">AAPD (As A Product Designer) 產品設計學院｜兼職</div>
+                </div>
+              </div>
               <div class="timeline-desc">擔任《產品設計挑戰賽》及《UI 設計線上實戰營》的產品設計助教，協助學員作業批改、幫助學員排除遇到的困難、分享對應設計資源以及分享自身經驗。已累積協助 200+ 以上學員。</div>
             </div>
           </div>
@@ -133,8 +154,13 @@
           <div class="timeline-item">
             <div class="timeline-year">2025.01 – 2025.06</div>
             <div class="timeline-body">
-              <div class="timeline-role">UI/UX 組業師</div>
-              <div class="timeline-company">XChange 互聯網大學｜兼職</div>
+              <div class="timeline-logo-row">
+                <img src="assets/images/xchangelogo.png" alt="XChange" class="timeline-logo">
+                <div>
+                  <div class="timeline-role">UI/UX 組業師</div>
+                  <div class="timeline-company">XChange 互聯網大學｜兼職</div>
+                </div>
+              </div>
               <div class="timeline-desc">我在第八屆 XChange 互聯網大學擔任 UI/UX 組業師，提供大學生和研究生一對一、一對二的諮詢，解惑他們在實習和專案中遇到的問題。</div>
             </div>
           </div>
@@ -144,9 +170,8 @@
 
       <!-- 學員評價 -->
       <div class="panel">
-        <p class="section-label">Student Reviews</p>
-        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px;">學員怎麼說</h2>
-        <div id="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <h2>學員怎麼說</h2>
+        <div id="reviews-grid" class="reviews-grid">
 
           <div class="testimonial-card">
             <p class="testimonial-quote">大胃不只能一針見血地指出核心問題，還會用細膩的眼光幫助我們看見畫面裡被忽略的細節。面對任何提問也十分願意耐心傾聽、細心解答，從整體產品思路到細微的視覺元素都照顧到，能感受到他滿滿的真心以及想讓學員成長的熱忱。</p>
@@ -216,17 +241,16 @@
 
         </div>
 
-        <div id="reviews-toggle-wrap" style="text-align: center; margin-top: 24px; display: none;">
-          <button id="reviews-toggle" onclick="toggleReviews()" style="background: none; border: 1px solid var(--border); border-radius: 999px; padding: 10px 24px; font-size: 14px; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: var(--transition);" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+        <div id="reviews-toggle-wrap">
+          <button id="reviews-toggle" onclick="toggleReviews()" class="toggle-btn">
             查看更多評價 ↓
           </button>
         </div>
       </div>
 
       <!-- 照片牆 -->
-      <div class="panel" style="overflow: hidden;">
-        <p class="section-label">Moments</p>
-        <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 28px;">教學現場</h2>
+      <div class="panel panel-overflow-hidden">
+        <h2>教學現場</h2>
         <div class="marquee-wrapper">
           <div class="marquee-track">
             <div class="marquee-item"><img src="assets/images/education1_web.jpg" alt=""></div>
@@ -247,12 +271,9 @@
       </div>
 
       <div class="panel cta-panel">
-        <p class="section-label">Let's Work Together</p>
-        <div class="cta-title">對我的背景有興趣？</div>
-        <div class="cta-subtitle">歡迎聯絡，討論合作機會或交流想法。</div>
-        <a href="contact.html" class="btn btn-primary">聯絡我 ↗</a>
+        <div class="cta-title">歡迎與我聯絡</div>
+        <p class="cta-email">yuhsuanwang531@gmail.com</p>
       </div>
-
     </main>
   </div>
 
@@ -295,13 +316,11 @@
 
     window.addEventListener('resize', updateReviewsLayout);
     document.addEventListener('DOMContentLoaded', updateReviewsLayout);
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-      const sidebar = document.getElementById('sidebar');
-      const toggle = document.getElementById('mobileToggle');
-      if (window.innerWidth <= 900 && sidebar.classList.contains('open') &&
-          !sidebar.contains(e.target) && !toggle.contains(e.target)) sidebar.classList.remove('open');
+    window.addEventListener('load', function() {
+      var track = document.querySelector('.marquee-track');
+      if (track) track.style.animationPlayState = 'running';
     });
   </script>
+  <script src="assets/js/sidebar.js"></script>
 </body>
 </html>
