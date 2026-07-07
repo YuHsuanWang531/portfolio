@@ -13,7 +13,8 @@
     { href: 'about.html',           icon: SVG('about.svg'),   label: '關於我',      match: ['about.html'] },
   ];
 
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const rawPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPage = rawPage.endsWith('.html') ? rawPage : rawPage + '.html';
 
   const navHTML = NAV_ITEMS.map(item => {
     const isActive = item.match.includes(currentPage) ? ' active' : '';
