@@ -3,133 +3,497 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Your Name</title>
+  <title>About — 大胃</title>
   <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    .about-square-photo { width: 280px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden; }
-    .about-square-photo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: top center; display: block; }
-    .about-intro-grid { display: flex; gap: var(--sp-10); align-items: flex-start; }
-    @media (max-width: 900px) {
-      .about-intro-grid { flex-direction: column; }
-      .about-square-photo { width: 100%; order: -1; }
+    body, .layout, .main { background: #f5f5f7; }
+    .layout { padding: 0; gap: 0; }
+    .main { padding: 0; gap: 0; }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 16px;
+      padding: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+      padding-bottom: 24px;
     }
-    .life-marquee-wrapper { overflow: hidden; margin: 0; }
-    .life-marquee-track { display: flex; gap: 12px; width: max-content; animation: marquee-life 45s linear infinite; animation-play-state: paused; }
-    .life-marquee-item { height: 240px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0; }
-    .life-marquee-item img { height: 100%; width: auto; object-fit: contain; display: block; }
-    @keyframes marquee-life { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── Left column ── */
+    .about-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: sticky;
+      top: 24px;
+    }
+    .about-profile-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .about-profile-photo {
+      width: calc(100% - 32px);
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 12px;
+      margin: 16px 16px 0;
+    }
+    .about-profile-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .about-profile-info {
+      padding: 16px 20px 20px;
+    }
+    .about-profile-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .about-profile-bio {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .about-profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .about-co-tag {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      color: var(--text-secondary);
+      background: transparent;
+    }
+
+    /* Masonry photo grid */
+    .about-photo-grid {
+      columns: 2;
+      column-gap: 8px;
+      padding: 0 16px 16px;
+    }
+    .about-photo-grid-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .about-photo-grid-item img {
+      width: 100%; display: block;
+      object-fit: cover;
+    }
+
+    /* ── Right column ── */
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .about-block {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      padding: 28px 32px;
+    }
+    .about-block h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    .about-block p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .about-block p:last-child { margin-bottom: 0; }
+
+    /* Skills grid */
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .skill-item {}
+    .skill-label {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .exp-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .exp-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: transparent;
+      flex-shrink: 0;
+    }
+    .exp-meta { display: flex; flex-direction: column; gap: 2px; }
+    .exp-year { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .skill-item { position: relative; cursor: default; }
+    .skill-item:has(.exp-toggle) { cursor: pointer; }
+    .exp-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+      padding: 0;
+    }
+    .exp-toggle:hover,
+    .skill-item:hover .exp-toggle { color: var(--accent); }
+    .about-bullets {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-bullets li:first-child { margin-top: 10px; }
+    .about-bullets {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .about-bullets li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      list-style: disc;
+    }
+    .skill-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* Values list */
+    .values-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .values-list li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      padding-left: 4px;
+      list-style: disc;
+      margin-left: 18px;
+    }
+
+    /* CTA buttons */
+    .about-cta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .about-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: #f5f5f7;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .about-cta-email:hover  { background: var(--accent); color: #fff; }
+    .about-cta-linkedin:hover { background: #0A66C2; color: #fff; }
+    .about-cta-medium:hover   { background: #000; color: #fff; }
+    .about-cta-resume:hover   { background: var(--accent); color: #fff; }
+    .about-cta-email-wrap { position: relative; }
+    .about-cta-email-wrap .about-cta-btn { width: 100%; cursor: pointer; border: none; font-family: inherit; }
+    .about-email-toast {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: #222; color: #fff;
+      font-size: 14px; font-weight: 500;
+      padding: 5px 12px; border-radius: 8px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .about-email-toast.show { opacity: 1; }
+
+    /* Divider */
+    .about-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.07);
+      margin: 0;
+    }
+
+    /* Photo toggle button — mobile only */
+    .photo-toggle-btn {
+      display: none;
+    }
+    @media (max-width: 860px) {
+      .about-wrap { grid-template-columns: 1fr; }
+      .about-left { position: static; }
+      .about-photo-grid { display: none; }
+      .about-photo-grid.expanded { display: block; }
+      .photo-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: calc(100% - 32px);
+        margin: 0 16px 16px;
+        padding: 10px 16px;
+        background: #f5f5f7;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 0.15s;
+      }
+      .photo-toggle-btn:hover { background: #ebebed; }
+    }
   </style>
 </head>
 <body>
   <div class="layout">
-
     <main class="main">
-      <div class="panel">
-        <h1 class="page-title">關於我</h1>
-      </div>
+      <div class="about-wrap">
 
-      <div class="panel">
-        <div class="about-intro-grid">
-          <div class="about-text">
-            <h2>嗨，我是大胃，<br>一名跨領域產品設計師，專注於用設計創造商業價值</h2>
-            <p>目前在運動科技業擔任資深產品設計師，專注於幫助運動場館業者運用科技提升營運效率，以推動運動科技產業數位化為目標，主導 B2B SaaS 與 B2B2C 多產品線的設計策略。我擅長化繁為簡，梳理複雜的系統操作流程，讓場館能輕鬆上手。將興趣與專業結合，讓我更能站在場館經營者與使用者的角度，不斷優化產品體驗。</p>
-            <p>過去曾在內容媒體業深耕 2C 產品設計 8 年，橫跨新聞媒體、知識音頻、電商、活動票券等多元產品線，透過數據與使用者訪談深入了解使用者需求，主導多項核心功能體驗優化，驅動業務成長，累計交付 10+ 個產品專案。最有成就感的時刻，是在捷運上看到陌生人使用我設計的產品！</p>
-            <p>我也熱衷於設計教育，在社群中擔任設計助教與職涯教練，陪伴新手設計師找到方向，透過分享自身經驗，幫助新手設計師少走一點彎路，我相信好的設計師不只能解決問題，更能幫助身邊的人看見更好的可能性。</p>
-          </div>
-        </div>
-      </div>
+        <!-- Left column -->
+        <div class="about-left">
+          <div class="about-profile-card">
+            <div class="about-profile-photo">
+              <img src="assets/images/aboutme.png" alt="大胃">
+            </div>
+            <div class="about-profile-info">
+              <div class="about-profile-name">王瑀萱｜大胃</div>
+              <div class="about-profile-bio">10 年以上產品設計經驗，橫跨 2C 與 2B，擅長從 0 → 1、1 → N 的產品規劃與設計流程，在不同角色之間搭起溝通橋樑，讓用戶需求、商業目標與技術可行性達到平衡。</div>
+            </div>
 
-      <!-- 技能 -->
-      <div class="panel">
-        <h2>專業技能</h2>
-        <div class="values-grid">
-          <div class="value-card">
-            <div class="value-card-icon"><img src="assets/images/productdesign.svg" alt="產品設計"></div>
-            <h3 class="value-card-title">產品設計</h3>
-            <div class="value-card-desc">從概念發想到高保真設計，擅長用 Figma 與 AI 工具快速驗證想法、建立設計系統，具備 HTML/CSS 基礎，能與工程師無縫協作並精準傳達設計意圖。</div>
+          <!-- Photo masonry -->
+          <button class="photo-toggle-btn" id="photoToggleBtn" onclick="togglePhotos()">查看照片 ▾</button>
+          <div class="about-photo-grid" id="aboutPhotoGrid">
+            <div class="about-photo-grid-item"><img src="assets/images/life7.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life2.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life3.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life5.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life4.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life6.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life1.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life8.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/education4_web.jpg" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/education6.png" alt=""></div>
           </div>
-          <div class="value-card">
-            <div class="value-card-icon"><img src="assets/images/research.svg" alt="使用者研究"></div>
-            <h3 class="value-card-title">使用者研究</h3>
-            <div class="value-card-desc">透過質化訪談與量化數據理解使用者真實需求，將洞察轉化為可落地的設計決策，讓每個設計選擇都有扎實依據，而非僅憑直覺。</div>
-          </div>
-          <div class="value-card">
-            <div class="value-card-icon"><img src="assets/images/chat.svg" alt="策略與溝通"></div>
-            <h3 class="value-card-title">策略與溝通</h3>
-            <div class="value-card-desc">擅長在 PM、工程師、業務等多方利害關係人之間建立共識，將商業目標轉化為設計語言，讓設計不只美觀，更能驅動業務成長。</div>
           </div>
         </div>
-      </div>
 
-      <!-- 價值觀 -->
-      <div class="panel">
-        <h2>設計價值觀</h2>
-        <div class="values-grid">
-          <div class="value-card">
-            <div class="value-card-icon"><img src="assets/images/happy.svg" alt="樂在其中"></div>
-            <h3 class="value-card-title">樂在其中</h3>
-            <div class="value-card-desc">設計不只是交付成果，而是一個充滿樂趣和挑戰的過程。當你真心投入每一個決策、每一次溝通、每一個解決問題的瞬間，好的設計自然會發生。</div>
-          </div>
-          <div class="value-card">
-            <div class="value-card-icon"><img src="assets/images/rose.svg" alt="生涯適應力"></div>
-            <h3 class="value-card-title">生涯適應力</h3>
-            <div class="value-card-desc">產業瞬息萬變，保持彈性是應對變化最好的方式。持續探索新領域、對新事物保持好奇心，不斷嘗試與學習，才能在變化中找到自己的方向。</div>
-          </div>
-          <div class="value-card">
-            <div class="value-card-icon"><img src="assets/images/diamond.svg" alt="設計創造價值"></div>
-            <h3 class="value-card-title">設計創造價值</h3>
-            <div class="value-card-desc">設計師的工作不只是讓產品變好看，而是透過理解使用者需求與商業目標，將每一個設計決策轉化為對使用者和企業都有意義的成果。</div>
-          </div>
-        </div>
-      </div>
+        <!-- Right column -->
+        <div class="about-right">
 
-      <!-- 照片跑馬燈 -->
-      <div class="panel panel-overflow-hidden">
-        <h2>生活現場</h2>
-        <div class="life-marquee-wrapper">
-          <div class="life-marquee-track">
-            <div class="life-marquee-item"><img src="assets/images/life7.png" alt="生活照 7"></div>
-            <div class="life-marquee-item"><img src="assets/images/life2.png" alt="生活照 2"></div>
-            <div class="life-marquee-item"><img src="assets/images/life3.png" alt="生活照 3"></div>
-            <div class="life-marquee-item"><img src="assets/images/life5.png" alt="生活照 5"></div>
-            <div class="life-marquee-item"><img src="assets/images/life4.png" alt="生活照 4"></div>
-            <div class="life-marquee-item"><img src="assets/images/life6.png" alt="生活照 6"></div>
-            <div class="life-marquee-item"><img src="assets/images/life1.png" alt="生活照 1"></div>
-            <div class="life-marquee-item"><img src="assets/images/life8.png" alt="生活照 8"></div>
-            <!-- 複製一組讓跑馬燈無縫循環 -->
-            <div class="life-marquee-item"><img src="assets/images/life7.png" alt="生活照 7"></div>
-            <div class="life-marquee-item"><img src="assets/images/life2.png" alt="生活照 2"></div>
-            <div class="life-marquee-item"><img src="assets/images/life3.png" alt="生活照 3"></div>
-            <div class="life-marquee-item"><img src="assets/images/life5.png" alt="生活照 5"></div>
-            <div class="life-marquee-item"><img src="assets/images/life4.png" alt="生活照 4"></div>
-            <div class="life-marquee-item"><img src="assets/images/life6.png" alt="生活照 6"></div>
-            <div class="life-marquee-item"><img src="assets/images/life1.png" alt="生活照 1"></div>
-            <div class="life-marquee-item"><img src="assets/images/life8.png" alt="生活照 8"></div>
+          <div class="about-block">
+            <h2>關於我</h2>
+            <p>目前在運動科技業擔任資深產品設計師，專注於幫助運動場館業者運用科技提升營運效率，以推動運動科技產業數位化為目標，主導 B2B SaaS 與 B2B2C 多產品線的設計策略。我擅長化繁為簡，梳理複雜的系統操作流程，讓場館能輕鬆上手。</p>
+            <p>過去曾在內容媒體業深耕 2C 產品設計 8 年，橫跨新聞媒體、知識音頻、電商、活動票券等多元產品線，透過數據與使用者訪談深入了解使用者需求，主導多項核心功能體驗優化，驅動業務成長，累計交付 10+ 個產品專案。</p>
+            <p>我也熱衷於設計教育，在社群中擔任設計助教與職涯教練，陪伴新手設計師找到方向，幫助他們少走一點彎路。我相信好的設計師不只能解決問題，更能幫助身邊的人看見更好的可能性。</p>
           </div>
-        </div>
-      </div>
 
-      <div class="panel cta-panel">
-        <div class="cta-left">
-          <div class="cta-label">歡迎與我聯絡</div>
-          <p class="cta-email-text">yuhsuanwang531@gmail.com</p>
-        </div>
-        <div class="cta-social">
-          <a href="https://www.linkedin.com/in/yuhsuanwang" target="_blank" class="cta-social-link">LinkedIn</a>
-          <a href="https://medium.com/@yuhsuanwang531" target="_blank" class="cta-social-link">Medium</a>
+          <div class="about-block">
+            <h2>專業技能</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="skill-label">產品設計</div>
+                <div class="skill-desc">從概念發想到高保真設計，擅長用 Figma 與 AI 工具快速驗證想法、建立設計系統，具備 HTML/CSS 基礎，能與工程師無縫協作並精準傳達設計理念。</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">使用者研究</div>
+                <div class="skill-desc">透過質化訪談與量化數據理解使用者真實需求，將洞察轉化為可落地的設計決策，讓每個設計選擇都有扎實依據，而非僅憑直覺。</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">策略與溝通</div>
+                <div class="skill-desc">擅長在 PM、工程師、業務等多方利害關係人之間建立共識，將商業目標轉化為設計語言，讓設計不只美觀，更能驅動業務成長。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h2>設計價值觀</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="skill-label">樂在其中</div>
+                <div class="skill-desc">設計不只是交付成果，而是一個充滿樂趣和挑戰的過程。當你真心投入每一個決策、每一次溝通、每一個解決問題的瞬間，好的設計自然會發生。</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">生涯適應力</div>
+                <div class="skill-desc">產業瞬息萬變，保持彈性是應對變化最好的方式。持續探索新領域、對新事物保持好奇心，不斷嘗試與學習，才能在變化中找到自己的方向。</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">設計創造價值</div>
+                <div class="skill-desc">設計師的工作不只是讓產品變好看，而是透過理解使用者需求與商業目標，將每一個設計決策轉化為對使用者和企業都有意義的成果。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h2>工作經歷</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="exp-logo-row">
+                  <img src="assets/images/fitbutlerlogo.png" alt="雲端力鍊" class="exp-logo">
+                  <div class="exp-meta">
+                    <div class="skill-label" style="margin-bottom:0;">資深產品設計師</div>
+                    <div class="exp-year">雲端力鍊股份有限公司 · 2023.05 – 目前</div>
+                  </div>
+                </div>
+                <div class="skill-desc">以推動運動科技產業數位化為目標，獨立負責 B2B SaaS 與 B2B2C 多產品線的設計策略。</div>
+                <button class="exp-toggle" onclick="toggleExp(this)">+</button>
+                <ul class="about-bullets">
+                  <li>主導 B2B SaaS 核心產品《Fitbutler》營運管理系統設計策略，建立模組化設計架構支援運動產業與空間租賃業等 2 個產業應用，成為公司跨國營運的核心產品線</li>
+                  <li>主導 B2B2C 會員端 App 多項核心功能設計，包含登入註冊、預約規則、線上儲值、補繳及綁卡驗證等，客訴率降低 23%</li>
+                  <li>主導官網改版，重整資訊架構並建立品牌視覺一致性，使用者平均參與時間提升 24.6%、回訪率提高 25.2%</li>
+                  <li>導入 AI 設計流程，運用 Claude Code、Figma AI 等生成可互動 Prototype，設計交付時間縮短 40%</li>
+                </ul>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="exp-logo-row">
+                  <img src="assets/images/common.png" alt="天下雜誌" class="exp-logo">
+                  <div class="exp-meta">
+                    <div class="skill-label" style="margin-bottom:0;">資深 UI/UX 設計師</div>
+                    <div class="exp-year">天下雜誌股份有限公司 · 2019.02 – 2023.04</div>
+                  </div>
+                </div>
+                <div class="skill-desc">以提升用戶的訂閱數、活躍度、留存率及轉換率等關鍵指標為目標，改善天下數位產品的閱讀、廣告、訂閱等核心功能體驗，並建立天下設計系統。</div>
+                <button class="exp-toggle" onclick="toggleExp(this)">+</button>
+                <ul class="about-bullets">
+                  <li>優化訂閱流程，縮短使用者決策路徑，轉換率提高 8%</li>
+                  <li>改善閱讀及廣告體驗，降低 3% 跳出率，提高廣告 900% 點擊率，協助創下「數位營收大於紙本營收」里程碑</li>
+                  <li>透過訪談 10 位使用者找到關鍵痛點，提高訂戶分享率與改善聽新聞體驗，首次讓 App 內的 TTS 用戶超過 Podcast 用戶</li>
+                </ul>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="exp-logo-row">
+                  <img src="assets/images/udn.png" alt="聯合報系" class="exp-logo">
+                  <div class="exp-meta">
+                    <div class="skill-label" style="margin-bottom:0;">UI/UX 設計師</div>
+                    <div class="exp-year">聯合報系股份有限公司 · 2014.08 – 2018.10</div>
+                  </div>
+                </div>
+                <div class="skill-desc">與跨部門單位合作，參與新聞媒體、知識音頻、內容創作、電商、活動票券等多類型產品，改善使用者體驗與介面設計，累計交付 10+ 個產品專案。</div>
+                <button class="exp-toggle" onclick="toggleExp(this)">+</button>
+                <ul class="about-bullets">
+                  <li>從 0 到 1 設計《一刻鯨選》知識音頻 App，為營運部門首次帶來營收</li>
+                  <li>從 0 到 1 設計《讀創故事》內容閱讀 App，成為營運部門核心產品</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h2>聯絡我</h2>
+            <div class="about-cta-list">
+              <div class="about-cta-email-wrap">
+                <button onclick="copyAboutEmail()" class="about-cta-btn about-cta-email">yuhsuanwang531@gmail.com</button>
+                <div class="about-email-toast" id="aboutEmailToast">複製成功</div>
+              </div>
+              <a href="https://www.linkedin.com/in/yuhsuanwang" target="_blank" class="about-cta-btn about-cta-linkedin">LinkedIn</a>
+              <a href="https://medium.com/@yuhsuanwang531" target="_blank" class="about-cta-btn about-cta-medium">Medium</a>
+              <a href="assets/resume.pdf" target="_blank" class="about-cta-btn about-cta-resume">下載履歷</a>
+            </div>
+          </div>
+
         </div>
       </div>
+      <div style="text-align:center; padding: 8px 0 100px; font-size:12px; color:#aaa;">Copyright © 2026 YuHsuan Wang</div>
     </main>
   </div>
-
   <script>
-    window.addEventListener('load', function() {
-      var track = document.querySelector('.life-marquee-track');
-      if (track) track.style.animationPlayState = 'running';
+    function toggleExp(btn) {
+      const bullets = btn.nextElementSibling;
+      const collapsing = btn.textContent.trim() === '−';
+      if (collapsing) {
+        btn.textContent = '+';
+        bullets.style.height = bullets.offsetHeight + 'px';
+        requestAnimationFrame(() => {
+          bullets.style.height = '0';
+        });
+      } else {
+        btn.textContent = '−';
+        bullets.style.height = bullets.scrollHeight + 'px';
+        bullets.addEventListener('transitionend', () => {
+          bullets.style.height = 'auto';
+        }, { once: true });
+      }
+    }
+    document.querySelectorAll('.skill-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') return;
+        if (e.target.classList.contains('exp-toggle')) return;
+        const btn = this.querySelector('.exp-toggle');
+        if (btn) toggleExp(btn);
+      });
     });
+
+    // 雲端力鍊預設展開
+    const firstToggle = document.querySelector('.exp-toggle');
+    if (firstToggle) {
+      const bullets = firstToggle.nextElementSibling;
+      firstToggle.textContent = '−';
+      bullets.style.height = 'auto';
+    }
   </script>
   <script src="assets/js/sidebar.js"></script>
+  <script>
+    function copyAboutEmail() {
+      navigator.clipboard.writeText('yuhsuanwang531@gmail.com').then(() => {
+        const toast = document.getElementById('aboutEmailToast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+  </script>
+  <script>
+    function togglePhotos() {
+      const grid = document.getElementById('aboutPhotoGrid');
+      const btn = document.getElementById('photoToggleBtn');
+      const expanded = grid.classList.toggle('expanded');
+      btn.textContent = expanded ? '收起照片 ▴' : '查看照片 ▾';
+    }
+  </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
       background: var(--bg);
       border-radius: var(--radius-sm);
     }
-    .stat-block .num { font-size: 36px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 0; }
+    .stat-block .num { font-size: 32px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 0; }
     .stat-block .stat-num { color: var(--text-primary); }
     #current-stats-grid .stat-num { color: var(--color-danger); }
     .stat-block .label { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
@@ -55,8 +55,10 @@
     .prose .section-label { margin-top: 48px; }
     .prose .section-label:first-child { margin-top: 0; }
     .prose p + .highlight-box { margin-top: -4px; }
-    .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .challenge-card { border-left: none; border: 1px solid var(--border); }
+    .challenge-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
+    #sec-challenges { background: var(--bg); border-radius: 12px; padding: 48px !important; }
+    #sec-design { border-top: none; }
+    .challenge-card { border-left: none; border: 1px solid var(--border); background: #fff; }
     .challenge-card h3 { margin-bottom: 12px; }
     .challenge-card p { font-size: var(--fs-body); color: var(--text-secondary); line-height: 1.6; margin: 0; }
     .comma-mobile { display: none; }
@@ -77,7 +79,7 @@
     @media (max-width: 900px) { .quote-card-row { grid-template-columns: 1fr; } }
     #results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
     .result-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .result-card-label { font-size: 20px; font-weight: 600; }
+    .result-card-label { font-size: 18px; font-weight: 600; }
     .learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 
     .panel .back-nav { margin-bottom: 32px; }
@@ -93,6 +95,155 @@
     .ba-label { position: absolute; top: 12px; background: rgba(0,0,0,0.55); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; pointer-events: none; }
     .ba-label--before { left: 12px; }
     .ba-label--after { right: 12px; }
+
+    /* ── White full-page + TOC layout ── */
+    body { background: #fff; }
+    .layout { padding: 0; gap: 0; }
+    .main { gap: 0; }
+
+    .proj-layout {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px 120px 0;
+      display: grid;
+      grid-template-columns: 188px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .proj-toc {
+      position: sticky;
+      top: 48px;
+      padding-top: 48px;
+    }
+    .proj-toc-heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #bbb;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .proj-toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .proj-toc-list a {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      text-decoration: none;
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.4;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .proj-toc-list .toc-num {
+      font-size: 12px;
+      font-weight: 600;
+      min-width: 18px;
+      flex-shrink: 0;
+      color: inherit;
+    }
+    .proj-toc-list li.toc-active a { color: #111; font-weight: 700; }
+    .proj-toc-list a:hover { color: #555; }
+
+    .proj-content .panel {
+      background: transparent;
+      border-radius: 0;
+      padding: 48px 0;
+      padding-left: 0;
+      padding-right: 0;
+      border-top: 1px solid var(--border);
+    }
+    .proj-content .panel:first-child {
+      padding-top: 40px;
+      border-top: none;
+    }
+
+    /* Typography: match homepage / about page logic */
+    .proj-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .page-title { font-size: 32px; }
+    .proj-meta-label {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .proj-meta-val {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+    @media (max-width: 600px) {
+      .proj-meta { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .prose p { line-height: 1.75; }
+    .prose h2 { font-size: 26px; margin-top: 0; margin-bottom: 14px; }
+    .prose h3 { font-size: 18px; margin-top: 28px; margin-bottom: 8px; }
+    .prose .section-label { margin-top: 36px; font-weight: 400; }
+    .prose .section-label:first-child { margin-top: 0; }
+    .prose .section-label + h2 { margin-top: 8px; }
+
+    .proj-nav {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+      margin-top: 0;
+    }
+    .proj-nav-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 28px 0;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-nav-item:hover { color: var(--text); }
+    .proj-nav-item--next { text-align: left; }
+    .proj-nav-label {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .proj-nav-title {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #000;
+    }
+    .proj-nav-item:hover .proj-nav-title { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .proj-layout { grid-template-columns: minmax(0, 1fr); padding: 0 20px 96px; gap: 0; }
+      .proj-toc { display: none; }
+      .proj-content { min-width: 0; }
+      .proj-content .panel { padding: 36px 0; }
+      .proj-content .panel:first-child { padding-top: 28px; }
+      .proj-nav { grid-template-columns: 1fr; }
+      .proj-nav-item--next { text-align: left; }
+      .page-title { font-size: clamp(20px, 5.5vw, 32px); }
+      /* Override base styles that come later in the cascade */
+      #results-grid { grid-template-columns: 1fr; }
+      .current-stats-grid { grid-template-columns: 1fr; }
+      .learn-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -108,9 +259,26 @@
   <div class="layout">
 
     <main class="main">
-      <!-- Header + Cover -->
-      <div class="panel">
-        <a href="projects.html" class="back-nav">← 回到設計專案</a>
+      <div class="proj-layout">
+        <nav class="proj-toc">
+          <ul class="proj-toc-list">
+            <li data-sec="sec-overview"><a href="#sec-overview"><span class="toc-num">01 /</span> 專案概述</a></li>
+            <li data-sec="sec-background"><a href="#sec-background"><span class="toc-num">02 /</span> 產業背景</a></li>
+            <li data-sec="sec-problem"><a href="#sec-problem"><span class="toc-num">03 /</span> 現況與問題</a></li>
+            <li data-sec="sec-research"><a href="#sec-research"><span class="toc-num">04 /</span> 研究與發現</a></li>
+            <li data-sec="sec-hypothesis"><a href="#sec-hypothesis"><span class="toc-num">05 /</span> 假設與成功指標</a></li>
+            <li data-sec="sec-challenges"><a href="#sec-challenges"><span class="toc-num">06 /</span> 困難與挑戰</a></li>
+            <li data-sec="sec-design"><a href="#sec-design"><span class="toc-num">07 /</span> 設計決策</a></li>
+            <li data-sec="sec-output"><a href="#sec-output"><span class="toc-num">08 /</span> 設計產出</a></li>
+            <li data-sec="sec-results"><a href="#sec-results"><span class="toc-num">09 /</span> 專案成果</a></li>
+            <li data-sec="sec-iteration"><a href="#sec-iteration"><span class="toc-num">10 /</span> 設計方案迭代</a></li>
+            <li data-sec="sec-learnings"><a href="#sec-learnings"><span class="toc-num">11 /</span> 學習與反思</a></li>
+          </ul>
+        </nav>
+        <div class="proj-content">
+        <!-- Header + Cover -->
+        <div class="panel" id="sec-overview">
+        <a href="index.html" class="back-nav">← 回首頁</a>
         <h1 class="page-title">透過改善數位閱讀及廣告體驗，協助《天下雜誌》達成「數位營收大於紙本營收」里程碑</h1>
         <p class="project-intro">作為產品團隊中的 UI/UX 設計師，我於 2020 年負責《天下雜誌》官網數位內容閱讀體驗的改版，透過改善閱讀及廣告體驗，使跳出率降低 3%、文字廣告點擊率提升 900%、廣編稿每週新增 4 萬篇流量，成功協助公司達成「數位營收大於紙本營收」的里程碑。</p>
         <div class="full-img-mt">
@@ -145,36 +313,24 @@
         })();
         </script>
         </div>
-        <div class="meta-card-grid">
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">專案時程</div>
-              <div class="meta-card-value">2019.12 - 2020.06</div>
-            </div>
+        <div class="proj-meta">
+          <div class="proj-meta-col">
+            <div class="proj-meta-label">專案時程</div>
+            <div class="proj-meta-val">2019.12 – 2020.06</div>
           </div>
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">角色</div>
-              <div class="meta-card-value">資深 UI/UX 設計師</div>
-            </div>
+          <div class="proj-meta-col">
+            <div class="proj-meta-label">團隊組成</div>
+            <div class="proj-meta-val">產品經理 *1<br>UI/UX 設計師 *1<br>軟體工程師 *3（前端、後端）</div>
           </div>
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">負責項目</div>
-              <div class="meta-card-value">UX 研究、設計系統、UI 設計、設計交付</div>
-            </div>
-          </div>
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">團隊組成</div>
-              <div class="meta-card-value">PM、UI/UX、前端、後端</div>
-            </div>
+          <div class="proj-meta-col">
+            <div class="proj-meta-label">我的角色</div>
+            <div class="proj-meta-val">UI/UX 設計師，負責：UX 研究、設計系統、UI 設計、設計交付</div>
           </div>
         </div>
       </div>
 
       <!-- 產業背景 -->
-      <div class="panel">
+      <div class="panel" id="sec-background">
         <div class="prose">
           <p class="section-label">產業背景</p>
           <h2>全球媒體產業正經歷前所未有的數位轉型浪潮</h2>
@@ -184,7 +340,7 @@
       </div>
 
       <!-- 現況與問題 -->
-      <div class="panel">
+      <div class="panel" id="sec-problem">
         <div class="prose">
           <p class="section-label">現況與問題</p>
           <h2>文章頁作為網站中流量最高的一頁，關鍵數據成效卻不顯著</h2>
@@ -239,7 +395,7 @@
       </div>
 
       <!-- 研究與發現 -->
-      <div class="panel">
+      <div class="panel" id="sec-research">
         <div class="prose">
           <p class="section-label">研究與發現</p>
           <h2>需調整商業策略與優化產品體驗，提升數位媒體競爭力</h2>
@@ -289,7 +445,7 @@
       </div>
 
       <!-- 假設與成功指標 -->
-      <div class="panel">
+      <div class="panel" id="sec-hypothesis">
         <div class="prose">
           <p class="section-label">假設</p>
           <p>基於競品研究、使用者訪談與商業目標的交叉分析，我們針對文章頁的核心問題提出以下設計假設，並以此定義成功指標：</p>
@@ -327,7 +483,7 @@
       </div>
 
       <!-- 困難與挑戰 -->
-      <div class="panel">
+      <div class="panel" id="sec-challenges">
         <div class="prose">
           <p class="section-label">困難與挑戰</p>
           <h2>如何在眾多利害關係人間解決利益衝突與溝通成本問題？</h2>
@@ -336,24 +492,24 @@
         <div class="challenge-grid">
           <div class="challenge-card">
             <div class="tag" style="margin-bottom:12px">方法一</div>
-            <h3>事前 1:1 對齊期待<span class="comma-mobile">，</span><br class="br-desktop">提前建立盟友</h3>
+            <h3>事前 1:1 對齊期待，提前建立盟友</h3>
             <p>在設計提案的公開會議以前，我先透過 1:1 的方式跟關鍵角色溝通，了解各部門在意的底線、風險和期待後，先將這些「雷點」排除，確保正式提案前已有初步共識，在公開會議時可以有效減少反對的聲音，降低溝通損耗。</p>
           </div>
           <div class="challenge-card">
             <div class="tag" style="margin-bottom:12px">方法二</div>
-            <h3>以數據與實際案例<span class="comma-mobile">，</span><br class="br-desktop">支撐設計決策</h3>
+            <h3>以數據與實際案例，支撐設計決策</h3>
             <p>不用主觀的判斷，而是客觀的用使用者的訪談原話、競品範例或是數據，讓提案更有說服力，證明優化的方向是有理可循的，而不只是設計師憑感覺的設計。</p>
           </div>
           <div class="challenge-card">
             <div class="tag" style="margin-bottom:12px">方法三</div>
-            <h3>針對不同角色<span class="comma-mobile">，</span><br class="br-desktop">講他們在意的內容</h3>
+            <h3>針對不同角色，講他們在意的內容</h3>
             <p>面對老闆時，著重說明該設計如何呼應公司的願景與設計風格，以及具體的時程規劃；面對業務單位時，強調廣告版位與付費功能的優化，如何提升點擊率與可視度；面對營運單位時，著重介紹新功能如何協助他們提升工作效率。</p>
           </div>
         </div>
       </div>
 
       <!-- 設計決策 -->
-      <div class="panel">
+      <div class="panel" id="sec-design">
         <div class="prose">
           <p class="section-label">設計決策</p>
           <h2>擺脫紙本設計思維，數位設計轉型</h2>
@@ -377,7 +533,7 @@
       </div>
 
       <!-- 設計產出 -->
-      <div class="panel">
+      <div class="panel" id="sec-output">
         <div class="prose">
           <p class="section-label">設計產出</p>
           <h2>以 UX 為核心的設計方案，讓每個決策有所依據</h2>
@@ -412,7 +568,7 @@
       </div>
 
       <!-- 專案成果 -->
-      <div class="panel">
+      <div class="panel" id="sec-results">
         <div class="prose">
           <p class="section-label">專案成果</p>
           <h2>廣告成效顯著，但閱讀篇數增長不如預期</h2>
@@ -486,7 +642,7 @@
       </div>
 
       <!-- 設計方案迭代 -->
-      <div class="panel">
+      <div class="panel" id="sec-iteration">
         <div class="prose">
           <p class="section-label">設計方案迭代</p>
           <h2>針對閱讀篇數進行 A/B Testing，持續觀察數據變化</h2>
@@ -503,7 +659,7 @@
       </div>
 
       <!-- 學習與反思 -->
-      <div class="panel">
+      <div class="panel" id="sec-learnings">
         <div class="prose">
           <p class="section-label">學習與反思</p>
           <h2>設計師需作為商業需求與使用者需求間的橋樑</h2>
@@ -516,18 +672,37 @@
         </div>
       </div>
 
-      <div class="panel cta-panel">
-        <div class="cta-left">
-          <div class="cta-label">歡迎與我聯絡</div>
-          <p class="cta-email-text">yuhsuanwang531@gmail.com</p>
-        </div>
-        <div class="cta-social">
-          <a href="https://www.linkedin.com/in/yuhsuanwang" target="_blank" class="cta-social-link">LinkedIn</a>
-          <a href="https://medium.com/@yuhsuanwang531" target="_blank" class="cta-social-link">Medium</a>
-        </div>
+      <div class="proj-nav">
+        <a href="project-detail-fitbutler.html" class="proj-nav-item proj-nav-item--prev">
+          <span class="proj-nav-label">← 上一篇</span>
+          <span class="proj-nav-title">用模組化思維重新定義 B2B 營運管理系統：《Fitbutler》從 0 到 1 的設計策略</span>
+        </a>
+        <a href="project-detail-cwapp.html" class="proj-nav-item proj-nav-item--next">
+          <span class="proj-nav-label">下一篇 →</span>
+          <span class="proj-nav-title">從使用者訪談到產品優化：UX 研究如何助攻《天下雜誌 App》訂戶增長</span>
+        </a>
       </div>
+        </div><!-- /.proj-content -->
+      </div><!-- /.proj-layout -->
     </main>
   </div>
   <script src="assets/js/sidebar.js"></script>
+  <script>
+  (function(){
+    var items = document.querySelectorAll('.proj-toc-list li[data-sec]');
+    var sections = document.querySelectorAll('.proj-content .panel[id]');
+    if (!sections.length) return;
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          items.forEach(function(li){ li.classList.remove('toc-active'); });
+          var active = document.querySelector('.proj-toc-list li[data-sec="' + entry.target.id + '"]');
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+    sections.forEach(function(s){ observer.observe(s); });
+  })();
+  </script>
 </body>
 </html>

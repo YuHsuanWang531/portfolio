@@ -7,7 +7,7 @@
   const NAV_ITEMS = [
     { href: 'index.html',           icon: SVG('home.svg'),    label: '首頁',        match: ['index.html', ''] },
     { href: 'work-experience.html', icon: SVG('work.svg'),    label: '工作經歷',    match: ['work-experience.html'] },
-    { href: 'projects.html',        icon: SVG('design.svg'),  label: '設計專案',    match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'] },
+    { href: 'index.html#projects',  icon: SVG('design.svg'),  label: '設計專案',    match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'] },
     { href: 'education.html',       icon: SVG('book.svg'),    label: '設計教育經歷', match: ['education.html'] },
     { href: 'podcast.html',         icon: SVG('podcast.svg'), label: 'Podcast',     match: ['podcast.html'] },
     { href: 'about.html',           icon: SVG('about.svg'),   label: '關於我',      match: ['about.html'] },
@@ -35,15 +35,33 @@
       </ul>
     </aside>`;
 
-  const toggleBtn = document.createElement('button');
-  toggleBtn.className = 'mobile-nav-toggle';
-  toggleBtn.id = 'mobileToggle';
-  toggleBtn.textContent = '☰';
-  toggleBtn.onclick = toggleSidebar;
-  document.body.prepend(toggleBtn);
-
   const layout = document.querySelector('.layout');
-  layout.insertAdjacentHTML('afterbegin', sidebarHTML);
+  // sidebar and toggle removed — navigation handled by bottom pill dock only
+
+  // Bottom nav (mobile only)
+  const BOTTOM_NAV_ITEMS = [
+    { href: 'index.html', label: '首頁', match: ['index.html', ''], icon: `<img src="assets/images/home.svg" class="nav-icon-img">` },
+    { href: 'index.html#projects', label: '設計專案', match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'], icon: `<img src="assets/images/design.svg" class="nav-icon-img">` },
+    { href: 'about.html', label: '關於我', match: ['about.html'], icon: `<img src="assets/images/about.svg" class="nav-icon-img">` },
+    { href: 'assets/resume.pdf', label: '履歷', match: [], icon: `<img src="assets/images/work.svg" class="nav-icon-img">` },
+  ];
+
+  const bottomNavHTML = `<nav class="bottom-nav" id="bottomNav">
+    <div class="bottom-nav-inner">
+      ${BOTTOM_NAV_ITEMS.map((item, i) => {
+        const isActive = item.match.includes(currentPage);
+        const isExternal = item.href.endsWith('.pdf');
+        const divider = i === 3 ? '<div class="bottom-nav-divider"></div>' : '';
+        return `${divider}<a href="${item.href}"${isExternal ? ' target="_blank"' : ''} class="bottom-nav-item${isActive ? ' active' : ''}">
+          <span class="bottom-nav-icon">${item.icon}</span>
+          <span class="bottom-nav-label">${item.label}</span>
+        </a>`;
+      }).join('')}
+    </div>
+    <div class="bottom-nav-handle"></div>
+  </nav>`;
+
+  document.body.insertAdjacentHTML('beforeend', bottomNavHTML);
 
   document.addEventListener('click', function (e) {
     const sidebar = document.getElementById('sidebar');

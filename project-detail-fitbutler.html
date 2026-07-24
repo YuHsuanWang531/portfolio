@@ -9,12 +9,98 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
 
-    .panel .back-nav { margin-bottom: 32px; }
-    .panel .project-intro { color: var(--text-primary); margin-top: 32px; margin-bottom: 32px; }
-    .section-label { margin-bottom: 8px; }
-    .prose .section-label + h2 { margin-top: 8px; }
-    .prose .section-label { margin-top: 48px; }
+    /* ── White full-page + TOC layout ── */
+    body { background: #fff; }
+    .layout { padding: 0; gap: 0; }
+    .main { gap: 0; }
+
+    .proj-layout {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px 120px 0;
+      display: grid;
+      grid-template-columns: 188px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .proj-toc {
+      position: sticky;
+      top: 48px;
+      padding-top: 48px;
+    }
+    .proj-toc-list {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .proj-toc-list a {
+      display: flex; gap: 10px; align-items: baseline;
+      text-decoration: none; color: #ccc; font-size: 14px;
+      line-height: 1.4; transition: color 0.2s; font-weight: 500;
+    }
+    .proj-toc-list .toc-num {
+      font-size: 12px; font-weight: 600; min-width: 18px; flex-shrink: 0; color: inherit;
+    }
+    .proj-toc-list li.toc-active a { color: #111; font-weight: 700; }
+    .proj-toc-list a:hover { color: #555; }
+
+    .proj-content .panel {
+      background: transparent; border-radius: 0;
+      padding: 48px 0;
+      padding-left: 0; padding-right: 0;
+      border-top: 1px solid var(--border);
+    }
+    .proj-content .panel:first-child { padding-top: 40px; border-top: none; }
+
+    .proj-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .page-title { font-size: 32px; }
+    .proj-meta-label { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .proj-meta-val { font-size: 15px; line-height: 1.75; color: var(--text-secondary); }
+    @media (max-width: 600px) {
+      .proj-meta { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .prose p { line-height: 1.75; }
+    .prose h2 { font-size: 26px; margin-top: 0; margin-bottom: 14px; }
+    .prose h3 { font-size: 18px; margin-top: 28px; margin-bottom: 8px; }
+    .prose .section-label { margin-top: 36px; font-weight: 400; }
     .prose .section-label:first-child { margin-top: 0; }
+    .prose .section-label + h2 { margin-top: 8px; }
+
+    .proj-nav {
+      display: flex; flex-direction: column;
+      border-top: 1px solid var(--border); margin-top: 0;
+    }
+    .proj-nav-item {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 28px 0; text-decoration: none;
+      color: var(--text-secondary); transition: color 0.2s;
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-nav-item:hover { color: var(--text); }
+    .proj-nav-label {
+      font-size: 14px; font-weight: 400; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-secondary);
+    }
+    .proj-nav-title { font-size: 16px; font-weight: 400; line-height: 1.5; color: #000; }
+    .proj-nav-item:hover .proj-nav-title { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .proj-layout { grid-template-columns: minmax(0, 1fr); padding: 0 20px 96px; gap: 0; }
+      .proj-toc { display: none; }
+      .proj-content { min-width: 0; }
+      .proj-content .panel { padding: 36px 0; }
+      .proj-content .panel:first-child { padding-top: 28px; }
+      .proj-nav-item--next { text-align: left; }
+      .page-title { font-size: clamp(20px, 5.5vw, 32px); }
+    }
 
     /* Module Architecture Diagram */
     .ma-wrap { margin-top: 24px; overflow-x: auto; background: #f5f5f7; border-radius: 12px; padding: 20px; }
@@ -59,9 +145,6 @@
     @media(max-width:900px){
       .problem-grid { grid-template-columns: 1fr !important; }
     }
-    @media(max-width:600px){
-      .meta-card-grid { grid-template-columns: 1fr !important; }
-    }
   </style>
 </head>
 <body>
@@ -77,545 +160,143 @@
   <div class="layout">
 
     <main class="main">
+      <div class="proj-layout">
+        <nav class="proj-toc">
+          <ul class="proj-toc-list">
+            <li data-sec="sec-overview"><a href="#sec-overview"><span class="toc-num">01 /</span> 專案概述</a></li>
+            <li data-sec="sec-background"><a href="#sec-background"><span class="toc-num">02 /</span> 產業背景</a></li>
+            <li data-sec="sec-problem"><a href="#sec-problem"><span class="toc-num">03 /</span> 現況與問題</a></li>
+            <li data-sec="sec-research"><a href="#sec-research"><span class="toc-num">04 /</span> 研究與發現</a></li>
+            <li data-sec="sec-challenges"><a href="#sec-challenges"><span class="toc-num">05 /</span> 困難與挑戰</a></li>
+            <li data-sec="sec-design"><a href="#sec-design"><span class="toc-num">06 /</span> 設計決策</a></li>
+            <li data-sec="sec-output"><a href="#sec-output"><span class="toc-num">07 /</span> 設計產出</a></li>
+            <li data-sec="sec-results"><a href="#sec-results"><span class="toc-num">08 /</span> 專案成果</a></li>
+            <li data-sec="sec-learnings"><a href="#sec-learnings"><span class="toc-num">09 /</span> 學習與反思</a></li>
+          </ul>
+        </nav>
+        <div class="proj-content">
 
-      <!-- Header + Cover -->
-      <div class="panel">
-        <a href="projects.html" class="back-nav">← 回到設計專案</a>
-        <h1 class="page-title">用模組化思維重新定義 B2B 營運管理系統：《Fitbutler》從 0 到 1 的設計策略</h1>
-        <p class="project-intro">從零建立模組化設計架構，支援運動產業與空間租賃業的差異化需求，並具備跨國營運能力，2026 年正式上線。</p>
-        <img src="assets/images/fitbutler.png" alt="Fitbutler" class="full-img full-img-mt" />
-        <div class="meta-card-grid">
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">專案時程</div>
-              <div class="meta-card-value">2023.10 - 目前（持續迭代）</div>
+          <!-- Header + Cover -->
+          <div class="panel" id="sec-overview">
+            <a href="index.html" class="back-nav">← 回首頁</a>
+            <h1 class="page-title">用模組化思維重新定義 B2B 營運管理系統：《Fitbutler》從 0 到 1 的設計策略</h1>
+            <p class="project-intro">從零建立模組化設計架構，支援運動產業與空間租賃業的差異化需求，並具備跨國營運能力，2026 年正式上線。</p>
+            <img src="assets/images/fitbutler.png" alt="Fitbutler" class="full-img full-img-mt" />
+            <div class="proj-meta">
+              <div class="proj-meta-col">
+                <div class="proj-meta-label">專案時程</div>
+                <div class="proj-meta-val">2023.10 – 目前（持續迭代）</div>
+              </div>
+              <div class="proj-meta-col">
+                <div class="proj-meta-label">團隊組成</div>
+                <div class="proj-meta-val">產品經理 *2<br>產品設計師 *1<br>軟體工程師 *6（前端、後端）<br>測試工程師 *1</div>
+              </div>
+              <div class="proj-meta-col">
+                <div class="proj-meta-label">我的角色</div>
+                <div class="proj-meta-val">產品設計師，負責產品設計策略、流程與介面設計、設計系統、AI Prototype、多語系翻譯管理</div>
+              </div>
             </div>
           </div>
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">角色</div>
-              <div class="meta-card-value">資深產品設計師</div>
+
+          <!-- 產業背景 -->
+          <div class="panel" id="sec-background">
+            <div class="prose">
+              <p class="section-label">產業背景</p>
+              <h2>科技正在重塑運動健身產業的營運方式</h2>
+              <p>台灣運動產業近年快速成長，根據體育署統計，台灣運動服務業產值持續攀升，健身房數量從 2015 年的不到 500 家，成長至 2022 年已突破 1,500 家，年均成長率超過 10%。運動人口的擴張帶動了場館需求，連鎖健身品牌快速展店、獨立工作室百花齊放，整個產業的規模與複雜度都在快速提升。</p>
+              <p>場館業者面臨的營運挑戰也隨之升級，從會員管理、空間排程、教練調度到金流收款，每一個環節都需要精準的系統支援。過去依賴人工作業或拼湊多套工具的方式，在規模擴大後開始顯現出明顯的效率瓶頸與管理漏洞。</p>
+              <p>SaaS 管理系統在各產業的普及，也改變了業者對數位工具的期待，雲端化、即時數據報表、跨裝置存取等等，成為場館業者評估管理系統的基本門檻，數位化營運管理成為降低人力成本、支撐規模擴張的必要基礎。</p>
             </div>
           </div>
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">負責項目</div>
-              <div class="meta-card-value">產品策略、UI 設計、設計系統、設計交付</div>
+
+          <!-- 現況與問題 -->
+          <div class="panel" id="sec-problem">
+            <div class="prose">
+              <p class="section-label">現況與問題</p>
+              <h2>技術老舊、使用體驗不佳、市場受限，三個問題同時爆發</h2>
+              <p>公司原有的管理系統面臨三個根本問題，且都已無法靠局部修補解決。三個問題加在一起，讓系統陷入難以突破的處境，重建一套現代化系統，是唯一能讓業務繼續成長的方法。</p>
+            </div>
+            <div class="problem-grid">
+              <div class="problem-card">
+                <div class="problem-card-icon"><img src="assets/images/develop.svg" alt="" /></div>
+                <h3>技術架構老舊</h3>
+                <p>既有系統無法在原有基礎上新增功能或做大幅改動，且架構只支援運動產業，面對其他產業的需求完全無法承接。</p>
+              </div>
+              <div class="problem-card">
+                <div class="problem-card-icon"><img src="assets/images/design.svg" alt="" /></div>
+                <h3>缺乏設計規範</h3>
+                <p>系統沒有統一的設計語言，使用者在不同頁面之間會遇到不同的操作邏輯，學習成本及出錯機率皆高。</p>
+              </div>
+              <div class="problem-card">
+                <div class="problem-card-icon"><img src="assets/images/earth.svg" alt="" /></div>
+                <h3>無法跨國營運</h3>
+                <p>系統不支援多時區、多幣別、多語系，有海外分館需求的品牌完全無法被承接，直接造成客戶流失。</p>
+              </div>
             </div>
           </div>
-          <div class="meta-card">
-            <div>
-              <div class="meta-card-label">團隊組成</div>
-              <div class="meta-card-value">PM、設計師、前端、後端、QA</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- 產業背景 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">產業背景</p>
-          <h2>科技正在重塑運動健身產業的營運方式</h2>
-          <p>台灣運動產業近年快速成長，根據體育署統計，台灣運動服務業產值持續攀升，健身房數量從 2015 年的不到 500 家，成長至 2022 年已突破 1,500 家，年均成長率超過 10%。運動人口的擴張帶動了場館需求，連鎖健身品牌快速展店、獨立工作室百花齊放，整個產業的規模與複雜度都在快速提升。</p>
-          <p>場館業者面臨的營運挑戰也隨之升級，從會員管理、空間排程、教練調度到金流收款，每一個環節都需要精準的系統支援。過去依賴人工作業或拼湊多套工具的方式，在規模擴大後開始顯現出明顯的效率瓶頸與管理漏洞。</p>
-          <p>SaaS 管理系統在各產業的普及，也改變了業者對數位工具的期待，雲端化、即時數據報表、跨裝置存取等等，成為場館業者評估管理系統的基本門檻，數位化營運管理成為降低人力成本、支撐規模擴張的必要基礎。</p>
-        </div>
-      </div>
-
-      <!-- 現況與問題 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">現況與問題</p>
-          <h2>技術老舊、使用體驗不佳、市場受限，三個問題同時爆發</h2>
-          <p>公司原有的管理系統面臨三個根本問題，且都已無法靠局部修補解決。三個問題加在一起，讓系統陷入難以突破的處境，重建一套現代化系統，是唯一能讓業務繼續成長的方法。</p>
-        </div>
-        <div class="problem-grid">
-          <div class="problem-card">
-            <div class="problem-card-icon"><img src="assets/images/develop.svg" alt="" /></div>
-            <h3>技術架構老舊</h3>
-            <p>既有系統無法在原有基礎上新增功能或做大幅改動，且架構只支援運動產業，面對其他產業的需求完全無法承接。</p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-card-icon"><img src="assets/images/design.svg" alt="" /></div>
-            <h3>缺乏設計規範</h3>
-            <p>系統沒有統一的設計語言，使用者在不同頁面之間會遇到不同的操作邏輯，學習成本及出錯機率皆高。</p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-card-icon"><img src="assets/images/earth.svg" alt="" /></div>
-            <h3>無法跨國營運</h3>
-            <p>系統不支援多時區、多幣別、多語系，有海外分館需求的品牌完全無法被承接，直接造成客戶流失。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 研究與發現 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">研究與發現</p>
-          <h2>透過內部協作與競品分析，定義出七大核心需求，構成系統的基礎骨架</h2>
-          <p>系統的主要使用者是運動場館的老闆與經營者。這類 B2B 使用者無法像 B2C 產品一樣大量招募訪談，我們主要透過 PM、客服、業務團隊取得第一手資料，客戶的抱怨與需求通常最先流向這三個角色，他們掌握的資訊比任何問卷或訪談更即時。除此之外，我們也系統性地比對了海內外的競品功能，找出現有系統缺少哪些關鍵功能導致客戶不願意買單，再將這些洞察轉化為設計依據。</p>
-          <p>透過這些方法，我們整理出場館業者在日常營運中最核心的七大需求：<strong>企業管理、人員管理、方案管理、會員管理、合約管理、金流收款、數據報表</strong>，這幾個面向成為系統的基礎架構，也是後續所有模組延伸的起點。</p>
-          <div class="comp-img-wrap">
-            <img src="assets/images/comp-table.png" alt="競品分析表格" />
-          </div>
-          <div class="comp-table-wrap" style="display:none">
-            <table class="comp-table">
-              <thead>
-                <tr>
-                  <th>功能</th>
-                  <th>Fitbutler</th>
-                  <th>17FIT</th>
-                  <th>BookFast</th>
-                  <th>生活歐巴</th>
-                  <th>Omcean Booking</th>
-                </tr>
-              </thead>
-              <tbody>
+          <!-- 研究與發現 -->
+          <div class="panel" id="sec-research">
+            <div class="prose">
+              <p class="section-label">研究與發現</p>
+              <h2>透過內部協作與競品分析，定義出七大核心需求，構成系統的基礎骨架</h2>
+              <p>系統的主要使用者是運動場館的老闆與經營者。這類 B2B 使用者無法像 B2C 產品一樣大量招募訪談，我們主要透過 PM、客服、業務團隊取得第一手資料，客戶的抱怨與需求通常最先流向這三個角色，他們掌握的資訊比任何問卷或訪談更即時。除此之外，我們也系統性地比對了海內外的競品功能，找出現有系統缺少哪些關鍵功能導致客戶不願意買單，再將這些洞察轉化為設計依據。</p>
+              <p>透過這些方法，我們整理出場館業者在日常營運中最核心的七大需求：<strong>企業管理、人員管理、方案管理、會員管理、合約管理、金流收款、數據報表</strong>，這幾個面向成為系統的基礎架構，也是後續所有模組延伸的起點。</p>
+              <div class="comp-img-wrap">
+                <img src="assets/images/comp-table.png" alt="競品分析表格" />
+              </div>
+              <div class="comp-table-wrap" style="display:none">
+                <table class="comp-table">
+                  <thead>
+                    <tr>
+                      <th>功能</th>
+                      <th>Fitbutler</th>
+                      <th>17FIT</th>
+                      <th>BookFast</th>
+                      <th>生活歐巴</th>
+                      <th>Omcean Booking</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 <tr>
-                  <td class="comp-feature">課程／服務管理</td>
-                  <td>線上課程預約、團課/私課 模組、課程配置建議</td>
-                  <td>線上預約、行事曆管理、訂閱制方案銷售</td>
-                  <td>線上預約、自動扣課、團體/私人課排程、課程異動通知</td>
-                  <td>LINE預約、Google預約整合、24小時自動接收預約、自動提醒、班班預約、計次券、寄杯/寄餐券</td>
-                  <td>線上課程預約、團課/私課/場租預約、候補功能、預約排程自動化、客製化功能</td>
-                </tr>
-                <tr>
-                  <td class="comp-feature">金流管理</td>
-                  <td>線上合法金流、TRUST+ 金流串接／電子發票、線上購課</td>
-                  <td>線上支付、POS結帳管理、多元支付串接</td>
-                  <td>金流發票、免押金刷卡、LINE Pay、月費制 AutoPay、線上販售</td>
-                  <td>預付訂金功能</td>
-                  <td>線上交易、金流支付、內建電商平台、線上購課</td>
-                </tr>
-                <tr>
-                  <td class="comp-feature">場館管理</td>
-                  <td>空間管理、智能門禁、IoT整合、自動測量體溫/InBody</td>
-                  <td>IoT解決方案、員工薪資計算、營運分析報表</td>
-                  <td>智能門禁、IoT整合、POS系統、自動化通知</td>
-                  <td>智慧業績報表、人員績效、多店管理</td>
-                  <td>自助報到、營運分析報表、AI模組自動控制</td>
-                </tr>
-                <tr>
-                  <td class="comp-feature">數據分析</td>
-                  <td>各式營運報表分析、數據分析報表</td>
-                  <td>營運分析報表、數據分析</td>
-                  <td>數據洞察、自動分析人流、優化課程與定價、銷售分析</td>
-                  <td>會員數據與消費行為即時串聯、智慧業績報表</td>
-                  <td>營運分析報表、客戶數據分析</td>
-                </tr>
-                <tr>
-                  <td class="comp-feature">行銷功能</td>
-                  <td>品牌專屬APP、官網建置服務</td>
-                  <td>數位行銷推廣、行銷工具、推播優惠訊息</td>
-                  <td>品牌APP、LINE預約、精準推播</td>
-                  <td>優惠券、行銷工具、互動遊戲、精準再行銷、社群電商、口碑行銷、LINE官方帳號外掛模組</td>
-                  <td>即時推播通知、整合LINE訊息功能、專業預約網站</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- 困難與挑戰 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">困難與挑戰</p>
-          <h2>如何讓同一套系統，服務多個不同商業邏輯的產業</h2>
-          <p>專案最初是為運動產業設計的，當我們完成基礎的兩個模組後，<strong style="color:#111;font-weight:700;">公司接到了一個截然不同的新客戶—空間租賃業</strong>，這代表我們要服務一個對公司來說完全陌生的產業。</p>
-          <p>為了快速建立產業知識，我們與客戶維持每兩週一次的固定會議，從中了解空間租賃業的營運邏輯與經營痛點，我們發現兩個產業之間存在高度重疊的部分，例如對人員的管理、空間場租、合約簽署、金流收款方式，兩個產業的需求幾乎一致，只需在細節的部分針對兩個產業做調整。</p>
-          <p>差異顯著的部分主要是販售模式與帳務管理，運動產業以授課方式、票券點數、會員方案為主；空間租賃業則以租約、押金、長租計費為核心，兩者的商業邏輯幾乎沒有交集。</p>
-          <p>如果為每個產業各自開發一套系統，成本高且難以維護，這個挑戰迫使我重新思考整個設計架構，需要找到一個方法，<strong>讓同一套系統能夠彈性服務不同產業，而不是為每個產業重新設計一遍</strong>。</p>
-        </div>
-      </div>
-
-      <!-- 設計決策 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">設計決策</p>
-          <h2>以彈性架構為核心，支援未來多產業及跨國營運的擴展能力</h2>
-
-          <h3>一、用模組化架構解決跨產業的彈性需求</h3>
-          <p>面對跨產業的設計挑戰，我們建立了以<strong style="color: var(--text-primary);">「共用核心模組＋可選擴充模組」</strong>為基礎的設計架構。</p>
-          <p>所有產業共用的基礎功能，企業模組、團隊模組、會員模組、方案模組、收款管道模組等等，成為系統的核心模組，是每個客戶預設都擁有這些模組。而各產業的差異化需求，例如空間租賃業的租約管理、保證金模組，則設計為可獨立開關的擴充模組，依客戶需求彈性開啟。</p>
-          <p>這個架構帶來兩個關鍵優勢，一是系統的設計語言保持一致，不同產業的使用者面對的是同一套介面邏輯，學習成本低；二是未來擴展至更多產業時，只需新增對應的擴充模組，不需要重新設計整套系統。</p>
-        </div>
-
-        <!-- Module Architecture Diagram -->
-        <div class="ma-wrap">
-          <div class="ma-legend">
-            <div class="ma-leg"><div class="ma-leg-dot b"></div>共用核心模組</div>
-            <div class="ma-leg"><div class="ma-leg-dot e"></div>可選擴充模組</div>
-          </div>
-          <div class="ma-rows">
-
-            <!-- Row 1 -->
-            <div class="ma-row">
-              <div class="ma-col b">
-                <div class="mc hb">核心模組 (必選一個)</div>
-                <div class="mc ie">私教課</div>
-                <div class="mc ie">場租</div>
-                <div class="mc ie">通行證</div>
-                <div class="mc ie">團體課</div>
-                <div class="mc ie">期課</div>
-                <div class="mc ie">空間長租</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">企業模組</div>
-                <div class="mc-row">
-                  <div class="mc ib">公司管理_法人公司</div>
-                  <div class="mc ie">公司管理_自然人業者</div>
-                </div>
-                <div class="mc ib">開放公司所在國家</div>
-                <div class="mc ib">場館管理</div>
-                <div class="mc ib">空間管理</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">團隊模組</div>
-                <div class="mc ib">員工管理</div>
-                <div class="mc ib">權限管理</div>
-                <div class="mc ib">教練管理 (相依私教課/期課/團體課)</div>
-              </div>
-            </div>
-
-            <!-- Row 2 -->
-            <div class="ma-row">
-              <div class="ma-col b">
-                <div class="mc hb">會員模組</div>
-                <div class="mc-row">
-                  <div class="mc ib">個人會員帳號</div>
-                  <div class="mc ie">企業會員帳號</div>
-                </div>
-                <div class="mc ie">檔案</div>
-                <div class="mc ie">聯繫紀錄</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">方案管理模組</div>
-                <div class="mc ib">權益類型</div>
-                <div class="mc ie">租約 (相依方案管理/空間長租)</div>
-                <div class="mc he">票券 (相依方案管理/團體課/私教課/期課/場租)</div>
-                <div class="mc ie">票券種類_計次券</div>
-                <div class="mc ie">票券種類_點數券</div>
-                <div class="mc ie">票券種類_計時券</div>
-                <div class="mc hb">發放類型 (相依票券)</div>
-                <div class="mc ib">發放類型_單次發放</div>
-                <div class="mc ib">發放類型_每月發放</div>
-                <div class="mc ie">票券種類_訂閱期間發放</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">收費方式模組</div>
-                <div class="mc ib">收費方式_免費</div>
-                <div class="mc ib">收費方式_一次付清</div>
-                <div class="mc ib">收費方式_定期支付</div>
-                <div class="mc ie">收費方式_訂閱制</div>
-              </div>
-            </div>
-
-            <!-- Row 3 -->
-            <div class="ma-row">
-              <div class="ma-col e">
-                <div class="mc he">保證金模組</div>
-                <div class="mc ie">訂金</div>
-                <div class="mc ie">押金</div>
-                <div class="mc ie">定金</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">收款管道模組</div>
-                <div class="mc-row">
-                  <div class="mc hb">現場結帳</div>
-                  <div class="mc he">線上結帳</div>
-                </div>
-                <div class="mc-row">
-                  <div class="mc ib">現場結帳_現金</div>
-                  <div class="mc ie">線上結帳-虛擬匯款帳號-凱基銀行</div>
-                </div>
-                <div class="mc-row">
-                  <div class="mc ib">現場結帳_轉帳匯款_匯款至公司收款帳戶</div>
-                  <div class="mc ie">線上結帳-信用卡</div>
-                </div>
-                <div class="mc ie">現場結帳_轉帳匯款_匯款至個人虛擬帳戶</div>
-                <div class="mc ib">現場結帳_刷信用卡機</div>
-                <div class="mc ie">現場結帳_自訂</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">收款憑證模組</div>
-                <div class="mc ib">標準收據</div>
-                <div class="mc ie">電子發票</div>
-                <div class="mc ie">列印電子發票 (相依電子發票)</div>
-              </div>
-            </div>
-
-            <!-- Row 5 -->
-            <div class="ma-row">
-              <div class="ma-col b">
-                <div class="mc hb">通知模組</div>
-                <div class="mc ib">通知範本</div>
-                <div class="mc ib">自動通知</div>
-                <div class="mc ib">通知途徑_電子郵件</div>
-                <div class="mc ie">通知途徑_簡訊</div>
-              </div>
-              <div class="ma-col b">
-                <div class="mc hb">數據中心模組</div>
-                <div class="mc ib">基礎報表</div>
-                <div class="mc ie">進階報表</div>
-              </div>
-              <div class="ma-col e">
-                <div class="mc he">合約管理模組</div>
-                <div class="mc ie">電子合約</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="prose">
-          <h3>二、權限分層設計：模組之下的第二道控制</h3>
-          <p>除了模組化架構之外，系統還設計了<strong style="color: var(--text-primary);">職務權限管理機制</strong>。模組決定客戶購買了哪些功能，權限則決定場館內不同職務的員工能夠存取哪些功能。前台人員、場館管理者、財務、教練各自看到的介面與可操作的範圍都不同。</p>
-          <p>這兩層架構共同構成系統的存取控制邏輯：<strong style="color:#111;font-weight:700;">模組是客戶層級的開關，權限是員工層級的開關</strong>。場館業者可以依據自身的組織結構與管理需求，靈活配置每個職務的使用範圍，在系統彈性與資料安全之間取得平衡。</p>
-
-          <div class="perm-grid">
-            <!-- 企業模組 -->
-            <div class="perm-card">
-              <div class="perm-card-header">企業模組</div>
-              <div class="perm-card-body">
-                <div class="perm-feature">
-                  <div class="perm-feature-name">公司管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視公司列表</span>
-                    <span class="perm-tag">編輯品牌資訊</span>
-                    <span class="perm-tag">新增／編輯公司資訊</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">場館管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視場館列表</span>
-                    <span class="perm-tag">新增／編輯場館資訊</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">空間管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視空間列表</span>
-                    <span class="perm-tag">新增／編輯空間資訊</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 團隊模組 -->
-            <div class="perm-card">
-              <div class="perm-card-header">團隊模組</div>
-              <div class="perm-card-body">
-                <div class="perm-feature">
-                  <div class="perm-feature-name">員工管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視員工列表</span>
-                    <span class="perm-tag">執行開通登入權限</span>
-                    <span class="perm-tag">可見員工敏感資訊</span>
-                    <span class="perm-tag">新增／編輯員工資訊</span>
-                    <span class="perm-tag">刪除員工帳號</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">權限管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視職務列表</span>
-                    <span class="perm-tag">新增／編輯職務權限</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">教練管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視教練列表</span>
-                    <span class="perm-tag">編輯教練資訊</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 會員模組 -->
-            <div class="perm-card">
-              <div class="perm-card-header">會員模組</div>
-              <div class="perm-card-body">
-                <div class="perm-feature">
-                  <div class="perm-feature-name">會員管理</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">設定帳號資料</span>
-                    <span class="perm-tag">設定推薦來源</span>
-                    <span class="perm-tag">設定關係類型</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">會員資訊</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">查詢品牌會員</span>
-                    <span class="perm-tag">檢視會員列表</span>
-                    <span class="perm-tag">檢視會員檔案</span>
-                    <span class="perm-tag">可見會員敏感資訊</span>
-                    <span class="perm-tag">新增/編輯會員資訊</span>
-                    <span class="perm-tag">調整會員隸屬場館</span>
-                    <span class="perm-tag">刪除會員帳號</span>
-                    <span class="perm-tag">加入/解除黑名單</span>
-                    <span class="perm-tag">新增/編輯待辦事項</span>
-                    <span class="perm-tag">設定會員人際關係</span>
-                    <span class="perm-tag">套用會員標籤</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 方案管理模組 -->
-            <div class="perm-card">
-              <div class="perm-card-header">方案管理模組</div>
-              <div class="perm-card-body">
-                <div class="perm-feature">
-                  <div class="perm-tags">
-                    <span class="perm-tag">設定權益類型</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">票券</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視票券列表</span>
-                    <span class="perm-tag">新增/編輯票券方案</span>
-                    <span class="perm-tag">新增/編輯發放類型</span>
-                  </div>
-                </div>
-                <div class="perm-feature">
-                  <div class="perm-feature-name">租約</div>
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視租約列表</span>
-                    <span class="perm-tag">新增/編輯租約方案</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 收款管道模組 -->
-            <div class="perm-card">
-              <div class="perm-card-header">收款管道模組</div>
-              <div class="perm-card-body">
-                <div class="perm-feature">
-                  <div class="perm-tags">
-                    <span class="perm-tag">執行收費</span>
-                    <span class="perm-tag">執行取消訂單</span>
-                    <span class="perm-tag">新增/編輯收費項目</span>
-                    <span class="perm-tag">調整收費金額</span>
-                    <span class="perm-tag">開立憑證</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 合約管理模組 -->
-            <div class="perm-card">
-              <div class="perm-card-header">合約管理模組</div>
-              <div class="perm-card-body">
-                <div class="perm-feature">
-                  <div class="perm-tags">
-                    <span class="perm-tag">檢視合約範本列表</span>
-                    <span class="perm-tag">設定合約範本</span>
-                    <span class="perm-tag">建立/編輯合約</span>
-                    <span class="perm-tag">刪除/終止合約</span>
-                    <span class="perm-tag">查看合約</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h3>三、跨國營運設計：時區、貨幣、多語系的系統支援</h3>
-          <p>針對有海外分館的客戶需求，系統在設計上支援多時區、多幣別、多語系，讓不同國家的場館業者能在同一套系統上運作，無需為每個市場單獨客製化，讓系統從一開始就<strong style="color:#111;font-weight:700;">具備國際化的擴展能力</strong>，補上舊系統的缺口。</p>
-          <p>多語系的設計不只是語言翻譯，也包含產業用語的差異化處理，同一個概念在不同產業有不同的慣用說法，例如同樣的空間單位，在運動產業稱為「場館」，在空間租賃業則稱為「據點」，系統使用相同的 key 值，但<strong style="color:#111;font-weight:700;">根據客戶所屬產業自動顯示對應的文案</strong>，讓每個產業的使用者都能看到符合自身產業語境的文案。</p>
-
-          <div style="margin: 20px 0;">
-            <div class="img-ba-wrap" id="img-ba">
-              <!-- After layer (base) -->
-              <div class="img-ba-layer img-ba-after-layer">
-                <img src="assets/images/fitbutler_US.png" alt="英文版" style="width:100%; display:block; border-radius:8px;">
-              </div>
-              <!-- Before layer (overlay) -->
-              <div class="img-ba-layer img-ba-before-layer" id="iba-before">
-                <img src="assets/images/fitbutler.png" alt="繁體中文版" style="width:100%; display:block; border-radius:8px;">
-              </div>
-              <!-- Labels -->
-              <span class="ba-label ba-label--before">繁體中文版</span>
-              <span class="ba-label ba-label--after">英文版</span>
-              <!-- Divider -->
-              <div class="img-ba-line" id="iba-line">
-                <div class="ba-handle">⟨⟩</div>
-              </div>
-            </div>
-          </div>
-          <script>
-          (function(){
-            var wrap = document.getElementById('img-ba');
-            var before = document.getElementById('iba-before');
-            var line = document.getElementById('iba-line');
-            var down = false;
-            function move(x){
-              var r = wrap.getBoundingClientRect();
-              var p = Math.max(0, Math.min(1, (x - r.left) / r.width));
-              var pct = (p * 100).toFixed(2);
-              before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
-              line.style.left = pct + '%';
-            }
-            wrap.addEventListener('mousedown', function(e){ down = true; move(e.clientX); e.preventDefault(); });
-            wrap.addEventListener('touchstart', function(e){ down = true; move(e.touches[0].clientX); }, {passive: true});
-            window.addEventListener('mousemove', function(e){ if(down) move(e.clientX); });
-            window.addEventListener('touchmove', function(e){ if(down) move(e.touches[0].clientX); }, {passive: true});
-            window.addEventListener('mouseup', function(){ down = false; });
-            window.addEventListener('touchend', function(){ down = false; });
-          })();
-          </script>
-
-          <div style="margin-top:20px; display:flex; flex-direction:column; gap:16px; background:var(--bg); border-radius:var(--radius-sm); padding:20px;">
-            <div>
-              <div style="margin-bottom:8px;"><span class="trans-ind sport" style="font-size:12px; padding:3px 10px;">運動產業</span></div>
-              <div style="overflow-x:auto;">
-                <table class="trans-table">
-                  <colgroup><col><col><col><col><col></colgroup>
-                  <thead>
-                    <tr><th>key</th><th>zh-TW</th><th>en-US</th><th>類型</th><th>頁面</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="trans-key">venue</td>
-                      <td>場館</td>
-                      <td>Venue</td>
-                      <td>文字</td>
-                      <td>企業管理</td>
+                      <td class="comp-feature">課程／服務管理</td>
+                      <td>線上課程預約、團課/私課 模組、課程配置建議</td>
+                      <td>線上預約、行事曆管理、訂閱制方案銷售</td>
+                      <td>線上預約、自動扣課、團體/私人課排程、課程異動通知</td>
+                      <td>LINE預約、Google預約整合、24小時自動接收預約、自動提醒、班班預約、計次券、寄杯/寄餐券</td>
+                      <td>線上課程預約、團課/私課/場租預約、候補功能、預約排程自動化、客製化功能</td>
                     </tr>
                     <tr>
-                      <td class="trans-key">stamp_picture_hint_text</td>
-                      <td>用於合約為公司方簽章時，可直接使用此圖章</td>
-                      <td>Use this image file when the contract requires the company's signature.</td>
-                      <td>文字</td>
-                      <td>企業管理</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div>
-              <div style="margin-bottom:8px;"><span class="trans-ind space" style="font-size:12px; padding:3px 10px;">空間租賃業</span></div>
-              <div style="overflow-x:auto;">
-                <table class="trans-table">
-                  <colgroup><col><col><col><col><col></colgroup>
-                  <thead>
-                    <tr><th>key</th><th>zh-TW</th><th>en-US</th><th>類型</th><th>頁面</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="trans-key">venue</td>
-                      <td>據點</td>
-                      <td>Site</td>
-                      <td>文字</td>
-                      <td>企業管理</td>
+                      <td class="comp-feature">金流管理</td>
+                      <td>線上合法金流、TRUST+ 金流串接／電子發票、線上購課</td>
+                      <td>線上支付、POS結帳管理、多元支付串接</td>
+                      <td>金流發票、免押金刷卡、LINE Pay、月費制 AutoPay、線上販售</td>
+                      <td>預付訂金功能</td>
+                      <td>線上交易、金流支付、內建電商平台、線上購課</td>
                     </tr>
                     <tr>
-                      <td class="trans-key">stamp_picture_hint_text</td>
-                      <td>用於合約為出租人簽章時，可直接使用此圖章</td>
-                      <td>Use this image file when the contract requires the landlord's signature.</td>
-                      <td>文字</td>
-                      <td>企業管理</td>
+                      <td class="comp-feature">場館管理</td>
+                      <td>空間管理、智能門禁、IoT整合、自動測量體溫/InBody</td>
+                      <td>IoT解決方案、員工薪資計算、營運分析報表</td>
+                      <td>智能門禁、IoT整合、POS系統、自動化通知</td>
+                      <td>智慧業績報表、人員績效、多店管理</td>
+                      <td>自助報到、營運分析報表、AI模組自動控制</td>
+                    </tr>
+                    <tr>
+                      <td class="comp-feature">數據分析</td>
+                      <td>各式營運報表分析、數據分析報表</td>
+                      <td>營運分析報表、數據分析</td>
+                      <td>數據洞察、自動分析人流、優化課程與定價、銷售分析</td>
+                      <td>會員數據與消費行為即時串聯、智慧業績報表</td>
+                      <td>營運分析報表、客戶數據分析</td>
+                    </tr>
+                    <tr>
+                      <td class="comp-feature">行銷功能</td>
+                      <td>品牌專屬APP、官網建置服務</td>
+                      <td>數位行銷推廣、行銷工具、推播優惠訊息</td>
+                      <td>品牌APP、LINE預約、精準推播</td>
+                      <td>優惠券、行銷工具、互動遊戲、精準再行銷、社群電商、口碑行銷、LINE官方帳號外掛模組</td>
+                      <td>即時推播通知、整合LINE訊息功能、專業預約網站</td>
                     </tr>
                   </tbody>
                 </table>
@@ -623,151 +304,575 @@
             </div>
           </div>
 
-          <p style="margin-top:20px;">現有的多語系翻譯是透過 Google Sheet 統一管理，但實際使用起來有幾個明顯的痛點：同一份 Sheet 內的 key 值及中文翻譯不能重複，加上 Sheet 本身沒有語意篩選能力，很難快速找出句型相似、應該統一的文案。每次新增語系或修改文案，都需要逐一比對、手動確認，效率低且容易出錯。</p>
-          <p>為了解決這個問題，我自己<a href="#" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;font-weight:600;">用 AI 打造了一個翻譯器</a>：工具會自動偵測重複與衝突，並依照產業語境給出建議翻譯，也可以轉成 JSON 檔供工程師使用，大幅縮短多語系維護的時間成本，也讓文案的一致性更容易被追蹤與管理。</p>
-
-          <div class="comp-img-wrap" style="margin-top:16px;">
-            <video src="assets/images/i18n.mp4" autoplay loop muted playsinline style="width:100%; display:block; border-radius:8px;"></video>
-          </div>
-
-          <h3>四、建立設計系統，並導入 AI prototype 加速工程協作</h3>
-          <p>我以現有元件庫 (Shadcn/ui) 為基礎，依據 Fitbutler 的品牌色與設計規範進行客製化，建立一套統一的設計語言，確保跨模組、跨產業的介面一致性，並降低工程開發的重複成本。</p>
-          <div style="margin-top:16px;">
-            <img src="assets/images/fitbutler_DS.png" alt="設計系統" style="width:100%; display:block; border-radius:8px;">
-          </div>
-          <p style="margin-top:20px;">設計系統建立之後，我進一步<strong style="color:#111;font-weight:700;">利用 Claude Code 串接 Figma MCP 跟 Shadcn MCP，製作可互動的 AI prototype</strong> 給工程師參考，工程師可以直接在 prototype 上確認元件效果與轉場動畫，原本需要多次來回溝通才能確認的細節，透過 prototype 一次就能對齊，這個做法同時降低了前端切版的摸索成本，也減少了設計與工程之間的認知落差。</p>
-          <div class="comp-img-wrap" style="margin-top:16px;">
-            <div style="background:#e8eaed; border-radius:8px; height:200px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補：AI Prototype 截圖</div>
-          </div>
-
-          <h3>五、重新設計導覽架構：讓操作動線符合真實工作流程</h3>
-          <p>舊系統的導覽架構有兩個明顯痛點。</p>
-          <p>第一是跨場館切換的體驗極差，若員工同時負責多個場館，切換場館需要先登出、回到登入頁重新選擇，對每天需要跨場館操作的人來說非常不方便。</p>
-          <p>第二是相關功能離得太遠，以員工幫會員購買方案為例，結帳完成後還需要切換到完全不同的位置才能開立發票，流程被切斷，員工必須自行記住下一步在哪裡。</p>
-          <p>新系統在這兩個面向上都做了根本性的改變，<strong style="color:#111;font-weight:700;">跨場館切換的邏輯從登入層移到職務層</strong>，員工的場館權限綁定在職務上，登入後可以直接在頁面的篩選欄位上切換場館，大幅降低日常操作的摩擦。</p>
-          <p>導覽架構的重整則依據幾個原則決定：功能性質相近的項目合併為同一群組、排序按使用頻率由上往下排列，屬於「一次性設定」的項目，例如企業管理、收款設定、通知管理、合約範本等統一收進「設定」區塊，與日常操作區隔開來，設定好之後不太需要頻繁調整的功能，不應該佔據主要導覽的位置。</p>
-          <div class="comp-img-wrap" style="margin-top:16px;">
-            <div style="background:#e8eaed; border-radius:8px; height:200px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補：導覽架構圖</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 設計產出 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">設計產出</p>
-          <h2>八大模組的介面設計</h2>
-          <p>系統介面依據場館業者的實際工作流程，拆分為八個核心功能模組，每個模組皆針對使用者的操作情境設計動線與介面邏輯。</p>
-
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">1</div>
-              <h3>企業模組</h3>
+          <!-- 困難與挑戰 -->
+          <div class="panel" id="sec-challenges">
+            <div class="prose">
+              <p class="section-label">困難與挑戰</p>
+              <h2>如何讓同一套系統，服務多個不同商業邏輯的產業</h2>
+              <p>專案最初是為運動產業設計的，當我們完成基礎的兩個模組後，<strong style="color:#111;font-weight:700;">公司接到了一個截然不同的新客戶—空間租賃業</strong>，這代表我們要服務一個對公司來說完全陌生的產業。</p>
+              <p>為了快速建立產業知識，我們與客戶維持每兩週一次的固定會議，從中了解空間租賃業的營運邏輯與經營痛點，我們發現兩個產業之間存在高度重疊的部分，例如對人員的管理、空間場租、合約簽署、金流收款方式，兩個產業的需求幾乎一致，只需在細節的部分針對兩個產業做調整。</p>
+              <p>差異顯著的部分主要是販售模式與帳務管理，運動產業以授課方式、票券點數、會員方案為主；空間租賃業則以租約、押金、長租計費為核心，兩者的商業邏輯幾乎沒有交集。</p>
+              <p>如果為每個產業各自開發一套系統，成本高且難以維護，這個挑戰迫使我重新思考整個設計架構，需要找到一個方法，<strong>讓同一套系統能夠彈性服務不同產業，而不是為每個產業重新設計一遍</strong>。</p>
             </div>
-            <p>企業模組負責整個系統的基礎架構設定，建立品牌、公司、據點、空間四個層級的從屬關係。</p>
-            <p>品牌是系統的頂層單位，名稱於開通時設定後不可更改，但可上傳品牌 Logo，套用於對外文件如信件、收據、合約等。品牌之下可建立多個公司，對應不同子公司或法人實體；每間公司可設立多個據點，對應實際經營的分店或物件；每個據點內再定義具體的空間單位，無論是辦公室、套房或共享空間皆可建檔管理。</p>
-            <p>這個四層架構讓不同規模的品牌都能依照自身的組織結構靈活配置，同時保持清楚的管理層級。</p>
           </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">2</div>
-              <h3>團隊模組</h3>
+          <!-- 設計決策 -->
+          <div class="panel" id="sec-design">
+            <div class="prose">
+              <p class="section-label">設計決策</p>
+              <h2>以彈性架構為核心，支援未來多產業及跨國營運的擴展能力</h2>
+
+              <h3>一、用模組化架構解決跨產業的彈性需求</h3>
+              <p>面對跨產業的設計挑戰，我們建立了以<strong style="color: var(--text-primary);">「共用核心模組＋可選擴充模組」</strong>為基礎的設計架構。</p>
+              <p>所有產業共用的基礎功能，企業模組、團隊模組、會員模組、方案模組、收款管道模組等等，成為系統的核心模組，是每個客戶預設都擁有這些模組。而各產業的差異化需求，例如空間租賃業的租約管理、保證金模組，則設計為可獨立開關的擴充模組，依客戶需求彈性開啟。</p>
+              <p>這個架構帶來兩個關鍵優勢，一是系統的設計語言保持一致，不同產業的使用者面對的是同一套介面邏輯，學習成本低；二是未來擴展至更多產業時，只需新增對應的擴充模組，不需要重新設計整套系統。</p>
             </div>
-            <p>團隊模組負責員工的建檔與權限配置，是確保每位員工在系統中擁有正確操作範圍的關鍵步驟。</p>
-            <p>建立員工時，除了基本資料建檔外，還需指定該員工負責的場館與對應職務。由於不同員工可能負責不同場館，同一職務在不同場館下的操作範圍也可以各自配置，讓管理更有彈性。</p>
-            <p>職務權限由總管理者統一設定，可針對每個功能模組的檢視與操作權限個別開關。業務、財務、前台人員等不同角色各自看到的介面與可操作的功能都不同，在確保資料安全的同時，也讓每位員工專注於自己職責範圍內的工作。</p>
-          </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">3</div>
-              <h3>會員模組</h3>
+            <!-- Module Architecture Diagram -->
+            <div class="ma-wrap">
+              <div class="ma-legend">
+                <div class="ma-leg"><div class="ma-leg-dot b"></div>共用核心模組</div>
+                <div class="ma-leg"><div class="ma-leg-dot e"></div>可選擴充模組</div>
+              </div>
+              <div class="ma-rows">
+
+                <!-- Row 1 -->
+                <div class="ma-row">
+                  <div class="ma-col b">
+                    <div class="mc hb">核心模組 (必選一個)</div>
+                    <div class="mc ie">私教課</div>
+                    <div class="mc ie">場租</div>
+                    <div class="mc ie">通行證</div>
+                    <div class="mc ie">團體課</div>
+                    <div class="mc ie">期課</div>
+                    <div class="mc ie">空間長租</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">企業模組</div>
+                    <div class="mc-row">
+                      <div class="mc ib">公司管理_法人公司</div>
+                      <div class="mc ie">公司管理_自然人業者</div>
+                    </div>
+                    <div class="mc ib">開放公司所在國家</div>
+                    <div class="mc ib">場館管理</div>
+                    <div class="mc ib">空間管理</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">團隊模組</div>
+                    <div class="mc ib">員工管理</div>
+                    <div class="mc ib">權限管理</div>
+                    <div class="mc ib">教練管理 (相依私教課/期課/團體課)</div>
+                  </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="ma-row">
+                  <div class="ma-col b">
+                    <div class="mc hb">會員模組</div>
+                    <div class="mc-row">
+                      <div class="mc ib">個人會員帳號</div>
+                      <div class="mc ie">企業會員帳號</div>
+                    </div>
+                    <div class="mc ie">檔案</div>
+                    <div class="mc ie">聯繫紀錄</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">方案管理模組</div>
+                    <div class="mc ib">權益類型</div>
+                    <div class="mc ie">租約 (相依方案管理/空間長租)</div>
+                    <div class="mc he">票券 (相依方案管理/團體課/私教課/期課/場租)</div>
+                    <div class="mc ie">票券種類_計次券</div>
+                    <div class="mc ie">票券種類_點數券</div>
+                    <div class="mc ie">票券種類_計時券</div>
+                    <div class="mc hb">發放類型 (相依票券)</div>
+                    <div class="mc ib">發放類型_單次發放</div>
+                    <div class="mc ib">發放類型_每月發放</div>
+                    <div class="mc ie">票券種類_訂閱期間發放</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">收費方式模組</div>
+                    <div class="mc ib">收費方式_免費</div>
+                    <div class="mc ib">收費方式_一次付清</div>
+                    <div class="mc ib">收費方式_定期支付</div>
+                    <div class="mc ie">收費方式_訂閱制</div>
+                  </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="ma-row">
+                  <div class="ma-col e">
+                    <div class="mc he">保證金模組</div>
+                    <div class="mc ie">訂金</div>
+                    <div class="mc ie">押金</div>
+                    <div class="mc ie">定金</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">收款管道模組</div>
+                    <div class="mc-row">
+                      <div class="mc hb">現場結帳</div>
+                      <div class="mc he">線上結帳</div>
+                    </div>
+                    <div class="mc-row">
+                      <div class="mc ib">現場結帳_現金</div>
+                      <div class="mc ie">線上結帳-虛擬匯款帳號-凱基銀行</div>
+                    </div>
+                    <div class="mc-row">
+                      <div class="mc ib">現場結帳_轉帳匯款_匯款至公司收款帳戶</div>
+                      <div class="mc ie">線上結帳-信用卡</div>
+                    </div>
+                    <div class="mc ie">現場結帳_轉帳匯款_匯款至個人虛擬帳戶</div>
+                    <div class="mc ib">現場結帳_刷信用卡機</div>
+                    <div class="mc ie">現場結帳_自訂</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">收款憑證模組</div>
+                    <div class="mc ib">標準收據</div>
+                    <div class="mc ie">電子發票</div>
+                    <div class="mc ie">列印電子發票 (相依電子發票)</div>
+                  </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="ma-row">
+                  <div class="ma-col b">
+                    <div class="mc hb">通知模組</div>
+                    <div class="mc ib">通知範本</div>
+                    <div class="mc ib">自動通知</div>
+                    <div class="mc ib">通知途徑_電子郵件</div>
+                    <div class="mc ie">通知途徑_簡訊</div>
+                  </div>
+                  <div class="ma-col b">
+                    <div class="mc hb">數據中心模組</div>
+                    <div class="mc ib">基礎報表</div>
+                    <div class="mc ie">進階報表</div>
+                  </div>
+                  <div class="ma-col e">
+                    <div class="mc he">合約管理模組</div>
+                    <div class="mc ie">電子合約</div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <p>會員模組提供完整的客戶資料管理功能，並針對不同產業的需求設計了高度彈性的架構。</p>
-            <p>建立會員時，除了基本資料建檔，系統提供自訂欄位功能——不同產業對會員資料的需求各異，例如健身房需要緊急聯絡人、空間租賃業重視身份驗證資料，品牌可自行定義所需欄位並設定是否必填，確保資料收集符合自身的營運需求。</p>
-            <p>人際關係功能可記錄會員之間的親屬或關聯關係，例如父母、子女、配偶、推薦人等，並自動建立雙向關聯。這個功能不只是資料管理，也可與方案設計結合應用——例如攜伴方案限定特定關係類型才能購買、推薦優惠需有對應的被推薦人關係作為識別依據。</p>
-            <p>推薦來源欄位記錄會員最初接觸品牌的方式，例如社群媒體、官網預約或現場參觀，協助品牌追蹤會員來源管道。此欄位僅限具備對應權限的職務才能編輯，確保資料的正確性。</p>
-          </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">4</div>
-              <h3>方案模組</h3>
+            <div class="prose">
+              <h3>二、權限分層設計：模組之下的第二道控制</h3>
+              <p>除了模組化架構之外，系統還設計了<strong style="color: var(--text-primary);">職務權限管理機制</strong>。模組決定客戶購買了哪些功能，權限則決定場館內不同職務的員工能夠存取哪些功能。前台人員、場館管理者、財務、教練各自看到的介面與可操作的範圍都不同。</p>
+              <p>這兩層架構共同構成系統的存取控制邏輯：<strong style="color:#111;font-weight:700;">模組是客戶層級的開關，權限是員工層級的開關</strong>。場館業者可以依據自身的組織結構與管理需求，靈活配置每個職務的使用範圍，在系統彈性與資料安全之間取得平衡。</p>
+
+              <div class="perm-grid">
+                <!-- 企業模組 -->
+                <div class="perm-card">
+                  <div class="perm-card-header">企業模組</div>
+                  <div class="perm-card-body">
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">公司管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視公司列表</span>
+                        <span class="perm-tag">編輯品牌資訊</span>
+                        <span class="perm-tag">新增／編輯公司資訊</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">場館管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視場館列表</span>
+                        <span class="perm-tag">新增／編輯場館資訊</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">空間管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視空間列表</span>
+                        <span class="perm-tag">新增／編輯空間資訊</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 團隊模組 -->
+                <div class="perm-card">
+                  <div class="perm-card-header">團隊模組</div>
+                  <div class="perm-card-body">
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">員工管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視員工列表</span>
+                        <span class="perm-tag">執行開通登入權限</span>
+                        <span class="perm-tag">可見員工敏感資訊</span>
+                        <span class="perm-tag">新增／編輯員工資訊</span>
+                        <span class="perm-tag">刪除員工帳號</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">權限管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視職務列表</span>
+                        <span class="perm-tag">新增／編輯職務權限</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">教練管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視教練列表</span>
+                        <span class="perm-tag">編輯教練資訊</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 會員模組 -->
+                <div class="perm-card">
+                  <div class="perm-card-header">會員模組</div>
+                  <div class="perm-card-body">
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">會員管理</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">設定帳號資料</span>
+                        <span class="perm-tag">設定推薦來源</span>
+                        <span class="perm-tag">設定關係類型</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">會員資訊</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">查詢品牌會員</span>
+                        <span class="perm-tag">檢視會員列表</span>
+                        <span class="perm-tag">檢視會員檔案</span>
+                        <span class="perm-tag">可見會員敏感資訊</span>
+                        <span class="perm-tag">新增/編輯會員資訊</span>
+                        <span class="perm-tag">調整會員隸屬場館</span>
+                        <span class="perm-tag">刪除會員帳號</span>
+                        <span class="perm-tag">加入/解除黑名單</span>
+                        <span class="perm-tag">新增/編輯待辦事項</span>
+                        <span class="perm-tag">設定會員人際關係</span>
+                        <span class="perm-tag">套用會員標籤</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 方案管理模組 -->
+                <div class="perm-card">
+                  <div class="perm-card-header">方案管理模組</div>
+                  <div class="perm-card-body">
+                    <div class="perm-feature">
+                      <div class="perm-tags">
+                        <span class="perm-tag">設定權益類型</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">票券</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視票券列表</span>
+                        <span class="perm-tag">新增/編輯票券方案</span>
+                        <span class="perm-tag">新增/編輯發放類型</span>
+                      </div>
+                    </div>
+                    <div class="perm-feature">
+                      <div class="perm-feature-name">租約</div>
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視租約列表</span>
+                        <span class="perm-tag">新增/編輯租約方案</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 收款管道模組 -->
+                <div class="perm-card">
+                  <div class="perm-card-header">收款管道模組</div>
+                  <div class="perm-card-body">
+                    <div class="perm-feature">
+                      <div class="perm-tags">
+                        <span class="perm-tag">執行收費</span>
+                        <span class="perm-tag">執行取消訂單</span>
+                        <span class="perm-tag">新增/編輯收費項目</span>
+                        <span class="perm-tag">調整收費金額</span>
+                        <span class="perm-tag">開立憑證</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 合約管理模組 -->
+                <div class="perm-card">
+                  <div class="perm-card-header">合約管理模組</div>
+                  <div class="perm-card-body">
+                    <div class="perm-feature">
+                      <div class="perm-tags">
+                        <span class="perm-tag">檢視合約範本列表</span>
+                        <span class="perm-tag">設定合約範本</span>
+                        <span class="perm-tag">建立/編輯合約</span>
+                        <span class="perm-tag">刪除/終止合約</span>
+                        <span class="perm-tag">查看合約</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3>三、跨國營運設計：時區、貨幣、多語系的系統支援</h3>
+              <p>針對有海外分館的客戶需求，系統在設計上支援多時區、多幣別、多語系，讓不同國家的場館業者能在同一套系統上運作，無需為每個市場單獨客製化，讓系統從一開始就<strong style="color:#111;font-weight:700;">具備國際化的擴展能力</strong>，補上舊系統的缺口。</p>
+              <p>多語系的設計不只是語言翻譯，也包含產業用語的差異化處理，同一個概念在不同產業有不同的慣用說法，例如同樣的空間單位，在運動產業稱為「場館」，在空間租賃業則稱為「據點」，系統使用相同的 key 值，但<strong style="color:#111;font-weight:700;">根據客戶所屬產業自動顯示對應的文案</strong>，讓每個產業的使用者都能看到符合自身產業語境的文案。</p>
+
+              <div style="margin: 20px 0;">
+                <div class="img-ba-wrap" id="img-ba">
+                  <!-- After layer (base) -->
+                  <div class="img-ba-layer img-ba-after-layer">
+                    <img src="assets/images/fitbutler_US.png" alt="英文版" style="width:100%; display:block; border-radius:8px;">
+                  </div>
+                  <!-- Before layer (overlay) -->
+                  <div class="img-ba-layer img-ba-before-layer" id="iba-before">
+                    <img src="assets/images/fitbutler.png" alt="繁體中文版" style="width:100%; display:block; border-radius:8px;">
+                  </div>
+                  <!-- Labels -->
+                  <span class="ba-label ba-label--before">繁體中文版</span>
+                  <span class="ba-label ba-label--after">英文版</span>
+                  <!-- Divider -->
+                  <div class="img-ba-line" id="iba-line">
+                    <div class="ba-handle">⟨⟩</div>
+                  </div>
+                </div>
+              </div>
+              <script>
+              (function(){
+                var wrap = document.getElementById('img-ba');
+                var before = document.getElementById('iba-before');
+                var line = document.getElementById('iba-line');
+                var down = false;
+                function move(x){
+                  var r = wrap.getBoundingClientRect();
+                  var p = Math.max(0, Math.min(1, (x - r.left) / r.width));
+                  var pct = (p * 100).toFixed(2);
+                  before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+                  line.style.left = pct + '%';
+                }
+                wrap.addEventListener('mousedown', function(e){ down = true; move(e.clientX); e.preventDefault(); });
+                wrap.addEventListener('touchstart', function(e){ down = true; move(e.touches[0].clientX); }, {passive: true});
+                window.addEventListener('mousemove', function(e){ if(down) move(e.clientX); });
+                window.addEventListener('touchmove', function(e){ if(down) move(e.touches[0].clientX); }, {passive: true});
+                window.addEventListener('mouseup', function(){ down = false; });
+                window.addEventListener('touchend', function(){ down = false; });
+              })();
+              </script>
+
+              <div style="margin-top:20px; display:flex; flex-direction:column; gap:16px; background:var(--bg); border-radius:var(--radius-sm); padding:20px;">
+                <div>
+                  <div style="margin-bottom:8px;"><span class="trans-ind sport" style="font-size:12px; padding:3px 10px;">運動產業</span></div>
+                  <div style="overflow-x:auto;">
+                    <table class="trans-table">
+                      <colgroup><col><col><col><col><col></colgroup>
+                      <thead>
+                        <tr><th>key</th><th>zh-TW</th><th>en-US</th><th>類型</th><th>頁面</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="trans-key">venue</td>
+                          <td>場館</td>
+                          <td>Venue</td>
+                          <td>文字</td>
+                          <td>企業管理</td>
+                        </tr>
+                        <tr>
+                          <td class="trans-key">stamp_picture_hint_text</td>
+                          <td>用於合約為公司方簽章時，可直接使用此圖章</td>
+                          <td>Use this image file when the contract requires the company's signature.</td>
+                          <td>文字</td>
+                          <td>企業管理</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <div style="margin-bottom:8px;"><span class="trans-ind space" style="font-size:12px; padding:3px 10px;">空間租賃業</span></div>
+                  <div style="overflow-x:auto;">
+                    <table class="trans-table">
+                      <colgroup><col><col><col><col><col></colgroup>
+                      <thead>
+                        <tr><th>key</th><th>zh-TW</th><th>en-US</th><th>類型</th><th>頁面</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="trans-key">venue</td>
+                          <td>據點</td>
+                          <td>Site</td>
+                          <td>文字</td>
+                          <td>企業管理</td>
+                        </tr>
+                        <tr>
+                          <td class="trans-key">stamp_picture_hint_text</td>
+                          <td>用於合約為出租人簽章時，可直接使用此圖章</td>
+                          <td>Use this image file when the contract requires the landlord's signature.</td>
+                          <td>文字</td>
+                          <td>企業管理</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p style="margin-top:20px;">現有的多語系翻譯是透過 Google Sheet 統一管理，但實際使用起來有幾個明顯的痛點：同一份 Sheet 內的 key 值及中文翻譯不能重複，加上 Sheet 本身沒有語意篩選能力，很難快速找出句型相似、應該統一的文案。每次新增語系或修改文案，都需要逐一比對、手動確認，效率低且容易出錯。</p>
+              <p>為了解決這個問題，我自己<a href="#" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;font-weight:600;">用 AI 打造了一個翻譯器</a>：工具會自動偵測重複與衝突，並依照產業語境給出建議翻譯，也可以轉成 JSON 檔供工程師使用，大幅縮短多語系維護的時間成本，也讓文案的一致性更容易被追蹤與管理。</p>
+
+              <div class="comp-img-wrap" style="margin-top:16px;">
+                <video src="assets/images/i18n.mp4" autoplay loop muted playsinline style="width:100%; display:block; border-radius:8px;"></video>
+              </div>
+
+              <h3>四、建立設計系統，並導入 AI prototype 加速工程協作</h3>
+              <p>我以現有元件庫 (Shadcn/ui) 為基礎，依據 Fitbutler 的品牌色與設計規範進行客製化，建立一套統一的設計語言，確保跨模組、跨產業的介面一致性，並降低工程開發的重複成本。</p>
+              <div style="margin-top:16px;">
+                <img src="assets/images/fitbutler_DS.png" alt="設計系統" style="width:100%; display:block; border-radius:8px;">
+              </div>
+              <p style="margin-top:20px;">設計系統建立之後，我進一步<strong style="color:#111;font-weight:700;">利用 Claude Code 串接 Figma MCP 跟 Shadcn MCP，製作可互動的 AI prototype</strong> 給工程師參考，工程師可以直接在 prototype 上確認元件效果與轉場動畫，原本需要多次來回溝通才能確認的細節，透過 prototype 一次就能對齊，這個做法同時降低了前端切版的摸索成本，也減少了設計與工程之間的認知落差。</p>
+              <div class="comp-img-wrap" style="margin-top:16px;">
+                <div style="background:#e8eaed; border-radius:8px; height:200px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補：AI Prototype 截圖</div>
+              </div>
+
+              <h3>五、重新設計導覽架構：讓操作動線符合真實工作流程</h3>
+              <p>舊系統的導覽架構有兩個明顯痛點。</p>
+              <p>第一是跨場館切換的體驗極差，若員工同時負責多個場館，切換場館需要先登出、回到登入頁重新選擇，對每天需要跨場館操作的人來說非常不方便。</p>
+              <p>第二是相關功能離得太遠，以員工幫會員購買方案為例，結帳完成後還需要切換到完全不同的位置才能開立發票，流程被切斷，員工必須自行記住下一步在哪裡。</p>
+              <p>新系統在這兩個面向上都做了根本性的改變，<strong style="color:#111;font-weight:700;">跨場館切換的邏輯從登入層移到職務層</strong>，員工的場館權限綁定在職務上，登入後可以直接在頁面的篩選欄位上切換場館，大幅降低日常操作的摩擦。</p>
+              <p>導覽架構的重整則依據幾個原則決定：功能性質相近的項目合併為同一群組、排序按使用頻率由上往下排列，屬於「一次性設定」的項目，例如企業管理、收款設定、通知管理、合約範本等統一收進「設定」區塊，與日常操作區隔開來，設定好之後不太需要頻繁調整的功能，不應該佔據主要導覽的位置。</p>
+              <div class="comp-img-wrap" style="margin-top:16px;">
+                <div style="background:#e8eaed; border-radius:8px; height:200px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補：導覽架構圖</div>
+              </div>
             </div>
-            <p class="placeholder-note">說明文字待補</p>
           </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">5</div>
-              <h3>收款模組</h3>
+          <!-- 設計產出 -->
+          <div class="panel" id="sec-output">
+            <div class="prose">
+              <p class="section-label">設計產出</p>
+              <h2>八大模組的介面設計</h2>
+              <p>系統介面依據場館業者的實際工作流程，拆分為八個核心功能模組，每個模組皆針對使用者的操作情境設計動線與介面邏輯。</p>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">1</div>
+                  <h3>企業模組</h3>
+                </div>
+                <p>企業模組負責整個系統的基礎架構設定，建立品牌、公司、據點、空間四個層級的從屬關係。</p>
+                <p>品牌是系統的頂層單位，名稱於開通時設定後不可更改，但可上傳品牌 Logo，套用於對外文件如信件、收據、合約等。品牌之下可建立多個公司，對應不同子公司或法人實體；每間公司可設立多個據點，對應實際經營的分店或物件；每個據點內再定義具體的空間單位，無論是辦公室、套房或共享空間皆可建檔管理。</p>
+                <p>這個四層架構讓不同規模的品牌都能依照自身的組織結構靈活配置，同時保持清楚的管理層級。</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">2</div>
+                  <h3>團隊模組</h3>
+                </div>
+                <p>團隊模組負責員工的建檔與權限配置，是確保每位員工在系統中擁有正確操作範圍的關鍵步驟。</p>
+                <p>建立員工時，除了基本資料建檔外，還需指定該員工負責的場館與對應職務。由於不同員工可能負責不同場館，同一職務在不同場館下的操作範圍也可以各自配置，讓管理更有彈性。</p>
+                <p>職務權限由總管理者統一設定，可針對每個功能模組的檢視與操作權限個別開關。業務、財務、前台人員等不同角色各自看到的介面與可操作的功能都不同，在確保資料安全的同時，也讓每位員工專注於自己職責範圍內的工作。</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">3</div>
+                  <h3>會員模組</h3>
+                </div>
+                <p>會員模組提供完整的客戶資料管理功能，並針對不同產業的需求設計了高度彈性的架構。</p>
+                <p>建立會員時，除了基本資料建檔，系統提供自訂欄位功能——不同產業對會員資料的需求各異，例如健身房需要緊急聯絡人、空間租賃業重視身份驗證資料，品牌可自行定義所需欄位並設定是否必填，確保資料收集符合自身的營運需求。</p>
+                <p>人際關係功能可記錄會員之間的親屬或關聯關係，例如父母、子女、配偶、推薦人等，並自動建立雙向關聯。這個功能不只是資料管理，也可與方案設計結合應用——例如攜伴方案限定特定關係類型才能購買、推薦優惠需有對應的被推薦人關係作為識別依據。</p>
+                <p>推薦來源欄位記錄會員最初接觸品牌的方式，例如社群媒體、官網預約或現場參觀，協助品牌追蹤會員來源管道。此欄位僅限具備對應權限的職務才能編輯，確保資料的正確性。</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">4</div>
+                  <h3>方案模組</h3>
+                </div>
+                <p class="placeholder-note">說明文字待補</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">5</div>
+                  <h3>收款模組</h3>
+                </div>
+                <p class="placeholder-note">說明文字待補</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">6</div>
+                  <h3>空間租賃模組</h3>
+                </div>
+                <p class="placeholder-note">說明文字待補</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">7</div>
+                  <h3>通知模組</h3>
+                </div>
+                <p class="placeholder-note">說明文字待補</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
+
+              <div class="output-module">
+                <div class="output-module-header">
+                  <div class="output-module-num">8</div>
+                  <h3>合約模組</h3>
+                </div>
+                <p class="placeholder-note">說明文字待補</p>
+              </div>
+              <div class="img-placeholder">截圖待補</div>
             </div>
-            <p class="placeholder-note">說明文字待補</p>
           </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">6</div>
-              <h3>空間租賃模組</h3>
+          <!-- 專案成果 -->
+          <div class="panel" id="sec-results">
+            <div class="prose">
+              <p class="section-label">專案成果</p>
+              <h2>待補</h2>
             </div>
-            <p class="placeholder-note">說明文字待補</p>
           </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">7</div>
-              <h3>通知模組</h3>
+          <!-- 學習與反思 -->
+          <div class="panel" id="sec-learnings">
+            <div class="prose">
+              <p class="section-label">學習與反思</p>
+              <h2>待補</h2>
             </div>
-            <p class="placeholder-note">說明文字待補</p>
           </div>
-          <div class="img-placeholder">截圖待補</div>
 
-          <div class="output-module">
-            <div class="output-module-header">
-              <div class="output-module-num">8</div>
-              <h3>合約模組</h3>
-            </div>
-            <p class="placeholder-note">說明文字待補</p>
+          <div class="proj-nav">
+            <a href="project-detail.html" class="proj-nav-item proj-nav-item--prev">
+              <span class="proj-nav-label">← 上一篇</span>
+              <span class="proj-nav-title">改善數位閱讀及廣告體驗，協助《天下雜誌》創下「數位營收大於紙本營收」里程碑</span>
+            </a>
+            <a href="project-detail-cwapp.html" class="proj-nav-item proj-nav-item--next">
+              <span class="proj-nav-label">下一篇 →</span>
+              <span class="proj-nav-title">從使用者訪談到產品優化：UX 研究如何助攻《天下雜誌 App》訂戶增長</span>
+            </a>
           </div>
-          <div class="img-placeholder">截圖待補</div>
-        </div>
-      </div>
-
-      <!-- 專案成果 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">專案成果</p>
-          <h2>待補</h2>
-        </div>
-      </div>
-
-      <!-- 學習與反思 -->
-      <div class="panel">
-        <div class="prose">
-          <p class="section-label">學習與反思</p>
-          <h2>待補</h2>
-        </div>
-      </div>
-
-      <div class="panel cta-panel">
-        <div class="cta-left">
-          <div class="cta-label">歡迎與我聯絡</div>
-          <p class="cta-email-text">yuhsuanwang531@gmail.com</p>
-        </div>
-        <div class="cta-social">
-          <a href="https://www.linkedin.com/in/yuhsuanwang" target="_blank" class="cta-social-link">LinkedIn</a>
-          <a href="https://medium.com/@yuhsuanwang531" target="_blank" class="cta-social-link">Medium</a>
-        </div>
-      </div>
+        </div><!-- /.proj-content -->
+      </div><!-- /.proj-layout -->
     </main>
   </div>
   <script src="assets/js/sidebar.js"></script>
+  <script>
+  (function(){
+    var items = document.querySelectorAll('.proj-toc-list li[data-sec]');
+    var sections = document.querySelectorAll('.proj-content .panel[id]');
+    if (!sections.length) return;
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          items.forEach(function(li){ li.classList.remove('toc-active'); });
+          var active = document.querySelector('.proj-toc-list li[data-sec="' + entry.target.id + '"]');
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+    sections.forEach(function(s){ observer.observe(s); });
+  })();
+  </script>
 </body>
 </html>
