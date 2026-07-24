@@ -248,15 +248,15 @@
       transition: box-shadow 0.2s;
     }
     .home-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
-    .home-card--coming-soon { cursor: default; position: relative; }
+    .home-card--coming-soon { cursor: default; }
     .home-card--coming-soon:hover { box-shadow: none; }
+    .home-card--coming-soon .hc-img { position: relative; }
     .hc-coming-soon {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.82);
-      backdrop-filter: blur(4px);
-      border-radius: 16px;
-      font-size: 16px; font-weight: 600; color: var(--text-primary);
+      background: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      font-size: 16px; font-weight: 600; color: #fff;
       opacity: 0;
       transition: opacity 0.2s;
       pointer-events: none;
@@ -663,7 +663,7 @@
           <p class="hero-sub hero-line">10 年以上產品設計經驗，橫跨 2C 與 2B，擅長從 0 → 1、1 → N 的產品規劃與設計流程，我相信好的設計師不只解決問題，更能幫助身邊的人看見更好的可能性</p>
           <div class="hero-cta" style="display:none">
             <a href="about.html" class="hero-cta-btn hero-cta-btn--primary">關於我 ↗</a>
-            <a href="assets/resume.pdf" target="_blank" class="hero-cta-btn hero-cta-btn--outline">下載履歷</a>
+            <a href="https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link" target="_blank" class="hero-cta-btn hero-cta-btn--outline">下載履歷</a>
           </div>
           <div class="hero-cards">
             <a href="about.html" class="hero-card">
@@ -708,13 +708,15 @@
           <div class="home-row home-row--proj">
 
             <div class="home-card home-card--coming-soon">
-              <div class="hc-img"><img src="assets/images/fitbutler.png" alt="Fitbutler"></div>
+              <div class="hc-img">
+                <img src="assets/images/fitbutler.png" alt="Fitbutler">
+                <div class="hc-coming-soon">即將推出</div>
+              </div>
               <div class="hc-body">
                 <div class="hc-meta">2023 - 2026</div>
                 <div class="hc-title">用模組化思維重新定義 B2B 營運管理系統：《Fitbutler》從 0 到 1 的設計策略</div>
                 <div class="hc-desc">從零建立模組化設計架構，支援運動產業與空間租賃業的差異化需求，並具備跨國營運能力</div>
               </div>
-              <div class="hc-coming-soon">即將推出</div>
             </div>
 
             <a href="project-detail.html" class="home-card">

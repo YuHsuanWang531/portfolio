@@ -43,14 +43,14 @@
     { href: 'index.html', label: '首頁', match: ['index.html', ''], icon: `<img src="assets/images/home.svg" class="nav-icon-img">` },
     { href: 'index.html#projects', label: '設計專案', match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'], icon: `<img src="assets/images/design.svg" class="nav-icon-img">` },
     { href: 'about.html', label: '關於我', match: ['about.html'], icon: `<img src="assets/images/about.svg" class="nav-icon-img">` },
-    { href: 'assets/resume.pdf', label: '履歷', match: [], icon: `<img src="assets/images/work.svg" class="nav-icon-img">` },
+    { href: 'https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link', label: '履歷', match: [], icon: `<img src="assets/images/work.svg" class="nav-icon-img">` },
   ];
 
   const bottomNavHTML = `<nav class="bottom-nav" id="bottomNav">
     <div class="bottom-nav-inner">
       ${BOTTOM_NAV_ITEMS.map((item, i) => {
         const isActive = item.match.includes(currentPage);
-        const isExternal = item.href.endsWith('.pdf');
+        const isExternal = item.href.startsWith('https://') || item.href.startsWith('http://');
         const divider = i === 3 ? '<div class="bottom-nav-divider"></div>' : '';
         return `${divider}<a href="${item.href}"${isExternal ? ' target="_blank"' : ''} class="bottom-nav-item${isActive ? ' active' : ''}">
           <span class="bottom-nav-icon">${item.icon}</span>
