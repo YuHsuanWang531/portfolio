@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YuHsuan Wang — Senior Product Designer</title>
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    .layout, .main { background: transparent; }
+    body { background: #f5f5f7; min-height: 100vh; }
+    .layout { padding: 0; gap: 0; }
+    .main   { padding: 0; }
+
+    /* ── Page container ── */
+    .home {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 24px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 96px;
+    }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    @keyframes heroLineIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-line {
+      display: block;
+      opacity: 0;
+      animation: heroLineIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hero-headline .hero-line:nth-child(1) { animation-delay: 0.1s; }
+    .hero-headline .hero-line:nth-child(2) { animation-delay: 0.3s; }
+    p.hero-line { animation-delay: 0.5s; }
+
+    .home-hero {
+      padding: 60px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 28px;
+      background:
+        radial-gradient(ellipse 70% 80% at 0%   15%,  rgba(41,118,160,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 65% 70% at 100% 85%,  rgba(139,92,246,0.15) 0%, transparent 65%),
+        radial-gradient(ellipse 75% 55% at 78%  5%,   rgba(173,216,240,0.20) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 60% at 8%   88%,  rgba(41,118,160,0.10) 0%, transparent 62%),
+        radial-gradient(ellipse 50% 50% at 100% 5%,   rgba(139,92,246,0.10) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 50% at 48%  55%,  rgba(100,130,210,0.07) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(41,118,160,0.05) 0%, rgba(139,92,246,0.04) 100%),
+        #fff;
+      border-radius: 24px;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: 999px; padding: 8px 18px;
+      font-size: var(--fs-xs); font-weight: 500; color: var(--text-primary);
+      margin-bottom: -8px;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center;
+      padding: 5px 12px; border: none;
+      border-radius: 8px; font-size: 12px; font-weight: 500;
+      background: #E8F1F8; color: #2976A0;
+    }
+
+    .hero-headline {
+      font-size: 34px; font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1.35;
+      color: var(--text-primary); margin: 0;
+    }
+    .hero-headline em { font-style: normal; }
+    .hero-cta {
+      display: flex; gap: 12px; align-items: center;
+      margin-top: -8px;
+    }
+    .hero-cta-btn {
+      display: inline-flex; align-items: center;
+      padding: 10px 24px; border-radius: 999px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none; transition: opacity 0.15s, box-shadow 0.15s;
+    }
+    .hero-cta-btn--primary {
+      background: #2976A0; color: #fff;
+    }
+    .hero-cta-btn--primary:hover { opacity: 0.88; }
+    .hero-cta-btn--outline {
+      background: #fff; color: var(--text-primary);
+      border: 1.5px solid rgba(0,0,0,0.15);
+    }
+    .hero-cta-btn--outline:hover { border-color: rgba(0,0,0,0.35); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+    .hero-sub {
+      font-size: 18px; color: var(--text-secondary);
+      line-height: 1.7; max-width: 640px;
+      margin: -16px 0 0; text-align: center;
+    }
+
+    /* 4 info cards */
+    .hero-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      margin-top: 16px;
+    }
+
+    .hero-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      padding: 20px;
+      display: flex; flex-direction: column; gap: 2px;
+      text-decoration: none; color: inherit;
+      transition: box-shadow 0.2s;
+    }
+    .hero-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+    .hero-card--photo {
+      padding: 0; overflow: hidden; min-height: 160px;
+    }
+    .hero-card--photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .hero-card-label {
+      font-size: 12px; color: var(--text-muted);
+      font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 2px;
+    }
+    .hero-card-value {
+      font-size: 18px; font-weight: 800;
+      color: var(--text-primary); line-height: 1.3;
+    }
+    .hero-card-sub {
+      font-size: 16px; color: var(--text-secondary);
+      line-height: 1.55; margin-top: 2px;
+    }
+
+    /* ══════════════════════════════════
+       SECTION WRAPPER (Podcast / Articles)
+    ══════════════════════════════════ */
+    .home-section {
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .card-hidden {
+      opacity: 0;
+      transform: translateY(48px);
+    }
+    .card-visible {
+      animation: cardIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes cardIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-visible {
+      animation: sectionIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes sectionIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .home-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .home-section-header.centered { justify-content: center; gap: 16px; }
+    .home-section-header.centered .home-section-title { text-align: center; }
+    .home-section-header.centered::before,
+    .home-section-header.centered::after {
+      content: ''; flex-shrink: 0;
+      width: 80px; height: 1.5px;
+      background: #ccc; border-radius: 2px;
+    }
+    .home-section-sub {
+      text-align: center;
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-top: -12px;
+    }
+    .home-section-title {
+      font-size: 32px; font-weight: 700;
+      font-family: 'Noto Serif TC', serif;
+      letter-spacing: 0.02em; color: var(--text-primary);
+    }
+    .home-section-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 13px; font-weight: 600;
+      padding: 8px 16px; border-radius: 20px;
+      background: #fff; border: 1px solid rgba(0,0,0,0.07);
+      text-decoration: none; color: var(--text-primary);
+      transition: background 0.15s, box-shadow 0.15s; white-space: nowrap;
+    }
+    .home-section-btn:hover { background: #eef0f5; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+    /* ══════════════════════════════════
+       PROJECTS: 1 large + 2 small
+    ══════════════════════════════════ */
+    .home-row--proj {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .home-row--proj .home-card {
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .home-row--proj .hc-img {
+      flex-shrink: 0;
+      width: 460px;
+      margin: 12px 0 12px 12px;
+    }
+    .home-row--proj .hc-img img {
+      aspect-ratio: 16 / 10;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .home-row--proj .hc-body {
+      padding: 20px 24px;
+      justify-content: center;
+    }
+
+    /* ══════════════════════════════════
+       PODCAST: 3-col cards
+    ══════════════════════════════════ */
+    .home-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px; overflow: hidden;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.2s;
+    }
+    .home-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+    .home-card--coming-soon { cursor: default; }
+    .home-card--coming-soon:hover { box-shadow: none; }
+    .home-card--coming-soon .hc-img { position: relative; }
+    .hc-coming-soon {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      font-size: 16px; font-weight: 600; color: #fff;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .home-card--coming-soon:hover .hc-coming-soon { opacity: 1; }
+
+    .hc-img { flex-shrink: 0; margin: 12px 12px 0; overflow: hidden; border-radius: 10px; }
+    .hc-img img {
+      width: 100%; display: block; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .home-card:hover .hc-img img { transform: scale(1.04); }
+
+    .hc-body { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .hc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .hc-title { font-size: 24px; font-weight: 700; line-height: 1.5; color: var(--text-primary); }
+    .hc-desc  { font-size: 16px; color: var(--text-secondary); line-height: 1.55; margin-top: 2px; }
+    .hc-meta  { font-size: 12px; color: var(--text-muted); }
+    .home-row--proj .hc-meta { font-size: 14px; }
+    .hc-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.15); font-size: 14px; font-weight: 500; color: var(--text-primary); width: fit-content; }
+    .home-card:hover .hc-more { border-color: #111; }
+
+    /* ── 社群影響力 bento ── */
+    .edu-bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+    .edu-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .edu-card--large { grid-row: 1 / 3; }
+    .edu-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .edu-role {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .edu-card--small .edu-role { font-size: 24px; }
+    .edu-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
+    .edu-card--link { text-decoration: none; color: inherit; cursor: pointer; transition: box-shadow 0.2s; }
+    .edu-card--link:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+    .edu-card--link:hover .edu-more { border-color: #111; }
+    .edu-card { opacity: 0; transform: translateY(48px); }
+    .edu-card.edu-visible { animation: cardIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .edu-card--small .edu-more { margin-top: 20px; }
+    .edu-more {
+      margin-top: auto;
+      padding-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 20px;
+      padding: 8px 16px;
+      width: fit-content;
+    }
+    @media (max-width: 767px) {
+      .edu-bento { grid-template-columns: 1fr; }
+      .edu-card--large { grid-row: auto; }
+    }
+
+    .pod-row { display: flex; gap: 12px; }
+    .pod-row .home-card { flex: 1; }
+    .pod-row .hc-img img { aspect-ratio: 1 / 1; }
+    .pod-row .hc-body { padding: 12px 14px 16px; gap: 5px; }
+    .pod-row .hc-title { font-size: 16px; }
+    .blog-row { display: flex; gap: 12px; }
+    .blog-card {
+      flex-shrink: 0;
+      width: calc((100% - 24px) / 3);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.25s;
+    }
+    .blog-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+    .blog-card-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: blur(6px);
+      transform: scale(1.08);
+    }
+    .blog-card-inner {
+      position: relative; z-index: 1;
+      margin: 12px;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .blog-card-meta {
+      font-size: 13px; color: #999;
+      padding: 13px 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .blog-card-body {
+      display: flex; gap: 10px;
+      padding: 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .blog-card-title-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .blog-card-title {
+      font-size: 18px; font-weight: 800;
+      line-height: 1.4; letter-spacing: -0.02em;
+      color: #111;
+    }
+    .blog-card-desc {
+      font-size: 14px; color: #666; line-height: 1.6;
+    }
+    .blog-card-url {
+      writing-mode: vertical-rl;
+      font-size: 11px; color: #bbb;
+      white-space: nowrap; align-self: stretch;
+      display: flex; align-items: flex-end;
+    }
+    .blog-card-author {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+    }
+    .blog-card-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%; object-fit: cover;
+    }
+    .blog-card-author-name { font-size: 14px; color: #333; font-weight: 500; }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: transparent;
+      padding: 24px 24px 120px;
+      margin-top: 0;
+      text-align: center;
+    }
+    .site-footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      background: #111;
+      border-radius: 24px;
+      padding: 48px 56px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .footer-main-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 8px; }
+    .footer-label { font-size: 14px; color: rgba(255,255,255,0.45); }
+    .footer-email {
+      font-size: 28px; font-weight: 700;
+      color: #fff; background: none; border: none;
+      cursor: pointer; padding: 0;
+      letter-spacing: -0.02em;
+      transition: opacity 0.18s;
+      text-align: left;
+    }
+    .footer-email:hover { opacity: 0.7; }
+    .footer-copy-toast {
+      font-size: 14px; color: rgba(255,255,255,0.4);
+      opacity: 0; transition: opacity 0.3s;
+      height: 16px;
+    }
+    .footer-copy-toast.show { opacity: 1; }
+    .footer-email-wrap { position: relative; display: inline-block; }
+    .footer-email-wrap::after {
+      content: 'Copy';
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.15);
+      color: #fff; font-size: 14px; font-weight: 500;
+      padding: 4px 10px; border-radius: 6px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 0; transition: opacity 0.15s;
+    }
+    .footer-email-wrap:hover::after { opacity: 1; }
+    .footer-copyright {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .footer-right { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .footer-link {
+      font-size: 15px; color: rgba(255,255,255,0.45);
+      text-decoration: none; transition: color 0.18s;
+    }
+    .footer-link:hover { color: #fff; }
+    .blog-card-img { width: 100%; height: auto; display: block; border-radius: 20px; transition: transform 0.25s; }
+    .blog-card:hover .blog-card-img { transform: scale(1.04); }
+
+    /* ══════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════ */
+    .testi-section-wrapper { position: relative; padding-right: 56px; }
+    .pod-wrapper { padding-right: 0; }
+
+    .testi-layout {
+      display: flex; gap: 16px; align-items: stretch;
+    }
+
+    .testi-intro {
+      flex-shrink: 0; width: 220px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px; padding: 24px;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      scroll-snap-align: start;
+    }
+    .testi-intro-title {
+      font-size: 26px; font-weight: 800;
+      letter-spacing: -0.02em; line-height: 1.3;
+      color: var(--text-primary);
+    }
+    .testi-intro-marks { display: flex; gap: 6px; align-items: center; }
+    .testi-intro-marks svg { width: 40px; height: 40px; }
+    .testi-intro-marks svg:first-child { transform: scale(-1, -1); }
+
+    .testi-scroll {
+      display: flex; gap: 12px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .testi-scroll::-webkit-scrollbar { display: none; }
+
+    .testi-grid {
+      column-count: 2;
+      column-gap: 16px;
+    }
+    .testi-grid .testi-card {
+      break-inside: avoid;
+      margin-bottom: 16px;
+    }
+
+    .testi-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex; flex-direction: column;
+    }
+
+    .testi-q-mark {
+      display: block; margin-bottom: 16px;
+      width: 36px; height: 36px;
+      fill: rgba(0,0,0,0.18);
+      transform: scale(-1, -1);
+    }
+
+    .testi-text {
+      font-size: 16px; color: var(--text-secondary);
+      line-height: 1.75; flex: 1;
+    }
+
+    .testi-author {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 24px;
+    }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      border: 2px solid #fff;
+    }
+    .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testi-name { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .testi-role { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
+
+    .testi-arrow {
+      position: absolute; right: 8px; top: 50%;
+      transform: translateY(-50%);
+      width: 40px; height: 40px;
+      background: #2976A0; color: #fff;
+      border: none; border-radius: 50%;
+      cursor: pointer; font-size: 28px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, transform 0.15s;
+      z-index: 10;
+    }
+    .testi-arrow:hover { background: #1f5f84; transform: translateY(-50%) scale(1.08); }
+
+    /* ══════════════════════════════════
+       ARTICLES: scrollable cards
+    ══════════════════════════════════ */
+    .blog-intro-sub   { font-size: 16px; font-weight: 700; color: var(--text-secondary); margin-top: 4px; }
+    .blog-intro-list  { margin-top: auto; padding-top: 20px; display: flex; flex-direction: column; gap: 2px; font-size: 16px; color: var(--text-muted); }
+    .blog-intro-link  {
+      margin-top: 16px; display: inline-flex; align-items: center; gap: 4px;
+      font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 20px;
+      background: #fff; border: 1px solid rgba(0,0,0,0.07);
+      text-decoration: none; color: var(--text-primary); width: fit-content;
+      transition: background 0.15s;
+    }
+    .blog-intro-link:hover { background: #eef0f5; }
+
+    .blog-scroll-card {
+      flex-shrink: 0;
+      width: calc(50% - 122px);
+      height: 312px;
+      position: relative; border-radius: 20px; overflow: hidden;
+      display: block; text-decoration: none;
+      scroll-snap-align: start;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .blog-scroll-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.18); }
+    .blog-scroll-card img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .blog-scroll-card:hover img { transform: scale(1.05); }
+    .blog-scroll-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.4) 55%, transparent 100%);
+      padding: 40px 18px 18px; border-radius: 0 0 20px 20px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .blog-scroll-body .tag { background: rgba(255,255,255,0.2); color: #fff; border-color: transparent; }
+    .blog-scroll-title { font-size: 18px; font-weight: 700; color: #fff; line-height: 1.45; }
+
+    /* ══════════════════════════════════
+       MOBILE (≤767px)
+    ══════════════════════════════════ */
+    @media (max-width: 767px) {
+      .home { padding: 16px 12px 120px; gap: 32px; }
+
+      .home-hero { padding: 24px 20px 20px; gap: 20px; }
+      .hero-headline { font-size: 28px; }
+      .hero-sub { font-size: 16px; }
+      .hero-cards { grid-template-columns: 1fr 1fr; }
+      .hero-card--photo { min-height: 130px; }
+
+      /* Project cards: stack image on top, text below */
+      .home-row--proj .home-card { flex-direction: column; }
+      .home-row--proj .hc-img { width: auto; margin: 12px 12px 0; }
+      .home-row--proj .hc-img img { aspect-ratio: 16 / 9; height: auto; }
+      .home-row--proj .hc-body { padding: 14px 18px 18px; justify-content: flex-start; }
+      .hc-title { font-size: 18px; }
+
+      .home-section { gap: 20px; }
+      .home-section-title { font-size: 20px; }
+
+      /* Podcast: one card per row, image left + text right */
+      .pod-row { flex-direction: column; flex-wrap: nowrap; }
+      .pod-row .home-card { flex: none; width: 100%; flex-direction: row; align-items: center; }
+      .pod-row .hc-img { margin: 12px 0 12px 12px; width: 88px; height: 88px; flex-shrink: 0; border-radius: 10px; }
+      .pod-row .hc-img img { aspect-ratio: 1 / 1; width: 88px; height: 88px; }
+      .pod-row .hc-body { padding: 12px 14px; }
+
+      /* Blog row: two per row */
+      .blog-row { flex-wrap: wrap; }
+      .blog-card { flex: 1 1 calc(50% - 6px); min-width: 0; }
+
+      /* Testimonial grid: 1 column */
+      .testi-grid { column-count: 1; }
+    }
+
+    /* ══════════════════════════════════
+       TABLET (768px–1024px)
+    ══════════════════════════════════ */
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .home { padding: 18px 18px 140px; }
+      .hero-headline { font-size: 34px; }
+      .hero-cards { grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+      .hero-card { padding: 16px; }
+      .hero-card-value { font-size: 16px; }
+      .proj-card { height: 320px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <main class="main">
+      <div class="home">
+
+        <!-- ── Hero ── -->
+        <section class="home-hero">
+          <div class="hero-badge"><span class="live-dot"></span>Designing</div>
+          <h1 class="hero-headline">
+            <span class="hero-line">Hi, I'm YuHsuan! 👋🏻</span>
+            <span class="hero-line"><em>A cross-domain product designer focused on creating business value through design</em></span>
+          </h1>
+          <p class="hero-sub hero-line">10+ years of product design experience across B2C and B2B. Skilled in 0→1 and 1→N product planning and design. I believe great designers don't just solve problems — they help the people around them see better possibilities.</p>
+          <div class="hero-cta" style="display:none">
+            <a href="about.html" class="hero-cta-btn hero-cta-btn--primary">About Me ↗</a>
+            <a href="https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link" target="_blank" class="hero-cta-btn hero-cta-btn--outline">Download Resume</a>
+          </div>
+          <div class="hero-cards">
+            <a href="about.html" class="hero-card">
+              <div class="hero-card-value">YuHsuan Wang</div>
+              <div class="hero-card-sub">Senior Product Designer</div>
+              <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap">
+                <span class="hero-tag">Taipei</span>
+              </div>
+            </a>
+            <a href="about.html" class="hero-card hero-card--photo">
+              <img src="assets/images/avatar.webp" alt="YuHsuan Wang">
+            </a>
+            <a href="about.html" class="hero-card">
+              <div class="hero-card-value">10+ Years</div>
+              <div class="hero-card-sub">Product Design Experience</div>
+              <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap">
+                <span class="hero-tag">B2C</span>
+                <span class="hero-tag">App</span>
+                <span class="hero-tag">Web</span>
+              </div>
+            </a>
+            <div class="hero-card">
+              <div class="hero-card-label">Currently at</div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <a href="https://www.fitbutler.ai/" target="_blank" class="hero-card-value" style="text-decoration:none;color:inherit">Fitbutler</a>
+                <a href="https://www.fitbutler.ai/" target="_blank" style="display:inline-flex;align-items:center;color:var(--text-primary);text-decoration:none;font-size:16px;line-height:1;opacity:0.8" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">↗</a>
+              </div>
+              <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap">
+                <span class="hero-tag">B2B</span>
+                <span class="hero-tag">SaaS</span>
+                <span class="hero-tag">AI agent</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── 設計專案 ── -->
+        <section id="projects" class="home-section">
+          <div class="home-section-header centered">
+            <div class="home-section-title">Design Projects</div>
+          </div>
+          <div class="home-row home-row--proj">
+
+            <a href="project-detail-fitbutler.html" class="home-card">
+              <div class="hc-img"><img src="assets/images/fitbutler.png" alt="Fitbutler"></div>
+              <div class="hc-body">
+                <div class="hc-meta">2023 - 2026</div>
+                <div class="hc-title">From Single-Industry to Cross-Industry B2B SaaS: Fitbutler's Modular Product Design Strategy from 0 to 1</div>
+                <div class="hc-desc">Built a modular design architecture from scratch to support the differentiated needs of the fitness and space rental industries, with cross-regional operational capability</div>
+                <div class="hc-more">Learn More →</div>
+              </div>
+            </a>
+
+            <a href="project-detail.html" class="home-card">
+              <div class="hc-img"><img src="assets/images/cwarticle.png" alt="天下雜誌廣告體驗"></div>
+              <div class="hc-body">
+                <div class="hc-meta">2020</div>
+                <div class="hc-title">Balancing Reading Experience and Business Growth Through Product Design, Helping CommonWealth Magazine Complete a Key Digital Transformation Milestone</div>
+                <div class="hc-desc">Reduced bounce rate (−3%), unlocked a new traffic source for sponsored content (+40K articles/week), and boosted text ad CTR (+900%)</div>
+                <div class="hc-more">Learn More →</div>
+              </div>
+            </a>
+
+            <a href="project-detail-cwapp.html" class="home-card">
+              <div class="hc-img"><img src="assets/images/cwapp.png" alt="天下雜誌App"></div>
+              <div class="hc-body">
+                <div class="hc-meta">2023</div>
+                <div class="hc-title">From User Research to Product Strategy: How UX Research Drove CommonWealth Magazine App Subscriber Growth</div>
+                <div class="hc-desc">Paywall optimization improved subscription conversion (+4%), gift articles expanded reach to non-subscribers, and TTS users surpassed Podcast users for the first time</div>
+                <div class="hc-more">Learn More →</div>
+              </div>
+            </a>
+
+          </div>
+        </section>
+
+        <!-- ── 社群影響力 ── -->
+        <section class="home-section">
+          <div class="home-section-header centered">
+            <div class="home-section-title">Community Impact</div>
+          </div>
+          <div class="home-section-sub">From learner to mentor — every session is a chance to revisit and deepen my own expertise</div>
+          <div class="edu-bento">
+            <!-- Product Design TA -->
+            <a href="https://aapd.com.tw/" target="_blank" rel="noopener" class="edu-card edu-card--large edu-card--link">
+              <img src="assets/images/aapdlogo.png" alt="AAPD" class="edu-logo">
+              <div class="edu-role">Product Design TA @AAPD</div>
+              <div class="edu-desc">Served as Product Design TA for "Product Design Bootcamp", "Product Design Challenge", and "UI Design Bootcamp" — supporting students with homework reviews, Design Reviews, workshop training, troubleshooting, and curating relevant design resources. Mentored 250+ students to date.</div>
+              <span class="edu-more">Learn More →</span>
+            </a>
+            <!-- Career Coaching Mentor -->
+            <a href="https://aapd.com.tw/coach-program/coach-all/%E5%A4%A7%E8%83%83" target="_blank" rel="noopener" class="edu-card edu-card--small edu-card--link">
+              <img src="assets/images/aapdlogo.png" alt="AAPD" class="edu-logo">
+              <div class="edu-role">Career Coaching Mentor</div>
+              <div class="edu-desc">Personalized 1-on-1 career consultations covering resume & portfolio optimization, skill development, and career planning — helping students tackle short-term challenges while exploring long-term growth goals. 10+ coaching sessions completed.</div>
+              <span class="edu-more">Learn More →</span>
+            </a>
+            <!-- UI/UX Industry Mentor -->
+            <a href="https://www.linkedin.com/company/xchange-tw/posts/?feedView=all" target="_blank" rel="noopener" class="edu-card edu-card--small edu-card--link">
+              <img src="assets/images/xchangelogo.png" alt="XChange" class="edu-logo">
+              <div class="edu-role">UI/UX Industry Mentor @XChange</div>
+              <div class="edu-desc">Served as UI/UX Industry Mentor at the 8th XChange Internet University, providing 1-on-1 consultations to university students on questions arising from their internships and projects.</div>
+              <span class="edu-more">Learn More →</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- ── Podcast ── -->
+        <section class="home-section">
+          <div class="home-section-header centered">
+            <div class="home-section-title">Podcasts I've Been Featured In</div>
+          </div>
+          <div class="home-section-sub">Sharing real career turning points and thought processes through interviews and conversations</div>
+          <div class="pod-row">
+
+            <a href="https://open.spotify.com/episode/4CjQp0ElixVsjUbpzuuK5L" target="_blank" class="home-card">
+              <div class="hc-img"><img src="assets/images/1on1.png" alt="Design Fireside"></div>
+              <div class="hc-body">
+                <div class="hc-meta">Product Design 1 on 1 · 55 min</div>
+                <div class="hc-title">Design Fireside Series — Challenges & Career Setbacks of a B2B Designer</div>
+              </div>
+            </a>
+
+            <a href="https://open.spotify.com/episode/63WUnjXNFJ5QCo0QfeWkVm" target="_blank" class="home-card">
+              <div class="hc-img"><img src="assets/images/S4EP5.png" alt="S4EP5"></div>
+              <div class="hc-body">
+                <div class="hc-meta">No Shortcuts S4EP5 · 44 min</div>
+                <div class="hc-title">Senior Designers Can Do It All? Let's Talk About Our Most Painful Failures</div>
+              </div>
+            </a>
+
+            <a href="https://open.spotify.com/episode/5AGdUuAcdmGiZoS4zycBJP" target="_blank" class="home-card">
+              <div class="hc-img"><img src="assets/images/S4EP6.png" alt="S4EP6"></div>
+              <div class="hc-body">
+                <div class="hc-meta">No Shortcuts S4EP6 · 52 min</div>
+                <div class="hc-title">Conquering Workplace Communication & Collaboration — Leading Your Team Toward a Clearer Vision</div>
+              </div>
+            </a>
+
+          </div>
+        </section>
+
+        <!-- ── 最新文章 ── -->
+        <section class="home-section">
+          <div class="home-section-header centered">
+            <div class="home-section-title">Design Thinking Notes</div>
+          </div>
+          <div class="home-section-sub">Drawing from real work experience — reflections on design and personal growth</div>
+          <div class="blog-row" style="justify-content: center;">
+
+            <a href="https://medium.com/@yuhsuanwang531/%E5%BE%9E%E8%AE%80%E6%87%82%E7%94%A8%E6%88%B6%E5%88%B0%E8%AE%80%E6%87%82%E7%B3%BB%E7%B5%B1-2c-%E8%BD%89-2b-%E7%9A%84%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD%E8%BD%89%E6%8F%9B-2ab9857ac2ef" target="_blank" class="blog-card">
+              <img class="blog-card-img" src="assets/images/blog1.png" alt="從讀懂用戶到讀懂系統">
+            </a>
+
+            <a href="https://medium.com/@yuhsuanwang531/%E8%BB%9F%E5%AF%A6%E5%8A%9B%E6%89%8D%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%AE%93%E4%BD%A0%E5%9C%A8%E8%81%B7%E5%A0%B4%E4%B8%AD%E8%88%87%E7%9C%BE%E4%B8%8D%E5%90%8C-%E4%B8%8A-dd560ea55585" target="_blank" class="blog-card">
+              <img class="blog-card-img" src="assets/images/blog2.png" alt="軟實力培養">
+            </a>
+
+          </div>
+        </section>
+
+        <!-- ── 大家怎麼說 ── -->
+        <section class="home-section">
+          <div class="home-section-header centered">
+            <div class="home-section-title">Trusted by Teammates & Students</div>
+          </div>
+          <div class="home-section-sub">Grateful for every piece of feedback that makes me a better designer</div>
+          <div class="testi-grid">
+
+            <div class="testi-card">
+              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+              <div class="testi-text">YuHsuan is an energetic and enthusiastic designer with a real passion for communication. She actively listens to engineering feedback, often proactively discusses feasibility with frontend developers, and uses AI tools effectively to articulate design ideas. Collaborating with her is not only enjoyable — it genuinely helps everyone grow together.</div>
+              <div class="testi-author">
+                <div class="testi-avatar"><img src="assets/images/Tofu.png" alt="Tofu"></div>
+                <div>
+                  <div class="testi-name">Tofu</div>
+                  <div class="testi-role">Senior Frontend Engineer @ CloudGem</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testi-card">
+              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+              <div class="testi-text">YuHsuan not only pinpoints core issues with precision, but also brings a keen eye to the subtle details we often overlook. She listens patiently to every question and answers thoughtfully — covering everything from big-picture product thinking to fine visual nuances. You can truly feel her genuine care and passion for helping students grow.</div>
+              <div class="testi-author">
+                <div class="testi-avatar"><img src="assets/images/Jyun.png" alt="Jyun"></div>
+                <div>
+                  <div class="testi-name">Jyun</div>
+                  <div class="testi-role">UI Design Bootcamp Student</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testi-card">
+              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+              <div class="testi-text">YuHsuan always helps us break through blind spots quickly and patiently guides us back to focus on our goals. Sharp, decisive, and a little funny — she brought a lot of laughter to an otherwise stressful project. Under her guidance, we didn't just win the top project award; we also developed a much more well-rounded design thinking mindset.</div>
+              <div class="testi-author">
+                <div class="testi-avatar"><img src="assets/images/Glori.png" alt="Glori"></div>
+                <div>
+                  <div class="testi-name">Glori</div>
+                  <div class="testi-role">Product Design Challenge Student</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testi-card">
+              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+              <div class="testi-text">I'm so grateful for YuHsuan's incredibly thorough Design Review. She answered every question in detail, not only identifying current issues in my product but also offering ideas that really opened my mind. After reflecting on everything post-session, I discovered blind spots in my own project execution and thinking. It was truly a rewarding experience.</div>
+              <div class="testi-author">
+                <div class="testi-avatar"><img src="assets/images/電鍋.png" alt="電鍋"></div>
+                <div>
+                  <div class="testi-name">電鍋</div>
+                  <div class="testi-role">Coachee</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-copyright">Copyright © 2026 YuHsuan Wang</div>
+  </footer>
+  <script src="assets/js/sidebar.js"></script>
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('yuhsuanwang531@gmail.com').then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+
+    // Section-level animation (for hero and sections without cards)
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('section-visible');
+        sectionObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+
+    // .home-hero uses CSS animation on load — no scroll observer needed
+
+    // Individual card animation with stagger based on sibling index
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const card = entry.target;
+        const siblings = Array.from(card.parentElement.children);
+        const i = siblings.indexOf(card);
+        setTimeout(() => {
+          card.classList.add('card-visible');
+          card.addEventListener('animationend', () => {
+            card.style.opacity = '1';
+            card.style.transform = '';
+            card.classList.remove('card-hidden', 'card-visible');
+          }, { once: true });
+        }, i * 200);
+        cardObserver.unobserve(card);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.home-card, .blog-card, .testi-card').forEach(card => {
+      card.classList.add('card-hidden');
+      cardObserver.observe(card);
+    });
+
+    // 社群影響力 staggered fade-in
+    const eduObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.edu-card');
+          cards.forEach((card, i) => {
+            setTimeout(() => card.classList.add('edu-visible'), i * 150);
+          });
+          eduObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    const eduBento = document.querySelector('.edu-bento');
+    if (eduBento) eduObserver.observe(eduBento);
+  </script>
+</body>
+</html>

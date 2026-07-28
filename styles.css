@@ -774,7 +774,8 @@ ul { list-style: none; }
 .prose ul li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: var(--fs-h4); line-height: 1.3; }
 .prose a { color: var(--accent); text-decoration: underline; }
 .panel h3 { font-size: 20px; font-weight: 700; margin: 0; }
-.panel .prose h3 { margin: 24px 0 8px; }
+.panel .prose h3 { margin: 56px 0 8px; }
+.panel .prose h2 + h3 { margin-top: 20px; }
 .panel h4 { font-size: 18px; font-weight: 700; margin: 0; }
 .project-sidebar dt { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 4px; margin-top: 24px; }
 .project-sidebar dt:first-child { margin-top: 0; }
@@ -1241,9 +1242,7 @@ h3.value-card-title { margin-bottom: 8px; }
   margin-top: 8px;
 }
 .problem-card {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  padding: 20px 20px 20px 0;
 }
 .problem-card-icon { font-size: 24px; margin-bottom: 12px; }
 .problem-card-icon img {
@@ -1563,7 +1562,7 @@ a.project-card-link {
   transform: translateX(-50%);
   background: rgba(0,0,0,0.75);
   color: #fff;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 8px;

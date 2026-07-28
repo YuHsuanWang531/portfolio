@@ -276,6 +276,8 @@
     .hc-desc  { font-size: 16px; color: var(--text-secondary); line-height: 1.55; margin-top: 2px; }
     .hc-meta  { font-size: 12px; color: var(--text-muted); }
     .home-row--proj .hc-meta { font-size: 14px; }
+    .hc-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.15); font-size: 14px; font-weight: 500; color: var(--text-primary); width: fit-content; }
+    .home-card:hover .hc-more { border-color: #111; }
 
     /* ── 社群影響力 bento ── */
     .edu-bento {
@@ -602,7 +604,7 @@
        MOBILE (≤767px)
     ══════════════════════════════════ */
     @media (max-width: 767px) {
-      .home { padding: 16px 12px 120px; gap: 32px; }
+      .home { padding: 16px 12px 0; gap: 32px; }
 
       .home-hero { padding: 24px 20px 20px; gap: 20px; }
       .hero-headline { font-size: 28px; }
@@ -646,6 +648,7 @@
       .hero-card-value { font-size: 16px; }
       .proj-card { height: 320px; }
     }
+
   </style>
 </head>
 <body>
@@ -707,24 +710,23 @@
           </div>
           <div class="home-row home-row--proj">
 
-            <div class="home-card home-card--coming-soon">
-              <div class="hc-img">
-                <img src="assets/images/fitbutler.png" alt="Fitbutler">
-                <div class="hc-coming-soon">即將推出</div>
-              </div>
+            <a href="project-detail-fitbutler.html" class="home-card">
+              <div class="hc-img"><img src="assets/images/fitbutler.png" alt="Fitbutler"></div>
               <div class="hc-body">
                 <div class="hc-meta">2023 - 2026</div>
-                <div class="hc-title">用模組化思維重新定義 B2B 營運管理系統：《Fitbutler》從 0 到 1 的設計策略</div>
-                <div class="hc-desc">從零建立模組化設計架構，支援運動產業與空間租賃業的差異化需求，並具備跨國營運能力</div>
+                <div class="hc-title">從單一產業到跨產業的 B2B SaaS 平台：Fitbutler 從 0 到 1 的模組化產品設計策略</div>
+                <div class="hc-desc">將跨產業需求轉化為可擴展的產品架構，建立模組化設計、權限模型與設計系統，支撐產品持續成長</div>
+                <div class="hc-more">了解更多 →</div>
               </div>
-            </div>
+            </a>
 
             <a href="project-detail.html" class="home-card">
               <div class="hc-img"><img src="assets/images/cwarticle.png" alt="天下雜誌廣告體驗"></div>
               <div class="hc-body">
-                <div class="hc-meta">2019 - 2020</div>
-                <div class="hc-title">改善數位閱讀及廣告體驗，協助《天下雜誌》創下「數位營收大於紙本營收」里程碑</div>
-                <div class="hc-desc">降低用戶跳出率（-3%），提供廣編稿新流量來源（+4萬篇/週）、提升文字廣告點擊率（+900%）</div>
+                <div class="hc-meta">2020</div>
+                <div class="hc-title">透過產品設計平衡閱讀體驗與商業成長，協助《天下雜誌》完成數位轉型關鍵里程碑</div>
+                <div class="hc-desc">重新設計閱讀與廣告體驗，降低跳出率 3%、提升文字廣告點擊率 900%，每週新增 4 萬篇廣編稿流量</div>
+                <div class="hc-more">了解更多 →</div>
               </div>
             </a>
 
@@ -732,8 +734,9 @@
               <div class="hc-img"><img src="assets/images/cwapp.png" alt="天下雜誌App"></div>
               <div class="hc-body">
                 <div class="hc-meta">2023</div>
-                <div class="hc-title">從使用者訪談到產品優化：UX 研究如何助攻《天下雜誌 App》訂戶增長</div>
-                <div class="hc-desc">付費牆優化訂閱轉換率（+4%）、禮物文章擴大觸及非訂戶、TTS 用戶首度超越 Podcast 用戶</div>
+                <div class="hc-title">從使用者研究到產品策略：如何透過 UX 研究驅動《天下雜誌 App》訂戶成長</div>
+                <div class="hc-desc">透過使用者研究找出訂閱成長機會，推動付費牆優化 (訂閱轉換率 +4%)、禮物文章分享與 TTS 體驗升級</div>
+                <div class="hc-more">了解更多 →</div>
               </div>
             </a>
 

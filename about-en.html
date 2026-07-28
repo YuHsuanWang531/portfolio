@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — YuHsuan Wang</title>
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body, .layout, .main { background: #f5f5f7; }
+    .layout { padding: 0; gap: 0; }
+    .main { padding: 0; gap: 0; }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 16px;
+      padding: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+      padding-bottom: 24px;
+    }
+
+    /* ── Left column ── */
+    .about-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: sticky;
+      top: 24px;
+    }
+    .about-profile-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .about-profile-photo {
+      width: calc(100% - 32px);
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 12px;
+      margin: 16px 16px 0;
+    }
+    .about-profile-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .about-profile-info {
+      padding: 16px 20px 20px;
+    }
+    .about-profile-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .about-profile-bio {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .about-profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .about-co-tag {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      color: var(--text-secondary);
+      background: transparent;
+    }
+
+    /* Masonry photo grid */
+    .about-photo-grid {
+      columns: 2;
+      column-gap: 8px;
+      padding: 0 16px 16px;
+    }
+    .about-photo-grid-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .about-photo-grid-item img {
+      width: 100%; display: block;
+      object-fit: cover;
+    }
+
+    /* ── Right column ── */
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .about-block {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      padding: 28px 32px;
+    }
+    .about-block h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    .about-block p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .about-block p:last-child { margin-bottom: 0; }
+
+    /* Skills grid */
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .skill-item {}
+    .skill-label {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .exp-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .exp-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: transparent;
+      flex-shrink: 0;
+    }
+    .exp-meta { display: flex; flex-direction: column; gap: 2px; }
+    .exp-year { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .skill-item { position: relative; cursor: default; }
+    .skill-item:has(.exp-toggle) { cursor: pointer; }
+    .exp-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+      padding: 0;
+    }
+    .exp-toggle:hover,
+    .skill-item:hover .exp-toggle { color: var(--accent); }
+    .about-bullets {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-bullets li:first-child { margin-top: 10px; }
+    .about-bullets {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .about-bullets li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      list-style: disc;
+    }
+    .skill-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* Values list */
+    .values-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .values-list li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      padding-left: 4px;
+      list-style: disc;
+      margin-left: 18px;
+    }
+
+    /* CTA buttons */
+    .about-cta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .about-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: #f5f5f7;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .about-cta-email:hover  { background: var(--accent); color: #fff; }
+    .about-cta-linkedin:hover { background: #0A66C2; color: #fff; }
+    .about-cta-medium:hover   { background: #000; color: #fff; }
+    .about-cta-resume:hover   { background: var(--accent); color: #fff; }
+    .about-cta-email-wrap { position: relative; }
+    .about-cta-email-wrap .about-cta-btn { width: 100%; cursor: pointer; border: none; font-family: inherit; }
+    .about-email-toast {
+      position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: #222; color: #fff;
+      font-size: 14px; font-weight: 500;
+      padding: 5px 12px; border-radius: 8px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .about-email-toast.show { opacity: 1; }
+
+    /* Divider */
+    .about-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.07);
+      margin: 0;
+    }
+
+    /* Photo toggle button — mobile only */
+    .photo-toggle-btn {
+      display: none;
+    }
+    @media (max-width: 860px) {
+      .about-wrap { grid-template-columns: 1fr; }
+      .about-left { position: static; }
+      .about-photo-grid { display: none; }
+      .about-photo-grid.expanded { display: block; }
+      .photo-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: calc(100% - 32px);
+        margin: 0 16px 16px;
+        padding: 10px 16px;
+        background: #f5f5f7;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 0.15s;
+      }
+      .photo-toggle-btn:hover { background: #ebebed; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <main class="main">
+      <div class="about-wrap">
+
+        <!-- Left column -->
+        <div class="about-left">
+          <div class="about-profile-card">
+            <div class="about-profile-photo">
+              <img src="assets/images/aboutme.png" alt="YuHsuan Wang">
+            </div>
+            <div class="about-profile-info">
+              <div class="about-profile-name">YuHsuan Wang</div>
+              <div class="about-profile-bio">10+ years of product design experience across B2C and B2B. Skilled in 0→1 and 1→N product planning, bridging communication across roles to balance user needs, business goals, and technical feasibility.</div>
+            </div>
+
+          <!-- Photo masonry -->
+          <button class="photo-toggle-btn" id="photoToggleBtn" onclick="togglePhotos()">View Photos ▾</button>
+          <div class="about-photo-grid" id="aboutPhotoGrid">
+            <div class="about-photo-grid-item"><img src="assets/images/life2.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life3.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life5.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life4.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life6.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/life1.png" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/education4_web.jpg" alt=""></div>
+            <div class="about-photo-grid-item"><img src="assets/images/education6.png" alt=""></div>
+          </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="about-right">
+
+          <div class="about-block">
+            <h2>About Me</h2>
+            <p>I'm currently a Senior Product Designer in the sports tech industry, focused on helping fitness venues leverage technology to improve operational efficiency. I lead design strategy across B2B SaaS and B2B2C product lines with the goal of driving digital transformation in the sports tech sector. I specialize in simplifying complexity — untangling intricate system workflows so venues can get up and running easily.</p>
+            <p>Before that, I spent 8 years in B2C product design in the media industry, spanning news, knowledge audio, e-commerce, and event ticketing. I drove growth through user interviews, data insights, and core feature optimization — delivering 10+ product projects in total.</p>
+            <p>I'm also passionate about design education, serving as a design TA and career coach in the community — helping aspiring designers find their direction and avoid the detours I once took. I believe great designers don't just solve problems; they help the people around them see better possibilities.</p>
+          </div>
+
+          <div class="about-block">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="skill-label">Product Design</div>
+                <div class="skill-desc">From concept to high-fidelity, skilled in using Figma and AI tools to rapidly validate ideas and build design systems. With a foundation in HTML/CSS, I collaborate seamlessly with engineers and communicate design intent with precision.</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">User Research</div>
+                <div class="skill-desc">Using qualitative interviews and quantitative data to understand real user needs, then translating insights into actionable design decisions — grounded in evidence, not just intuition.</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">Strategy & Communication</div>
+                <div class="skill-desc">Skilled at building alignment across PMs, engineers, and business stakeholders — translating business goals into design language so that design isn't just visually appealing, but drives real business growth.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h2>Design Values</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="skill-label">Enjoy the Process</div>
+                <div class="skill-desc">Design isn't just about deliverables — it's a process full of fun and challenge. When you genuinely invest in every decision, every conversation, every problem-solving moment, great design happens naturally.</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">Career Adaptability</div>
+                <div class="skill-desc">The industry evolves fast — staying flexible is the best way to navigate change. Continuously exploring new domains, staying curious, and never stopping to try and learn: that's how you find your direction amid uncertainty.</div>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="skill-label">Design Creates Value</div>
+                <div class="skill-desc">A designer's job isn't just to make things look good — it's to understand user needs and business goals, then translate every design decision into outcomes that matter for both users and the company.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h2>Work Experience</h2>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="exp-logo-row">
+                  <img src="assets/images/fitbutlerlogo.png" alt="CloudGem" class="exp-logo">
+                  <div class="exp-meta">
+                    <div class="skill-label" style="margin-bottom:0;">Senior Product Designer</div>
+                    <div class="exp-year">CloudGem Co., Ltd. · 2023.05 – Present</div>
+                  </div>
+                </div>
+                <div class="skill-desc">With the goal of digitalizing the sports tech industry, independently leading design strategy across B2B SaaS and B2B2C product lines.</div>
+                <button class="exp-toggle" onclick="toggleExp(this)">+</button>
+                <ul class="about-bullets">
+                  <li>Led design strategy for B2B SaaS core product Fitbutler, building a modular architecture supporting 2 industries (fitness and space rental), becoming the company's core product line for cross-regional operations</li>
+                  <li>Led design for multiple core features of the B2B2C member-facing app — including login/registration, booking rules, online top-up, supplemental payment, and card binding verification — reducing customer complaints by 23%</li>
+                  <li>Led a website redesign, restructured information architecture and established visual brand consistency — increasing average user engagement time by 24.6% and return visit rate by 25.2%</li>
+                  <li>Introduced AI into the design workflow using Claude Code and Figma AI to generate interactive prototypes, reducing design delivery time by 40%</li>
+                </ul>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="exp-logo-row">
+                  <img src="assets/images/common.png" alt="CommonWealth Magazine" class="exp-logo">
+                  <div class="exp-meta">
+                    <div class="skill-label" style="margin-bottom:0;">Senior UI/UX Designer</div>
+                    <div class="exp-year">CommonWealth Magazine Co., Ltd. · 2019.02 – 2023.04</div>
+                  </div>
+                </div>
+                <div class="skill-desc">Focused on improving key metrics — subscriptions, engagement, retention, and conversion — by redesigning core reading, ad, and subscription experiences for CommonWealth's digital products, and building the design system.</div>
+                <button class="exp-toggle" onclick="toggleExp(this)">+</button>
+                <ul class="about-bullets">
+                  <li>Optimized the subscription flow, shortening user decision paths and improving conversion rate by 8%</li>
+                  <li>Improved reading and ad experience — reduced bounce rate by 3%, increased ad CTR by 900%, helping achieve a "digital revenue surpasses print revenue" milestone</li>
+                  <li>Identified key pain points through interviews with 10 users, improved subscriber sharing rate and the news-listening experience — TTS users surpassed Podcast users in the app for the first time</li>
+                </ul>
+              </div>
+              <div class="about-divider"></div>
+              <div class="skill-item">
+                <div class="exp-logo-row">
+                  <img src="assets/images/udn.png" alt="United Daily News Group" class="exp-logo">
+                  <div class="exp-meta">
+                    <div class="skill-label" style="margin-bottom:0;">UI/UX Designer</div>
+                    <div class="exp-year">United Daily News Group · 2014.08 – 2018.10</div>
+                  </div>
+                </div>
+                <div class="skill-desc">Collaborated across departments on various product types including news media, knowledge audio, content creation, e-commerce, and event ticketing — improving UX and UI design, delivering 10+ product projects in total.</div>
+                <button class="exp-toggle" onclick="toggleExp(this)">+</button>
+                <ul class="about-bullets">
+                  <li>Designed YiKe knowledge audio app from 0 to 1, generating the business unit's first revenue</li>
+                  <li>Designed Duchuang content reading app from 0 to 1, which became the business unit's core product</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h2>Get in Touch</h2>
+<div class="about-cta-list">
+              <div class="about-cta-email-wrap">
+                <button onclick="copyAboutEmail()" class="about-cta-btn about-cta-email">yuhsuanwang531@gmail.com</button>
+                <div class="about-email-toast" id="aboutEmailToast">Copied!</div>
+              </div>
+              <a href="https://www.linkedin.com/in/yuhsuanwang" target="_blank" class="about-cta-btn about-cta-linkedin">LinkedIn</a>
+              <a href="https://medium.com/@yuhsuanwang531" target="_blank" class="about-cta-btn about-cta-medium">Medium</a>
+              <a href="https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link" target="_blank" class="about-cta-btn about-cta-resume">Download Resume</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div style="text-align:center; padding: 8px 0 100px; font-size:12px; color:#aaa;">Copyright © 2026 YuHsuan Wang</div>
+    </main>
+  </div>
+  <script>
+    function toggleExp(btn) {
+      const bullets = btn.nextElementSibling;
+      const collapsing = btn.textContent.trim() === '−';
+      if (collapsing) {
+        btn.textContent = '+';
+        bullets.style.height = bullets.offsetHeight + 'px';
+        requestAnimationFrame(() => {
+          bullets.style.height = '0';
+        });
+      } else {
+        btn.textContent = '−';
+        bullets.style.height = bullets.scrollHeight + 'px';
+        bullets.addEventListener('transitionend', () => {
+          bullets.style.height = 'auto';
+        }, { once: true });
+      }
+    }
+    document.querySelectorAll('.skill-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') return;
+        if (e.target.classList.contains('exp-toggle')) return;
+        const btn = this.querySelector('.exp-toggle');
+        if (btn) toggleExp(btn);
+      });
+    });
+
+    // 雲端力鍊預設展開
+    const firstToggle = document.querySelector('.exp-toggle');
+    if (firstToggle) {
+      const bullets = firstToggle.nextElementSibling;
+      firstToggle.textContent = '−';
+      bullets.style.height = 'auto';
+    }
+  </script>
+  <script src="assets/js/sidebar.js"></script>
+  <script>
+    function copyAboutEmail() {
+      navigator.clipboard.writeText('yuhsuanwang531@gmail.com').then(() => {
+        const toast = document.getElementById('aboutEmailToast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+  </script>
+  <script>
+    function togglePhotos() {
+      const grid = document.getElementById('aboutPhotoGrid');
+      const btn = document.getElementById('photoToggleBtn');
+      const expanded = grid.classList.toggle('expanded');
+      btn.textContent = expanded ? 'Collapse ▴' : 'View Photos ▾';
+    }
+  </script>
+</body>
+</html>
