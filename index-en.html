@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YuHsuan Wang — Senior Product Designer</title>
+  <title>YuHsuan Wang | Senior Product Designer</title>
   <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet" />
@@ -507,12 +507,15 @@
     .testi-scroll::-webkit-scrollbar { display: none; }
 
     .testi-grid {
-      column-count: 2;
-      column-gap: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
     }
-    .testi-grid .testi-card {
-      break-inside: avoid;
-      margin-bottom: 16px;
+    .testi-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .testi-card {
@@ -634,7 +637,7 @@
       .blog-card { flex: 1 1 calc(50% - 6px); min-width: 0; }
 
       /* Testimonial grid: 1 column */
-      .testi-grid { column-count: 1; }
+      .testi-grid { flex-direction: column; }
     }
 
     /* ══════════════════════════════════
@@ -663,7 +666,7 @@
             <span class="hero-line">Hi, I'm YuHsuan! 👋🏻</span>
             <span class="hero-line"><em>A cross-domain product designer focused on creating business value through design</em></span>
           </h1>
-          <p class="hero-sub hero-line">10+ years of product design experience across B2C and B2B. Skilled in 0→1 and 1→N product planning and design. I believe great designers don't just solve problems — they help the people around them see better possibilities.</p>
+          <p class="hero-sub hero-line">10+ years of product design experience across B2C and B2B. Skilled in 0→1 and 1→N product planning and design. I believe a great designer doesn't just solve problems, they help the people around them see better possibilities.</p>
           <div class="hero-cta" style="display:none">
             <a href="about.html" class="hero-cta-btn hero-cta-btn--primary">About Me ↗</a>
             <a href="https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link" target="_blank" class="hero-cta-btn hero-cta-btn--outline">Download Resume</a>
@@ -715,7 +718,7 @@
               <div class="hc-body">
                 <div class="hc-meta">2023 - 2026</div>
                 <div class="hc-title">From Single-Industry to Cross-Industry B2B SaaS: Fitbutler's Modular Product Design Strategy from 0 to 1</div>
-                <div class="hc-desc">Built a modular design architecture from scratch to support the differentiated needs of the fitness and space rental industries, with cross-regional operational capability</div>
+                <div class="hc-desc">Transformed cross-industry requirements into a scalable product architecture, building modular design, a permission model, and a design system to support continued product growth</div>
                 <div class="hc-more">Learn More →</div>
               </div>
             </a>
@@ -724,8 +727,8 @@
               <div class="hc-img"><img src="assets/images/cwarticle.png" alt="天下雜誌廣告體驗"></div>
               <div class="hc-body">
                 <div class="hc-meta">2020</div>
-                <div class="hc-title">Balancing Reading Experience and Business Growth Through Product Design, Helping CommonWealth Magazine Complete a Key Digital Transformation Milestone</div>
-                <div class="hc-desc">Reduced bounce rate (−3%), unlocked a new traffic source for sponsored content (+40K articles/week), and boosted text ad CTR (+900%)</div>
+                <div class="hc-title">Balancing Reading Experience and Business Growth Through Product Design, Helping CW Complete a Key Digital Transformation Milestone</div>
+                <div class="hc-desc">Redesigned the reading and ad experience, reducing bounce rate by 3%, boosting text ad CTR by 900%, and adding 40K sponsored article views per week</div>
                 <div class="hc-more">Learn More →</div>
               </div>
             </a>
@@ -734,8 +737,8 @@
               <div class="hc-img"><img src="assets/images/cwapp.png" alt="天下雜誌App"></div>
               <div class="hc-body">
                 <div class="hc-meta">2023</div>
-                <div class="hc-title">From User Research to Product Strategy: How UX Research Drove CommonWealth Magazine App Subscriber Growth</div>
-                <div class="hc-desc">Paywall optimization improved subscription conversion (+4%), gift articles expanded reach to non-subscribers, and TTS users surpassed Podcast users for the first time</div>
+                <div class="hc-title">From User Research to Product Strategy: How UX Research Drove CW App Subscriber Growth</div>
+                <div class="hc-desc">Used user research to identify subscription growth opportunities, driving paywall optimization (+4% conversion rate), gift article sharing, and TTS experience upgrades</div>
                 <div class="hc-more">Learn More →</div>
               </div>
             </a>
@@ -748,20 +751,20 @@
           <div class="home-section-header centered">
             <div class="home-section-title">Community Impact</div>
           </div>
-          <div class="home-section-sub">From learner to mentor — every session is a chance to revisit and deepen my own expertise</div>
+          <div class="home-section-sub">From learner to mentor, every session is a chance to revisit and deepen my own expertise</div>
           <div class="edu-bento">
             <!-- Product Design TA -->
             <a href="https://aapd.com.tw/" target="_blank" rel="noopener" class="edu-card edu-card--large edu-card--link">
               <img src="assets/images/aapdlogo.png" alt="AAPD" class="edu-logo">
               <div class="edu-role">Product Design TA @AAPD</div>
-              <div class="edu-desc">Served as Product Design TA for "Product Design Bootcamp", "Product Design Challenge", and "UI Design Bootcamp" — supporting students with homework reviews, Design Reviews, workshop training, troubleshooting, and curating relevant design resources. Mentored 250+ students to date.</div>
+              <div class="edu-desc">Served as Product Design TA for "Product Design Bootcamp", "Product Design Challenge", and "UI Design Bootcamp", supporting students with homework reviews, Design Reviews, workshop training, troubleshooting, and curating relevant design resources. Mentored 250+ students to date.</div>
               <span class="edu-more">Learn More →</span>
             </a>
             <!-- Career Coaching Mentor -->
             <a href="https://aapd.com.tw/coach-program/coach-all/%E5%A4%A7%E8%83%83" target="_blank" rel="noopener" class="edu-card edu-card--small edu-card--link">
               <img src="assets/images/aapdlogo.png" alt="AAPD" class="edu-logo">
               <div class="edu-role">Career Coaching Mentor</div>
-              <div class="edu-desc">Personalized 1-on-1 career consultations covering resume & portfolio optimization, skill development, and career planning — helping students tackle short-term challenges while exploring long-term growth goals. 10+ coaching sessions completed.</div>
+              <div class="edu-desc">Personalized 1-on-1 career consultations covering resume & portfolio optimization, skill development, and career planning, helping students tackle short-term challenges while exploring long-term growth goals. 10+ coaching sessions completed.</div>
               <span class="edu-more">Learn More →</span>
             </a>
             <!-- UI/UX Industry Mentor -->
@@ -786,7 +789,7 @@
               <div class="hc-img"><img src="assets/images/1on1.png" alt="Design Fireside"></div>
               <div class="hc-body">
                 <div class="hc-meta">Product Design 1 on 1 · 55 min</div>
-                <div class="hc-title">Design Fireside Series — Challenges & Career Setbacks of a B2B Designer</div>
+                <div class="hc-title">Design Fireside Series: Challenges and Career Setbacks of a B2B Designer</div>
               </div>
             </a>
 
@@ -802,7 +805,7 @@
               <div class="hc-img"><img src="assets/images/S4EP6.png" alt="S4EP6"></div>
               <div class="hc-body">
                 <div class="hc-meta">No Shortcuts S4EP6 · 52 min</div>
-                <div class="hc-title">Conquering Workplace Communication & Collaboration — Leading Your Team Toward a Clearer Vision</div>
+                <div class="hc-title">Conquering Workplace Communication and Collaboration: Leading Your Team Toward a Clearer Vision</div>
               </div>
             </a>
 
@@ -814,7 +817,7 @@
           <div class="home-section-header centered">
             <div class="home-section-title">Design Thinking Notes</div>
           </div>
-          <div class="home-section-sub">Drawing from real work experience — reflections on design and personal growth</div>
+          <div class="home-section-sub">Drawing from real work experience, sharing reflections on design and personal growth</div>
           <div class="blog-row" style="justify-content: center;">
 
             <a href="https://medium.com/@yuhsuanwang531/%E5%BE%9E%E8%AE%80%E6%87%82%E7%94%A8%E6%88%B6%E5%88%B0%E8%AE%80%E6%87%82%E7%B3%BB%E7%B5%B1-2c-%E8%BD%89-2b-%E7%9A%84%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD%E8%BD%89%E6%8F%9B-2ab9857ac2ef" target="_blank" class="blog-card">
@@ -836,50 +839,78 @@
           <div class="home-section-sub">Grateful for every piece of feedback that makes me a better designer</div>
           <div class="testi-grid">
 
-            <div class="testi-card">
-              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
-              <div class="testi-text">YuHsuan is an energetic and enthusiastic designer with a real passion for communication. She actively listens to engineering feedback, often proactively discusses feasibility with frontend developers, and uses AI tools effectively to articulate design ideas. Collaborating with her is not only enjoyable — it genuinely helps everyone grow together.</div>
-              <div class="testi-author">
-                <div class="testi-avatar"><img src="assets/images/Tofu.png" alt="Tofu"></div>
-                <div>
-                  <div class="testi-name">Tofu</div>
-                  <div class="testi-role">Senior Frontend Engineer @ CloudGem</div>
+            <div class="testi-col">
+              <div class="testi-card">
+                <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+                <div class="testi-text">YuHsuan is the kind of designer who helps PMs achieve more than the sum of their parts. When requirements land on her desk, they don't just get turned into screens — they get interrogated: Why does this scenario exist? How do we handle edge cases? Many issues that would have only surfaced during development get resolved at her stage. When communicating across teams, she translates design language into terms both engineering and business can understand, keeping everyone on the same page.</div>
+                <div class="testi-author">
+                  <div class="testi-avatar"><img src="assets/images/Linus.jpg" alt="Linus Liu"></div>
+                  <div>
+                    <div class="testi-name">Linus Liu</div>
+                    <div class="testi-role">Former Head of Product @ Fitbutler</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testi-card">
+                <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+                <div class="testi-text">YuHsuan not only pinpoints core issues with precision, but also brings a keen eye to the subtle details we often overlook. She listens patiently to every question and answers thoughtfully, covering everything from big-picture product thinking to fine visual nuances. You can truly feel her genuine care and passion for helping students grow.</div>
+                <div class="testi-author">
+                  <div class="testi-avatar"><img src="assets/images/Jyun.png" alt="Jyun"></div>
+                  <div>
+                    <div class="testi-name">Jyun</div>
+                    <div class="testi-role">UI Design Bootcamp Student @ AAPD</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testi-card">
+                <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+                <div class="testi-text">I'm so grateful for YuHsuan's incredibly thorough Design Review. She answered every question in detail, not only identifying current issues in my product but also offering ideas that really opened my mind. After reflecting on everything post-session, I discovered blind spots in my own project execution and thinking. It was truly a rewarding experience.</div>
+                <div class="testi-author">
+                  <div class="testi-avatar"><img src="assets/images/電鍋.png" alt="電鍋"></div>
+                  <div>
+                    <div class="testi-name">電鍋</div>
+                    <div class="testi-role">Coachee</div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="testi-card">
-              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
-              <div class="testi-text">YuHsuan not only pinpoints core issues with precision, but also brings a keen eye to the subtle details we often overlook. She listens patiently to every question and answers thoughtfully — covering everything from big-picture product thinking to fine visual nuances. You can truly feel her genuine care and passion for helping students grow.</div>
-              <div class="testi-author">
-                <div class="testi-avatar"><img src="assets/images/Jyun.png" alt="Jyun"></div>
-                <div>
-                  <div class="testi-name">Jyun</div>
-                  <div class="testi-role">UI Design Bootcamp Student</div>
+            <div class="testi-col">
+              <div class="testi-card">
+                <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+                <div class="testi-text">YuHsuan is an energetic and enthusiastic designer with a real passion for communication. She actively listens to engineering feedback, often proactively discusses feasibility with frontend developers, and uses AI tools effectively to articulate design ideas. Collaborating with her is not only enjoyable, it genuinely helps everyone grow together.</div>
+                <div class="testi-author">
+                  <div class="testi-avatar"><img src="assets/images/Tofu.png" alt="Tofu"></div>
+                  <div>
+                    <div class="testi-name">Tofu</div>
+                    <div class="testi-role">Senior Frontend Engineer @ Fitbutler</div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="testi-card">
-              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
-              <div class="testi-text">YuHsuan always helps us break through blind spots quickly and patiently guides us back to focus on our goals. Sharp, decisive, and a little funny — she brought a lot of laughter to an otherwise stressful project. Under her guidance, we didn't just win the top project award; we also developed a much more well-rounded design thinking mindset.</div>
-              <div class="testi-author">
-                <div class="testi-avatar"><img src="assets/images/Glori.png" alt="Glori"></div>
-                <div>
-                  <div class="testi-name">Glori</div>
-                  <div class="testi-role">Product Design Challenge Student</div>
+              <div class="testi-card">
+                <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+                <div class="testi-text">YuHsuan always helps us break through blind spots quickly and patiently guides us back to focus on our goals. Sharp, decisive, and a little funny, she brought a lot of laughter to an otherwise stressful project. Under her guidance, we didn't just win the top project award; we also developed a much more well-rounded design thinking mindset.</div>
+                <div class="testi-author">
+                  <div class="testi-avatar"><img src="assets/images/Glori.png" alt="Glori"></div>
+                  <div>
+                    <div class="testi-name">Glori</div>
+                    <div class="testi-role">Product Design Challenge Student @ AAPD</div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="testi-card">
-              <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
-              <div class="testi-text">I'm so grateful for YuHsuan's incredibly thorough Design Review. She answered every question in detail, not only identifying current issues in my product but also offering ideas that really opened my mind. After reflecting on everything post-session, I discovered blind spots in my own project execution and thinking. It was truly a rewarding experience.</div>
-              <div class="testi-author">
-                <div class="testi-avatar"><img src="assets/images/電鍋.png" alt="電鍋"></div>
-                <div>
-                  <div class="testi-name">電鍋</div>
-                  <div class="testi-role">Coachee</div>
+              <div class="testi-card">
+                <svg class="testi-q-mark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M148.57,63.619H72.162C32.31,63.619,0,95.929,0,135.781v76.408c0,39.852,32.31,72.161,72.162,72.161h7.559c6.338,0,12.275,3.128,15.87,8.362c3.579,5.234,4.365,11.898,2.074,17.811L54.568,422.208c-2.291,5.92-1.505,12.584,2.074,17.81c3.595,5.234,9.532,8.362,15.87,8.362h50.738c7.157,0,13.73-3.981,17.041-10.318l61.257-117.03c12.609-24.09,19.198-50.881,19.198-78.072v-107.18C220.748,95.929,188.422,63.619,148.57,63.619z"/><path d="M439.84,63.619h-76.41c-39.852,0-72.16,32.31-72.16,72.162v76.408c0,39.852,32.309,72.161,72.16,72.161h7.543c6.338,0,12.291,3.128,15.87,8.362c3.596,5.234,4.365,11.898,2.091,17.811l-43.113,111.686c-2.291,5.92-1.505,12.584,2.09,17.81c3.579,5.234,9.516,8.362,15.871,8.362h50.722c7.157,0,13.73-3.981,17.058-10.318l61.24-117.03C505.411,296.942,512,270.152,512,242.96v-107.18C512,95.929,479.691,63.619,439.84,63.619z"/></svg>
+                <div class="testi-text">YuHsuan's coaching helped me gain a clearer sense of my portfolio structure and storytelling, and clarify my direction as a designer. The process reignited my passion for UX and got me thinking seriously about my next career step. I learned so much.</div>
+                <div class="testi-author">
+                  <div class="testi-avatar"><img src="assets/images/Hedy.png" alt="Hedy Du"></div>
+                  <div>
+                    <div class="testi-name">Hedy Du</div>
+                    <div class="testi-role">Coachee</div>
+                  </div>
                 </div>
               </div>
             </div>

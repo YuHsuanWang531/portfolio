@@ -208,7 +208,7 @@
             <a href="index.html" class="back-nav">← 回首頁</a>
             <h1 class="page-title">從單一產業到跨產業的 B2B SaaS 平台：Fitbutler 從 0 到 1 的模組化產品設計策略</h1>
             <p class="project-intro">Fitbutler 原本是一套為運動產業打造的管理系統，隨著產品開始服務空間租賃等不同產業，既有架構已無法支撐持續擴張，真正的挑戰不只是新增功能，而是重新定義一套能跨產業、跨國營運的產品架構。</p>
-            <p class="project-intro">在這個專案中，我負責產品設計策略、資訊架構、設計系統與跨團隊協作，透過模組化架構、權限模型與可擴展元件設計，建立一套能因應不同商業模式持續演進的 B2B SaaS 平台。</p>
+            <p class="project-intro">在這個專案中，我負責產品設計策略、資訊架構、設計系統與跨團隊協作，透過模組化架構、權限控管與可擴展元件設計，建立一套能因應不同商業模式持續演進的 B2B SaaS 平台。</p>
             <img src="assets/images/fitbutler.png" alt="Fitbutler" class="full-img full-img-mt" />
             <div class="proj-meta">
               <div class="proj-meta-col">
@@ -360,18 +360,22 @@
               <p>我們建立了<strong style="color:#111;">「共用核心模組＋可選擴充模組」</strong>的系統架構。企業、團隊、會員、方案、收款等基礎功能成為每個客戶預設擁有的核心模組，空間租賃業的租約管理、保證金等差異化需求則設計為可獨立開關的擴充模組。這樣的架構讓產品能在不修改核心流程的情況下，逐步支援更多產業，也降低後續功能開發與維護成本。</p>
             </div>
 
-            <div style="background:#e8eaed; border-radius:12px; height:200px; margin-top:24px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補</div>
+            <div style="margin-top:24px;">
+              <img src="assets/images/module.png" alt="模組化架構" style="width:100%; border-radius:8px; display:block;">
+            </div>
 
             <div class="prose">
               <h3>二、權限分層設計，兼顧產品彈性與資料安全</h3>
               <p>模組決定客戶購買了哪些功能，權限則決定組織內不同角色可以使用哪些功能，前台人員、場館管理者、財務、教練各自看到的介面與可操作的範圍都不同。</p>
               <p>模組控制企業可使用的功能範圍，權限控制不同職務可存取的資料與操作，兩層架構讓業者能靈活配置每個職務的使用範圍，在系統彈性與資料安全之間取得平衡。</p>
 
-              <div style="background:#e8eaed; border-radius:12px; height:200px; margin-top:8px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補</div>
+              <div style="margin-top:8px;">
+                <img src="assets/images/permission.png" alt="權限分層設計" style="width:100%; border-radius:8px; display:block;">
+              </div>
 
               <h3>三、建立國際化產品架構，支援跨市場與跨產業營運</h3>
               <p>隨著產品開始支援海外市場，國際化不只是增加不同語言版本，而是需要從系統架構層面處理不同市場與產業的營運差異。</p>
-              <p>因此，我們從產品架構開始支援多時區、多幣別、多語系，並將產業用語抽象化。同一組功能可透過相同 key 值，依照客戶所屬產業顯示不同文案，例如運動產業使用「場館」，空間租賃業則使用「據點」，讓同一套產品能適應不同商業語境，而不需要建立不同版本。</p>
+              <p>因此，我們從產品架構開始支援多時區、多幣別、多語系，同一個位置的文案可透過相同 key 值，依照客戶所屬產業顯示不同文案，例如運動產業使用「場館」，空間租賃業則使用「據點」，讓同一套產品能適應不同商業語境，而不需要建立不同版本。</p>
 
               <div style="margin: 20px 0;">
                 <div class="img-ba-wrap" id="img-ba">
@@ -421,9 +425,9 @@
               <div style="margin-top:16px;">
                 <img src="assets/images/fitbutler_DS.png" alt="設計系統" style="width:100%; display:block; border-radius:8px;">
               </div>
-              <p style="margin-top:20px;">設計系統建立後，我進一步利用 Claude Code 串接 Figma MCP 與 Shadcn MCP，製作可互動的 AI prototype 給工程師參考，工程師可以直接在 prototype 上確認元件效果與轉場動畫，原本需要多次來回才能對齊的細節，透過 prototype 大幅縮短溝通成本。</p>
-              <div class="comp-img-wrap" style="margin-top:16px;">
-                <div style="background:#e8eaed; border-radius:8px; height:200px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補：AI Prototype 截圖</div>
+              <p style="margin-top:20px;">設計系統建立後，我進一步<strong style="color: var(--text-primary);">利用 Claude Code 串接 Figma MCP 與 Shadcn MCP，製作可互動的 AI prototype</strong> 給工程師參考，工程師可以直接在 prototype 上確認元件效果與轉場動畫，原本需要多次來回才能對齊的細節，透過 prototype 大幅縮短溝通成本。</p>
+              <div class="comp-img-wrap" style="margin-top:16px; background:none; padding:0;">
+                <video src="assets/images/prototype.mp4" autoplay loop muted playsinline style="width:100%; border-radius:8px; display:block;"></video>
               </div>
             </div>
           </div>
@@ -436,23 +440,29 @@
 
               <h3>一、重新設計資訊架構，讓操作流程貼近實際營運</h3>
               <p>舊系統的導覽架構隨著功能增加逐漸失去一致性，例如跨場館需要重新登入才能切換，部分常用任務也因功能分散而需要頻繁切換頁面。</p>
-              <p>我重新整理資訊架構，依照使用頻率與工作流程重新分群，將日常操作與一次性設定清楚區隔，並將場館切換從登入流程移至操作流程，讓員工可以在工作過程中快速切換不同場館。這次調整不只是重新排列選單，而是重新定義產品的操作模型，使系統更符合實際工作流程。</p>
+              <p>我重新整理資訊架構，依照使用頻率與工作流程重新分群，將日常操作與一次性設定清楚區隔，並將場館切換從登入流程移至操作流程，讓員工可以在工作過程中快速切換不同場館，使系統操作更符合實際工作流程。</p>
             </div>
-            <div style="background:#e8eaed; border-radius:12px; height:200px; margin-top:16px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補</div>
+            <div style="margin-top:16px;">
+              <img src="assets/images/nav.png" alt="重新設計資訊架構" style="width:100%; border-radius:8px; display:block;">
+            </div>
 
             <div class="prose">
               <h3>二、重新設計員工權限流程，完善異常情境</h3>
-              <p>除了建立雙層權限模型之外，我也重新整理整個員工建立與管理流程。我盤點了包含驗證信逾期、帳號停用後重新啟用、更換 Email、角色調整等各種邊界情境，整理成完整流程圖，作為後續介面設計與工程開發的依據。</p>
+              <p>我整理了員工建立與開通權限流程，員工帳號從未開通、邀請中、邀請逾時、已開通到已停用等各種狀態下，管理者與員工分別可以執行的操作，同時涵蓋驗證信逾期、帳號停用後重新啟用、更換 Email、角色調整等邊界情境，整理成完整流程圖，作為後續介面設計與工程開發的依據。</p>
               <p>透過流程先行的方式，降低不同狀態下操作不一致的問題，也讓管理者在異常情境下仍能快速完成任務。</p>
             </div>
-            <div style="background:#e8eaed; border-radius:12px; height:200px; margin-top:16px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補</div>
+            <div style="margin-top:16px;">
+              <img src="assets/images/Activate.png" alt="重新設計員工權限流程" style="width:100%; border-radius:8px; display:block;">
+            </div>
 
             <div class="prose">
               <h3>三、建立多語系設計規範，提升跨語系介面的使用一致性</h3>
               <p>在多語系介面設計過程中，我發現不同語言的文字長度差異，容易造成版面錯位與使用體驗不一致。因此，我建立多語系介面的設計規範，例如英文翻譯盡量控制與中文接近的長度、必要時使用業界常見縮寫，以及當文字長度存在差異時，以較長版本作為版面設計基準，降低未來語系擴充造成的修改成本。</p>
-              <p>此外，原本團隊透過 Google Sheet 管理大量翻譯內容，隨著語系增加，逐漸產生版本同步與維護效率問題。為改善翻譯流程，我利用 AI 工具打造翻譯管理工具，協助快速產生、整理與維護多語系內容，提升設計與開發協作效率。</p>
+              <p>此外，原本團隊透過 Google Sheet 管理大量翻譯內容，隨著翻譯數量增加，逐漸產生版本同步與維護效率問題。針對此問題，我嘗試利用 AI 工具建立翻譯管理工具的改善方向，並製作 prototype 進行驗證，探索提升設計與開發協作效率的可能性。</p>
             </div>
-            <div style="background:#e8eaed; border-radius:12px; height:200px; margin-top:16px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補</div>
+            <div style="margin-top:16px;">
+              <video src="assets/images/i18n.mp4" autoplay loop muted playsinline style="width:100%; border-radius:8px; display:block;"></video>
+            </div>
 
             <div class="prose">
               <h3>四、將元件做成可擴展的設計模式：以上傳元件為例</h3>
@@ -460,14 +470,16 @@
               <p>以上傳元件為例，系統中包含頭像、Logo、合約附件等多種上傳情境，對格式、數量、裁切需求皆不同。我整理所有使用情境，並與工程團隊共同定義元件邊界，最後將檔案格式、數量限制、裁切方式等都設計成可獨立開關的參數，需求變動時只需調整參數，不需要重寫元件。</p>
               <p>這套設計方式後續也應用到其他元件，降低重複設計與開發成本，同時提升設計系統的一致性與可擴展性。</p>
             </div>
-            <div style="background:#e8eaed; border-radius:12px; height:200px; margin-top:16px; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px;">待補</div>
+            <div style="margin-top:16px;"><img src="assets/images/upload.png" alt="upload" style="width:100%; border-radius:12px; display:block;"></div>
           </div>
 
           <!-- 專案成果 -->
           <div class="panel" id="sec-results">
             <div class="prose">
               <p class="section-label">專案成果</p>
-              <h2>待補</h2>
+              <h2>模組化架構讓 Fitbutler 從單一產業工具，成長為支援多產業的跨國營運平台</h2>
+              <p>新系統上線後，最直接的驗證是真正承接了原本無法承接的產業，舊系統僅能服務運動產業且不支援多時區、多語系客戶，海外客戶及其他產業客戶只能直接拒絕。透過模組化架構設計，我們成功簽下空間租賃產業的新客戶，這是舊系統完全無法達成的服務類型。</p>
+              <p>模組化架構的價值不只在於讓系統更彈性，是可以直接擴大公司可以承接的市場範圍，讓 Fitbutler 從單一產業的管理工具，逐步成為能夠支撐多產業並跨國營運的平台。</p>
             </div>
           </div>
 
@@ -475,7 +487,18 @@
           <div class="panel" id="sec-learnings">
             <div class="prose">
               <p class="section-label">學習與反思</p>
-              <h2>待補</h2>
+              <h2>保有生涯適應力，持續探索新領域、不斷嘗試與學習，才能在變化中找到自己的方向</h2>
+              <p>這是我第一次負責 B2B 的大型系統，過去累積的 2C 經驗在意使用者的痛點、行為、轉換與留存，但 Fitbutler 面對的是完全不同的情境，客戶不再是一般的使用者，而是運動產業、空間租賃業的老闆及經營者，設計決策也不再只靠使用者研究或數據驅動，而是要考慮企業、角色、系統之間的連動邏輯。初期我花了不少時間學習產業知識，理解運動產業的商業模式，也重新學習如何站在系統面的角度拆解需求。這段經歷我也曾在 podcast 中分享，並寫成文章<a href="https://medium.com/@yuhsuanwang531/%E5%BE%9E%E8%AE%80%E6%87%82%E7%94%A8%E6%88%B6%E5%88%B0%E8%AE%80%E6%87%82%E7%B3%BB%E7%B5%B1-2c-%E8%BD%89-2b-%E7%9A%84%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD%E8%BD%89%E6%8F%9B-2ab9857ac2ef" target="_blank" style="color:var(--text-primary); text-decoration:underline; text-underline-offset:3px; transition:opacity 0.15s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">《從讀懂用戶到讀懂系統 — To B 設計師的挑戰與職涯挫折》</a>。</p>
+              <p>這個過程中，我也開始嘗試把 AI 工具帶進日常工作流程，從整理需求、對齊想法，到用 Claude Code 製作可互動的 prototype，這些嘗試讓我重新思考，在 AI 時代下設計師在團隊裡可以扮演的角色，不只是輸出畫面，也能透過工具縮短跟工程端的溝通落差。</p>
+              <p>而整個專案推進的過程並不算順利，中途換過產品負責人、後端人力一度外包、團隊成員也經歷過許多調整與磨合，很多決策是在人力與方向都不穩定的狀態下持續往前推進的。這段經歷讓我理解到，系統架構的設計固然重要，但能不能把產品真正落地，往往取決於團隊在混亂中還能不能維持良好的溝通與判斷，這也是這次專案給我最實際的體悟。</p>
+              <div style="display:flex; gap:12px; margin-top:16px;">
+                <div style="flex:1; min-width:0; height:260px; border-radius:8px; overflow:hidden;">
+                  <img src="assets/images/fitbutler1.png" alt="" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+                <div style="flex:1; min-width:0; height:260px; border-radius:8px; overflow:hidden;">
+                  <img src="assets/images/fitbutler3.png" alt="" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+              </div>
             </div>
           </div>
 

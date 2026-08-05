@@ -16,14 +16,7 @@
   const rawPage = window.location.pathname.split('/').pop() || 'index.html';
   const currentPage = rawPage.endsWith('.html') ? rawPage : rawPage + '.html';
 
-  // Language persistence: auto-redirect to EN version if user previously chose EN
-  const EN_MAP = { 'index.html': 'index-en.html', 'about.html': 'about-en.html' };
-  const ZH_MAP = { 'index-en.html': 'index.html', 'about-en.html': 'about.html' };
-  const savedLang = localStorage.getItem('portfolio-lang') || 'zh';
-  if (savedLang === 'en' && EN_MAP[currentPage]) {
-    window.location.replace(EN_MAP[currentPage]);
-    return;
-  }
+  localStorage.removeItem('portfolio-lang');
 
   const navHTML = NAV_ITEMS.map(item => {
     const isActive = item.match.includes(currentPage) ? ' active' : '';
@@ -48,18 +41,12 @@
   // sidebar and toggle removed — navigation handled by bottom pill dock only
 
   // Bottom nav (mobile only)
-  const isEn = savedLang === 'en';
+  const isEn = currentPage.endsWith('-en.html');
   const BOTTOM_NAV_ITEMS = [
     { href: 'index.html', label: isEn ? 'Home' : '首頁', match: ['index.html', '', 'index-en.html'], icon: `<img src="assets/images/home.svg" class="nav-icon-img">` },
     { href: (isEn ? 'index-en.html' : 'index.html') + '#projects', label: isEn ? 'Projects' : '設計專案', match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'], icon: `<img src="assets/images/design.svg" class="nav-icon-img">` },
     { href: 'about.html', label: isEn ? 'About' : '關於我', match: ['about.html', 'about-en.html'], icon: `<img src="assets/images/about.svg" class="nav-icon-img">` },
     { href: 'https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link', label: isEn ? 'Resume' : '下載履歷', match: [], icon: `<img src="assets/images/work.svg" class="nav-icon-img">` },
-    (function() {
-      const isEn = currentPage.endsWith('-en.html');
-      const langHref = isEn ? currentPage.replace('-en.html', '.html') : currentPage.replace('.html', '-en.html');
-      const langLabel = isEn ? '中文' : 'EN';
-      return { href: langHref, label: langLabel, match: [], icon: `<img src="assets/images/earth.svg" class="nav-icon-img">` };
-    })(),
   ];
 
   const bottomNavHTML = `<nav class="bottom-nav" id="bottomNav">
