@@ -7,7 +7,7 @@
   const NAV_ITEMS = [
     { href: 'index.html',           icon: SVG('home.svg'),    label: '首頁',        match: ['index.html', ''] },
     { href: 'work-experience.html', icon: SVG('work.svg'),    label: '工作經歷',    match: ['work-experience.html'] },
-    { href: 'index.html#projects',  icon: SVG('design.svg'),  label: '設計專案',    match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'] },
+    { href: 'index.html#projects',  icon: SVG('design.svg'),  label: '設計專案',    match: ['projects.html', 'project-detail-cwwebsite.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'] },
     { href: 'education.html',       icon: SVG('book.svg'),    label: '設計教育經歷', match: ['education.html'] },
     { href: 'podcast.html',         icon: SVG('podcast.svg'), label: 'Podcast',     match: ['podcast.html'] },
     { href: 'about.html',           icon: SVG('about.svg'),   label: '關於我',      match: ['about.html'] },
@@ -44,7 +44,7 @@
   const isEn = currentPage.endsWith('-en.html');
   const BOTTOM_NAV_ITEMS = [
     { href: 'index.html', label: isEn ? 'Home' : '首頁', match: ['index.html', '', 'index-en.html'], icon: `<img src="assets/images/home.svg" class="nav-icon-img">` },
-    { href: (isEn ? 'index-en.html' : 'index.html') + '#projects', label: isEn ? 'Projects' : '設計專案', match: ['projects.html', 'project-detail.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'], icon: `<img src="assets/images/design.svg" class="nav-icon-img">` },
+    { href: (isEn ? 'index-en.html' : 'index.html') + '#projects', label: isEn ? 'Projects' : '設計專案', match: ['projects.html', 'project-detail-cwwebsite.html', 'project-detail-fitbutler.html', 'project-detail-cwapp.html'], icon: `<img src="assets/images/design.svg" class="nav-icon-img">` },
     { href: 'about.html', label: isEn ? 'About' : '關於我', match: ['about.html', 'about-en.html'], icon: `<img src="assets/images/about.svg" class="nav-icon-img">` },
     { href: 'https://drive.google.com/file/d/1i-y40wCi06h3AG27A6D_mVHMIXM2dRxS/view?usp=drive_link', label: isEn ? 'Resume' : '下載履歷', match: [], icon: `<img src="assets/images/work.svg" class="nav-icon-img">` },
   ];
